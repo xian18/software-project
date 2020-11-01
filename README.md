@@ -1,4 +1,4 @@
-# REACTTUTORIAL FOR MYSELF
+# SOFTWARE_PROJECT
 
 ## About
 
@@ -24,3 +24,6 @@
 > Reducer defines a function which accepts state and action and changes component's storeState with the return value.
 
 **In brief, ------>creatStore(reducer)------->events binded to components triggered------->triggered function leads to action by mapDispatchToProps-------->reducer accept action-------->reducer changes StoreState-------->mapStateToProps accept the change and modify component state**
+
+### epic
+> When fetching data from API, define a getData action that handle the request process in epics. Also define a getDataFulfilled action that send by epic handler. The getDataFulfilled action is handled by the component's reducer.
