@@ -95,3 +95,27 @@ export const updateSudokuAction=():UpdateSudokuAction=>{
         type:UPDATE_SUDOKU,
     }
 }
+
+/*highlight block of the same number*/
+export const BLOCK_HIGHLIGHT='BLOCK_HIGHLIGHT';
+export type BLOCK_HIGHLIGHT=typeof BLOCK_HIGHLIGHT;
+export interface BlockHighlightAction {
+    type:BLOCK_HIGHLIGHT;
+}
+export const blockHighlightAction=():BlockHighlightAction=>{
+    return {
+        type:BLOCK_HIGHLIGHT,
+    }
+}
+
+/*clear all highlight block*/
+export const CLEAR_BLOCK_HIGHLIGHT='CLEAR_BLOCK_HIGHLIGHT';
+export type CLEAR_BLOCK_HIGHLIGHT=typeof CLEAR_BLOCK_HIGHLIGHT;
+export interface ClearBlockHighlightAction {
+    type:CLEAR_BLOCK_HIGHLIGHT;
+}
+export const clearBlockHighlightAction=():ClearBlockHighlightAction=>{
+    return {
+        type:CLEAR_BLOCK_HIGHLIGHT,
+    }
+}

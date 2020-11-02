@@ -12,17 +12,23 @@ export interface Props {
     open:boolean;
     point:Point;
     onChooseDigit:(point:Point)=>void;
+    onBlockHighlight:()=>void;
     onClose:()=>void;
 }
 
-const DigitBoard:FC<Props>=memo(({open,point,onChooseDigit,onClose})=>{
+const DigitBoard:FC<Props>=memo(({open,point,onChooseDigit,onBlockHighlight,onClose})=>{
     const numbers:number[]=[1,2,3,4,5,6,7,8,9];
     const classes=useStyles();
     const FormRow:FC<{nums:number[]}>=memo(({nums})=>(
         <React.Fragment>
             {nums.map((num,index)=>(
                 <Grid key={`DigitBoard${num}`} item spacing={0}>
-                <Button size='small' color='secondary' onClick={e=>onChooseDigit({...point,value:num})}>{num}</Button>
+                <Button
+                    size='small'
+                    color='secondary'
+                    onMouseEnter={onBlockHighlight}
+                    onClick={e=>onChooseDigit({...point,value:num})}>{num}
+                </Button>
                 </Grid>
             ))}
         </React.Fragment>

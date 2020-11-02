@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {chooseDigitAction} from '../../actions';
+import {chooseDigitAction,blockHighlightAction} from '../../actions';
 import {Point} from '../../types';
 import {StoreState} from '../../reducers';
 
@@ -13,6 +13,7 @@ const mapStateToProps=({Game:{point}}:StoreState):{point:Point}=>({
 
 const mapDispatchToProps=(dispatch:Dispatch)=>({
     onChooseDigit:(point:Point)=>dispatch(chooseDigitAction(point)),
+    onBlockHighlight:()=>dispatch(blockHighlightAction()),
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(DigitBoard);
