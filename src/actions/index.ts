@@ -53,6 +53,23 @@ export const serverValueFulfilled=(key:string,message:string):ServerValueFulfill
     }
 }
 
+
+/*launch digitBoard when want to choose a number*/
+export const CHOOSE_DIGIT_START='CHOOSE_ACTION_START';
+export type CHOOSE_DIGIT_START=typeof CHOOSE_DIGIT_START;
+export interface ChooseDigitStartAction {
+    type:CHOOSE_DIGIT_START;
+    line:number;
+    column:number;
+}
+export const chooseDigitStartAction=(line:number,column:number):ChooseDigitStartAction=>{
+    return {
+        type:CHOOSE_DIGIT_START,
+        line,
+        column,
+    }
+}
+
 /*DigitBoard click a number, the clicked number will update number in block*/
 export const CHOOSE_DIGIT='CHOOSE_ACTION';
 export type CHOOSE_DIGIT=typeof CHOOSE_DIGIT;
@@ -64,5 +81,17 @@ export const chooseDigitAction=(point:Point):ChooseDigitAction=>{
     return {
         type:CHOOSE_DIGIT,
         point,
+    }
+}
+
+/*fresh sudoku 2-dimension array*/
+export const UPDATE_SUDOKU='UPDATE_SUDOKU';
+export type UPDATE_SUDOKU=typeof UPDATE_SUDOKU;
+export interface UpdateSudokuAction {
+    type:UPDATE_SUDOKU;
+}
+export const updateSudokuAction=():UpdateSudokuAction=>{
+    return {
+        type:UPDATE_SUDOKU,
     }
 }
