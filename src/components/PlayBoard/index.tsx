@@ -1,15 +1,23 @@
 import React,{FC,memo,useState,useMemo} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import {Props} from '../../containers/PlayBoard';
+
 
 import DigitBoard from '../../containers/DigitBoard';
+import PlayBoardBlock from '../../containers/PlayBoardBlock';
 
 import useStyles from '../../styles/playBoard';
+import useStylesBlock from '../../styles/playBoardBlock';
+import classNames from 'classnames';
 
-const PlayBoard:FC<Props>=memo(({values,onChooseDigitStart,onUpdateSudoku})=>{
+import {Props} from '../../containers/PlayBoard';
+
+
+
+const PlayBoard:FC<Props>=memo(({values,point,blockHighlight,onClearBlockHighlight,onUpdateSudoku})=>{
     const classes=useStyles();
-
+    const blockClasses=useStylesBlock();
+    console.log(blockHighlight);
     const [firstMount,setFirstMount]=useState(true);
     const [digitBoard,setDigitBoard]=useState(false);
     if(firstMount) onUpdateSudoku() && setFirstMount(false);
@@ -21,20 +29,20 @@ const PlayBoard:FC<Props>=memo(({values,onChooseDigitStart,onUpdateSudoku})=>{
     const FormRow:FC<{nums:number[],index:number}>=memo(({nums,index})=>(
         <React.Fragment>
             {nums.map((num,childIndex)=>(
-                <Grid key={`PlayBoardLine${index}Block${childIndex}`} item spacing={0}>
-                    <Paper variant='outlined' square className={classes.playBoardBlock} onClick={()=>{toggleDigitBoard();onChooseDigitStart(index,childIndex);}}>{num}</Paper>
-                </Grid>
+                <div onClick={toggleDigitBoard}>
+                    <PlayBoardBlock line={index} column={childIndex} num={values[index][childIndex]} highlight={blockHighlight[index][childIndex]} />
+                </div>
             ))}
         </React.Fragment>
     ));
 
     return (
         <>
-            <div className={classes.playBoardContainer}>
+            <div className={classes.playBoardContainer} onMouseLeave={onClearBlockHighlight}>
                 <Grid container spacing={0}>
                     {values.map((nums:number[],index)=>(
                         <Grid key={`PlayBoard${index}`} container item spacing={0}>
-                            <FormRow nums={nums} index={index}/>
+                            <FormRow nums={nums} index={index} />
                         </Grid>
                     ))}
                 </Grid>
