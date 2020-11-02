@@ -1,6 +1,7 @@
 import React,{FC,memo,useState} from 'react';
 
 import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
 
 import Twitter from '@material-ui/icons/Twitter';
 import Facebook from '@material-ui/icons/Facebook';
@@ -19,13 +20,19 @@ const Share:FC<Props>=memo(({content})=>{
     return (
         <div>
             <Link href={twitterShareLink(content)}>
-                <Twitter />
+                <IconButton color='inherit' size='medium'>
+                    <Twitter />
+                </IconButton>
             </Link>
             <Link href={facebookShareLink(content)}>
-                <Facebook />
+                <IconButton color='inherit' size='medium'>
+                    <Facebook />
+                </IconButton>
             </Link>
             <Link href={instagramShareLink(content)}>
-                <Instagram />
+                <IconButton  color='inherit' size='medium'>
+                    <Instagram />
+                </IconButton>
             </Link>
         </div>
     );

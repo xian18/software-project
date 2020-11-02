@@ -3,7 +3,8 @@ import React,{FC,memo,useState} from 'react';
 import Modal from '../Modal';
 import DigitBoard from '../../containers/DigitBoard';
 import Counters from '../../containers/Counters';
-import PlayBoard from '../PlayBoard';
+import PlayBoard from '../../containers/PlayBoard';
+import AppBar from '../../containers/AppBar';
 
 import Share from '../Share';
 
@@ -29,6 +30,10 @@ const Testmain:FC<Props>=memo(()=>{
 
     return (
         <>
+            <br />
+            <br />
+            <br />
+            <br />
             <Counters />
             <Card>
                 <div>
@@ -42,8 +47,8 @@ const Testmain:FC<Props>=memo(()=>{
                 <Typography>This is children</Typography>
             </Modal>
             <Share content='hello'/>
-            <DigitBoard open={false}/>
-            <PlayBoard values={Array(9).fill(Array(9).fill(5))}/>
+            <PlayBoard />
+            <AppBar />
         </>
     );
 })
