@@ -15,7 +15,6 @@ export interface Props {
 
 const customModal:FC<Props>=memo(({open,title,direction,children,onClose})=>{
     const classes=useStyles();
-    console.log(direction);
     const leaveDirection = direction === 'left' ? 'right' : 'left';
     return (
         <Modal

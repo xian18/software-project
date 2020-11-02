@@ -1,10 +1,13 @@
 import {combineReducers} from 'redux'
-import CountersReducer,{CountersStore} from './Counters'
+import CountersReducer,{CountersStore} from './counters'
+import GameReducer,{GameStore} from './game';
 
 export interface StoreState {
-    Counters:CountersStore
+    Counters:CountersStore,
+    Game:GameStore
 }
 
 export const reducers=combineReducers({
     Counters:CountersReducer,
+    Game:GameReducer
 });

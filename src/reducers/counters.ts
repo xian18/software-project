@@ -1,12 +1,12 @@
-import * as actions from '../../actions'
+import * as actions from '../actions';
 
-type Action=
+type ActionType=
     | actions.Increment
     | actions.Decrement
     | actions.GetserverValue
     | actions.ServerValueFulfilled
 
-export interface CountersStore{
+export interface CountersStore {
     times:number;
     serverValue:string;
 }
@@ -16,7 +16,7 @@ const init:CountersStore={
     serverValue:'init serverValue'
 }
 
-export default (state=init,action:Action):CountersStore=>{
+export default (state=init,action:ActionType):CountersStore=>{
     const {times}=state;
     switch(action.type){
         case actions.INCREMENT:
