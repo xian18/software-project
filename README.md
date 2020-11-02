@@ -1,8 +1,7 @@
 # SOFTWARE_PROJECT
 
 使用 npm install 来安装依赖<br/>
-使用 npm run test 来运行react <br/>
-使用 npm build 来生成 html 和 js 文件
+使用 npm run start 来运行react <br/>
 
 ## About
 
