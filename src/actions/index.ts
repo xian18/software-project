@@ -1,3 +1,5 @@
+import {Point} from '../types';
+
 /* counter increase action*/
 export const INCREMENT="INCREMENT";
 export type INCREMENT=typeof INCREMENT;
@@ -48,5 +50,19 @@ export const serverValueFulfilled=(key:string,message:string):ServerValueFulfill
     return {
         type:SERVERVALUE_FULFILLED,
         key,message
+    }
+}
+
+/*DigitBoard click a number, the clicked number will update number in block*/
+export const CHOOSE_DIGIT='CHOOSE_ACTION';
+export type CHOOSE_DIGIT=typeof CHOOSE_DIGIT;
+export interface ChooseDigitAction {
+    type:CHOOSE_DIGIT;
+    point:Point;
+}
+export const chooseDigitAction=(point:Point):ChooseDigitAction=>{
+    return {
+        type:CHOOSE_DIGIT,
+        point,
     }
 }

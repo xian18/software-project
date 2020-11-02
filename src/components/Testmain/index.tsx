@@ -1,8 +1,11 @@
 import React,{FC,memo,useState} from 'react';
 
 import Modal from '../Modal';
-import Dialog from '../Dialog';
+import DigitBoard from '../../containers/DigitBoard';
 import Counters from '../../containers/Counters';
+import PlayBoard from '../PlayBoard';
+
+import Share from '../Share';
 
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
@@ -38,6 +41,9 @@ const Testmain:FC<Props>=memo(()=>{
             <Modal open={modal} title='发送通知' onClose={toggleOpen('modal')}>
                 <Typography>This is children</Typography>
             </Modal>
+            <Share content='hello'/>
+            <DigitBoard open={false}/>
+            <PlayBoard values={Array(9).fill(Array(9).fill(5))}/>
         </>
     );
 })
