@@ -7,30 +7,23 @@ import DigitBoard from '../../containers/DigitBoard';
 import PlayBoardBlock from '../../containers/PlayBoardBlock';
 
 import useStyles from '../../styles/playBoard';
-import useStylesBlock from '../../styles/playBoardBlock';
 import classNames from 'classnames';
 
 import {Props} from '../../containers/PlayBoard';
 
 
 
-const PlayBoard:FC<Props>=memo(({values,point,blockHighlight,onClearBlockHighlight,onUpdateSudoku})=>{
+const PlayBoard:FC<Props>=memo(({values,point,digitBoard,onToggleDigitBoard,onClearBlockHighlight,onUpdateSudoku})=>{
     const classes=useStyles();
-    const blockClasses=useStylesBlock();
-    console.log(blockHighlight);
-    const [firstMount,setFirstMount]=useState(true);
-    const [digitBoard,setDigitBoard]=useState(false);
-    if(firstMount) onUpdateSudoku() && setFirstMount(false);
 
-    const toggleDigitBoard=()=>{
-        setDigitBoard((prev)=>!prev);
-    }
+    const [firstMount,setFirstMount]=useState(true);
+    if(firstMount) onUpdateSudoku() && setFirstMount(false);
 
     const FormRow:FC<{nums:number[],index:number}>=memo(({nums,index})=>(
         <React.Fragment>
             {nums.map((num,childIndex)=>(
-                <div onClick={toggleDigitBoard}>
-                    <PlayBoardBlock line={index} column={childIndex} num={values[index][childIndex]} highlight={blockHighlight[index][childIndex]} />
+                <div onClick={onToggleDigitBoard}>
+                    <PlayBoardBlock line={index} column={childIndex} num={values[index][childIndex]} />
                 </div>
             ))}
         </React.Fragment>
@@ -47,8 +40,8 @@ const PlayBoard:FC<Props>=memo(({values,point,blockHighlight,onClearBlockHighlig
                     ))}
                 </Grid>
             </div>
-            <div onClick={toggleDigitBoard}>
-                <DigitBoard open={digitBoard} onClose={toggleDigitBoard}/>
+            <div onClick={onToggleDigitBoard}>
+                <DigitBoard open={digitBoard} onClose={onToggleDigitBoard}/>
             </div>
         </>
     );

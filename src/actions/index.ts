@@ -101,10 +101,12 @@ export const BLOCK_HIGHLIGHT='BLOCK_HIGHLIGHT';
 export type BLOCK_HIGHLIGHT=typeof BLOCK_HIGHLIGHT;
 export interface BlockHighlightAction {
     type:BLOCK_HIGHLIGHT;
+    value:number;
 }
-export const blockHighlightAction=():BlockHighlightAction=>{
+export const blockHighlightAction=(value:number):BlockHighlightAction=>{
     return {
         type:BLOCK_HIGHLIGHT,
+        value,
     }
 }
 
@@ -119,3 +121,16 @@ export const clearBlockHighlightAction=():ClearBlockHighlightAction=>{
         type:CLEAR_BLOCK_HIGHLIGHT,
     }
 }
+
+/*toggle global digitBoard on and off*/
+export const TOGGLE_DIGITBOARD='TOGGLE_DIGITBOARD';
+export type TOGGLE_DIGITBOARD=typeof TOGGLE_DIGITBOARD;
+export interface ToggleDigitBoardAction {
+    type:TOGGLE_DIGITBOARD;
+}
+export const toggleDigitBoardAction=():ToggleDigitBoardAction=>{
+    return {
+        type:TOGGLE_DIGITBOARD,
+    }
+}
+

@@ -3,18 +3,17 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import useStyles from '../../styles/playBoardBlock';
 import classNames from 'classnames';
-import { Highlight } from '@material-ui/icons';
 
 export interface Props {
     line:number;
     column:number;
     num:number;
-    highlight:number;
+    blockHighlight:number[][];
     onChooseDigitStart:(line:number,column:number)=>void;
-    onBlockHighlight:()=>void;
+    onBlockHighlight:(value:number)=>void;
 }
 
-const PlayBoardBlock:FC<Props>=memo(({line,column,num,highlight,onChooseDigitStart,onBlockHighlight})=>{
+const PlayBoardBlock:FC<Props>=memo(({line,column,num,blockHighlight,onChooseDigitStart,onBlockHighlight})=>{
     const classes=useStyles();
     return (
         <Grid key={`PlayBoardLine${line}Block${column}`} item spacing={0}>
@@ -23,11 +22,11 @@ const PlayBoardBlock:FC<Props>=memo(({line,column,num,highlight,onChooseDigitSta
                 className={classNames(
                         classes.playBoardBlock,
                         {
-                            [classes.hightLight]:highlight
+                            [classes.hightLight]:blockHighlight[line][column],
                         }
                     )} square onMouseEnter={()=>{
                 onChooseDigitStart(line,column);
-                onBlockHighlight();
+                onBlockHighlight(num);
             }
             }>{num}</Paper>
         </Grid>

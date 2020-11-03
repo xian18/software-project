@@ -12,7 +12,7 @@ export interface Props {
     open:boolean;
     point:Point;
     onChooseDigit:(point:Point)=>void;
-    onBlockHighlight:()=>void;
+    onBlockHighlight:(value:number)=>void;
     onClose:()=>void;
 }
 
@@ -26,8 +26,10 @@ const DigitBoard:FC<Props>=memo(({open,point,onChooseDigit,onBlockHighlight,onCl
                 <Button
                     size='small'
                     color='secondary'
-                    onMouseEnter={onBlockHighlight}
-                    onClick={e=>onChooseDigit({...point,value:num})}>{num}
+                    onMouseEnter={()=>onBlockHighlight(num)}
+                    onClick={e=>onChooseDigit({...point,value:num})}
+                >
+                    {num}
                 </Button>
                 </Grid>
             ))}
