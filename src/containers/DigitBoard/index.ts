@@ -13,7 +13,7 @@ const mapStateToProps=({Game:{point}}:StoreState):{point:Point}=>({
 
 const mapDispatchToProps=(dispatch:Dispatch)=>({
     onChooseDigit:(point:Point)=>dispatch(chooseDigitAction(point)),
-    onBlockHighlight:()=>dispatch(blockHighlightAction()),
+    onBlockHighlight:(value:number)=>dispatch(blockHighlightAction(value)),
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(DigitBoard);

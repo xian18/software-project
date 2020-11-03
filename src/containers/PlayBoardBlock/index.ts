@@ -6,12 +6,13 @@ import {StoreState} from '../../reducers';
 
 import PlayBoardBlock from '../../components/PlayBoardBlock';
 
-const mapStateToProps=({Game:{values,point,blockHighlight}}:StoreState):{}=>({
+const mapStateToProps=({Game:{values,highlightPoint,blockHighlight}}:StoreState):{blockHighlight:number[][]}=>({
+    blockHighlight,
 })
 
 const mapDispatchToProps=(dispatch:Dispatch)=>({
     onChooseDigitStart:(line:number,column:number)=>dispatch(chooseDigitStartAction(line,column)),  /*set the block x,y in store*/
-    onBlockHighlight:()=>dispatch(blockHighlightAction()),
+    onBlockHighlight:(value:number)=>dispatch(blockHighlightAction(value)),
 })
 
 type StateProps=ReturnType<typeof mapStateToProps>;

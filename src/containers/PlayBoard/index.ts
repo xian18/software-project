@@ -4,23 +4,25 @@ import {Dispatch} from 'redux';
 import {chooseDigitAction,
         chooseDigitStartAction,
         updateSudokuAction,
-        clearBlockHighlightAction
+        clearBlockHighlightAction,
+        toggleDigitBoardAction,
     } from '../../actions';
 import {Point} from '../../types';
 import {StoreState} from '../../reducers';
 
 import PlayBoard from '../../components/PlayBoard';
 
-const mapStateToProps=({Game:{values,point,blockHighlight}}:StoreState):{values:number[][],point:Point,blockHighlight:number[][]}=>({
+const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight}}:StoreState):{values:number[][],point:Point,digitBoard:boolean}=>({
     values,
     point,
-    blockHighlight,
+    digitBoard,
 })
 
 const mapDispatchToProps=(dispatch:Dispatch)=>({
     onChooseDigitStart:(line:number,column:number)=>dispatch(chooseDigitStartAction(line,column)),
     onUpdateSudoku:()=>dispatch(updateSudokuAction()),
     onClearBlockHighlight:()=>dispatch(clearBlockHighlightAction()),
+    onToggleDigitBoard:()=>dispatch(toggleDigitBoardAction()),
 })
 
 type StateProps=ReturnType<typeof mapStateToProps>;
