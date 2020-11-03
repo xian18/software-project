@@ -13,7 +13,7 @@ interface Props {
 
 const Share:FC<Props>=memo(({content})=>{
 
-    const twitterShareLink=(content:string):string=>`https://twitter.com/intent/tweet?text={content}`;
+    const twitterShareLink=(content:string):string=>`https://twitter.com/intent/tweet?text=${content}`;
     const facebookShareLink=(content:string):string=>'https://www.facebook.com/sharer/sharer.php?u=http://baobao.pink&display=popup&ref=plugin&src=like&kid_directed_site=0';    
     const instagramShareLink=(content:string):string=>'https://www.linkedin.com/cws/share?url=http://baobao.pink';
 

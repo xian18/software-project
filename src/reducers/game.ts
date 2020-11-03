@@ -18,6 +18,7 @@ export interface GameStore {
     point:Point;
     highlightPoint:Point;
     digitBoard:boolean;
+    playRoundCurrent:number;
 }
 
 const init:GameStore={
@@ -47,6 +48,7 @@ const init:GameStore={
     point:{x:0,y:0,value:0},
     highlightPoint:{x:0,y:0,value:0},
     digitBoard:false,
+    playRoundCurrent:0,
 }
 
 const initBlockHighlight=[
@@ -66,14 +68,11 @@ export default (state=init,action:ActionType):GameStore=>{
     switch(action.type){
         case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
             return {...state,values:generateSudoku(level)};
-        case actions.BLOCK_HIGHLIGHT:
-            for(var m:number=0;m<9;m++){
-                for(var n:number=0;n<9;n++){
+        case actions.BLOCK_HIGHLIGHT:   // calculate highlight matrix
+            for(var m:number=0;m<9;m++)
+                for(var n:number=0;n<9;n++)
                     if(action.value==values[m][n]) blockHighlight[m][n]=1;
                     else blockHighlight[m][n]=0;
-                }
-            }
-            console.log(blockHighlight);
             return {...state,blockHighlight:blockHighlight};
         case actions.CLEAR_BLOCK_HIGHLIGHT:
             const clear=initBlockHighlight.map(x=>Object.assign({},x));
@@ -81,7 +80,6 @@ export default (state=init,action:ActionType):GameStore=>{
         case actions.TOGGLE_DIGITBOARD:     // show global digitBoard
             return {...state,digitBoard:!digitBoard};
         case actions.CHOOSE_DIGIT_START:    // just for update point and highlight point mouse is howvering on
-            console.log(action.line,action.column);
             return {
                 ...state,
                 point:{...point,x:action.line,y:action.column},

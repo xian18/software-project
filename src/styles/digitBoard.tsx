@@ -23,7 +23,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
                 maxWidth: '100%',
             },
             maxHeight: '90%',
-            maxWidth: '25%',
+            maxWidth: '75%',
         },
         backdrop: {
             background: palette.primary.main,

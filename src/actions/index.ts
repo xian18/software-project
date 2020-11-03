@@ -134,3 +134,27 @@ export const toggleDigitBoardAction=():ToggleDigitBoardAction=>{
     }
 }
 
+/*play round go ahrad*/
+export const PLAY_ROUND_FORWARD='PLAY_ROUND_FORWARD';
+export type PLAY_ROUND_FORWARD=typeof PLAY_ROUND_FORWARD;
+export interface PlayRoundForwardAction {
+    type:PLAY_ROUND_FORWARD;
+}
+export const playRoundForwardAction=():PlayRoundForwardAction=>{
+    return {
+        type:PLAY_ROUND_FORWARD,
+    }
+}
+
+/*play round go back*/
+export const PLAY_ROUND_BACKWARD='PLAY_ROUND_BACKWARD';
+export type PLAY_ROUND_BACKWARD=typeof PLAY_ROUND_BACKWARD;
+export interface PlayRoundBackwardAction {
+    type:PLAY_ROUND_BACKWARD;
+}
+export const playRoundBackwardAction=():PlayRoundBackwardAction=>{
+    return {
+        type:PLAY_ROUND_BACKWARD,
+    }
+}
+

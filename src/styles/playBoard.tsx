@@ -25,6 +25,9 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             textAlign:'center',
             verticalAlign:''
         },
+        hightLight:{
+            backgroundColor:'red',
+        },
         backdrop: {
             background: palette.primary.main,
         },
