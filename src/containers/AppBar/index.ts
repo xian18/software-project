@@ -2,13 +2,14 @@
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {updateSudokuAction} from '../../actions';
+import {updateSudokuAction,playRoundBackwardAction} from '../../actions';
 import {StoreState} from '../../reducers';
 
 import AppBar from '../../components/AppBar';
 
 const mapDispatchToProps=(dispatch:Dispatch)=>({
     onUpdateSudoku:()=>dispatch(updateSudokuAction()),
+    onPlayRoundBackward:()=>dispatch(playRoundBackwardAction()),
 })
 
 type DispatchProps=ReturnType<typeof mapDispatchToProps>;

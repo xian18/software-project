@@ -1,4 +1,4 @@
-import {Point} from '../types';
+import {Point, sudokuValue,PlayHistory} from '../types';
 
 /* counter increase action*/
 export const INCREMENT="INCREMENT";
@@ -61,12 +61,14 @@ export interface ChooseDigitStartAction {
     type:CHOOSE_DIGIT_START;
     line:number;
     column:number;
+    value:sudokuValue;
 }
-export const chooseDigitStartAction=(line:number,column:number):ChooseDigitStartAction=>{
+export const chooseDigitStartAction=(line:number,column:number,value:sudokuValue):ChooseDigitStartAction=>{
     return {
         type:CHOOSE_DIGIT_START,
         line,
         column,
+        value,
     }
 }
 
@@ -101,9 +103,9 @@ export const BLOCK_HIGHLIGHT='BLOCK_HIGHLIGHT';
 export type BLOCK_HIGHLIGHT=typeof BLOCK_HIGHLIGHT;
 export interface BlockHighlightAction {
     type:BLOCK_HIGHLIGHT;
-    value:number;
+    value:sudokuValue;
 }
-export const blockHighlightAction=(value:number):BlockHighlightAction=>{
+export const blockHighlightAction=(value:sudokuValue):BlockHighlightAction=>{
     return {
         type:BLOCK_HIGHLIGHT,
         value,
@@ -139,10 +141,12 @@ export const PLAY_ROUND_FORWARD='PLAY_ROUND_FORWARD';
 export type PLAY_ROUND_FORWARD=typeof PLAY_ROUND_FORWARD;
 export interface PlayRoundForwardAction {
     type:PLAY_ROUND_FORWARD;
+    payload:PlayHistory;
 }
-export const playRoundForwardAction=():PlayRoundForwardAction=>{
+export const playRoundForwardAction=(payload:PlayHistory):PlayRoundForwardAction=>{
     return {
         type:PLAY_ROUND_FORWARD,
+        payload
     }
 }
 

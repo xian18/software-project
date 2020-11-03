@@ -1,16 +1,18 @@
+import {sudokuValue} from '../types'
 
-export const generateSudoku=(level:number):number[][]=>{
+export const generateSudoku=(level:number):sudokuValue[][]=>{
     /*algrithm for generating soduku here*/
+    const a=undefined;
 
     return [
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
+        [a,a,a,a,a,a,a,a,a],
     ];
 }

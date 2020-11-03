@@ -11,6 +11,7 @@ import HelpIcon from '@material-ui/icons/HelpOutline';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 
 
 import Modal from '../Modal';
@@ -20,7 +21,7 @@ import useStyles from '../../styles/appBar';
 
 import {Props} from '../../containers/AppBar';
 
-const Bar:FC<Props>=memo(({onUpdateSudoku})=>{
+const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
     const classes=useStyles();
 
     const [open,setOpen]=useState(true);
@@ -64,6 +65,9 @@ const Bar:FC<Props>=memo(({onUpdateSudoku})=>{
                     {useMemo(
                         () => (
                             <div className={classNames(classes.rightButtons)}>
+                                <IconButton color='inherit' onClick={onPlayRoundBackward}>
+                                    <ArrowBack />
+                                </IconButton>
                                 <IconButton color='inherit' onClick={toggleHelper}>
                                     <HelpIcon />
                                 </IconButton>

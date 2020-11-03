@@ -8,6 +8,7 @@ import DigitBoard from '../../containers/DigitBoard';
 import useStyles from '../../styles/playBoard';
 import classNames from 'classnames';
 
+import {sudokuValue,PlayHistory} from '../../types';
 import {Props} from '../../containers/PlayBoard';
 
 function comparePlayBoardBlock(prevProps:any,nextProps:any){
@@ -17,7 +18,7 @@ function comparePlayBoardBlock(prevProps:any,nextProps:any){
             );
 }
 
-const PlayBoardBlock:FC<{num:number,highlight:boolean} >= memo(({children,num,highlight})=>
+const PlayBoardBlock:FC<{num:sudokuValue,highlight:boolean} >= memo(({children,num,highlight})=>
 {
 
 
@@ -33,7 +34,7 @@ const PlayBoard:FC<Props>=memo(({
     values,
     digitBoard,
     blockHighlight,
-    playRoundCurrent,
+    playRound,
     onToggleDigitBoard,
     onClearBlockHighlight,
     onUpdateSudoku,
@@ -47,20 +48,11 @@ const PlayBoard:FC<Props>=memo(({
         onUpdateSudoku();
     },[])
 
-    useEffect(()=>{
-        if(playRoundCurrent>playRoundTotal){
-            /*handle this big problem*/
-        }
-    },[playRoundCurrent]);
-
-    const [playRoundTotal,setPlayRoundTotal]=useState(0);
-    const [playHistory,setPlayHistory]=useState(0);
-
     return (
         <>
             <div className={classes.playBoardContainer} onMouseLeave={onClearBlockHighlight}>
                 <Grid container spacing={0}>
-                    {values.map((nums:number[],line)=>(
+                    {values.map((nums:sudokuValue[],line)=>(
                         <Grid key={`PlayBoard${line}`} container item spacing={0}>
                             {nums.map((num,column)=>(
                                 <div onClick={onToggleDigitBoard}>
@@ -76,7 +68,7 @@ const PlayBoard:FC<Props>=memo(({
                                                             [classes.hightLight]:blockHighlight[line][column],
                                                         }
                                                     )} square onMouseEnter={()=>{
-                                                onChooseDigitStart(line,column);
+                                                onChooseDigitStart(line,column,num);
                                                 onBlockHighlight(num);
                                                 }
                                             }>{num}</Paper>

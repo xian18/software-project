@@ -9,33 +9,34 @@ import {chooseDigitStartAction,
         playRoundForwardAction,
         playRoundBackwardAction,
     } from '../../actions';
-import {Point} from '../../types';
+import {PlayHistory, Point} from '../../types';
 import {StoreState} from '../../reducers';
 
+import {sudokuValue} from '../../types';
 import PlayBoard from '../../components/PlayBoard';
 
-const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight,playRoundCurrent}}:StoreState):
+const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight,playRound}}:StoreState):
     {
-        values:number[][],
+        values:sudokuValue[][],
         point:Point,
         digitBoard:boolean,
         blockHighlight:number[][],
-        playRoundCurrent:number,
+        playRound:number,
     }=>({
     values,
     point,
     digitBoard,
     blockHighlight,
-    playRoundCurrent,
+    playRound,
 })
 
 const mapDispatchToProps=(dispatch:Dispatch)=>({
-    onChooseDigitStart:(line:number,column:number)=>dispatch(chooseDigitStartAction(line,column)),
+    onChooseDigitStart:(line:number,column:number,value:sudokuValue)=>dispatch(chooseDigitStartAction(line,column,value)),
     onUpdateSudoku:()=>dispatch(updateSudokuAction()),
     onClearBlockHighlight:()=>dispatch(clearBlockHighlightAction()),
     onToggleDigitBoard:()=>dispatch(toggleDigitBoardAction()),
-    onBlockHighlight:(value:number)=>dispatch(blockHighlightAction(value)),
-    onPlayRoundForward:()=>dispatch(playRoundForwardAction()),
+    onBlockHighlight:(value:sudokuValue)=>dispatch(blockHighlightAction(value)),
+    onPlayRoundForward:(payload:PlayHistory)=>dispatch(playRoundForwardAction(payload)),
     onPlayRoundBackward:()=>dispatch(playRoundBackwardAction()),
 })
 
