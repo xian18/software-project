@@ -14,8 +14,3 @@ export const generateSudoku=(level:number):number[][]=>{
         [0,0,0,0,0,0,0,0,0],
     ];
 }
-
-export const checkSuccess=(values:number[][]):boolean=>{
-
-    return false;
-}
