@@ -54,7 +54,6 @@ const Testmain:FC<Props>=memo(()=>{
             <AppBar />
             <PlayHelper />
             <Login />
-            <Drawer />
         </>
     );
 })

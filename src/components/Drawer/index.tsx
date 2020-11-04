@@ -1,4 +1,4 @@
-import React, { MouseEvent, MouseEventHandler,useState } from 'react';
+import React, { FC,memo,MouseEvent, MouseEventHandler,useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -11,61 +11,74 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-});
+import useStyles from '../../styles/Drawer';
 
-export default function SwipeableTemporaryDrawer() {
+export interface DrawerItem {
+  text:string;
+  icon:any;
+  handler:Function;
+}
+
+export interface localProps {
+  open:boolean;
+  onOpen:()=>void;
+  onClose:()=>void;
+}
+
+const Drawer:FC<localProps>=memo(({open,onOpen,onClose})=>{
+
   const classes = useStyles();
-  const [drawer,setDrawer]=useState(false);
 
-  const toggleDrawer = () => (event:any) => {
-    setDrawer((prev)=>(!prev));
-  };
+  const items:DrawerItem[]=[
+    {
+      text:'Inbox',
+      icon:<InboxIcon />,
+      handler:()=>{console.log('Drawer Inbox')},
+    },{
+      text:'Starred',
+      icon:<MailIcon />,
+      handler:()=>{console.log('Drawer MailIcon')},
+    }
+  ]
 
-  const list = (anchor:string) => (
-    <div
-      role="presentation"
-      onClick={toggleDrawer()}
-      onKeyDown={toggleDrawer()}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
+  const list=(drawerItems:DrawerItem[])=>{
+    {
+      return (
+        drawerItems.map((item:DrawerItem,index:number)=>{
+          return (
+            <ListItem button key={item.text}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText>{item.text}</ListItemText>
+            </ListItem>
+          );
+        })
+      )
+    }
+  }
 
   return (
     <div>
         <React.Fragment>
-            <Button onClick={toggleDrawer()}>{`Open Drawer`}</Button>
             <SwipeableDrawer
-                open={drawer}
-                onClose={toggleDrawer()}
-                onOpen={toggleDrawer()}
+                open={open}
+                onClose={onClose}
+                onOpen={onOpen}
             >
-                {list('left')}
+              <div
+                role="presentation"
+                onClick={onClose}
+                onKeyDown={onClose}
+              >
+                <List>
+                  <>
+                    {list(items)}
+                  </>
+                </List>
+              </div>
             </SwipeableDrawer>
         </React.Fragment>
     </div>
-  );
-}
+  )
+})
+
+export default Drawer;

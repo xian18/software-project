@@ -13,7 +13,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import Drawer from '../Drawer';
 
 import Modal from '../Modal';
 
@@ -22,12 +22,14 @@ import useStyles from '../../styles/appBar';
 
 import {Props} from '../../containers/AppBar';
 
+
 const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
     const classes=useStyles();
 
     const [open,setOpen]=useState(true);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
     const [helper,setHelper]=useState(false);
+    const [drawer,setDrawer]=useState(false);
 
     const handleClickPerson: MouseEventHandler = ({ currentTarget }) => {
         setAnchorEl(currentTarget);
@@ -40,6 +42,10 @@ const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
     const toggleHelper=()=>{
         setHelper(prev=>!prev);
     };
+
+    const toggleDrawer=()=>{
+        setDrawer((drawer)=>!drawer);
+    }
 
     const HelpMessage=useMemo(()=>(
         <Typography>这里是我们要做的东西</Typography>
@@ -63,7 +69,8 @@ const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
                         () => (
                             <IconButton
                                 color='inherit'
-                                className={classes.menuButton}>
+                                className={classes.menuButton}
+                                onClick={toggleDrawer}>
                                 <MenuIcon />
                             </IconButton>
                         ),
@@ -99,6 +106,7 @@ const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
             <Modal title='help' open={helper} onClose={toggleHelper}>
                 {HelpMessage}
             </Modal>
+            <Drawer open={drawer} onOpen={toggleDrawer} onClose={toggleDrawer} />
         </>
     )
 })
