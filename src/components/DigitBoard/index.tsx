@@ -2,26 +2,20 @@ import React,{FC,memo,useState} from 'react';
 
 
 import Grid from '@material-ui/core/Grid';
-import myModal from '../Modal';
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
 import {Point,sudokuValue,PlayHistory} from '../../types';
 import Fade from '@material-ui/core/Fade';
-import Dialog from '@material-ui/core/Dialog';
-
 
 import useStyles from '../../styles/digitBoard';
+import {Props} from '../../containers/DigitBoard';
 
-export interface Props {
+export interface localProps {
     open:boolean;
-    point:Point;
-    onChooseDigit:(point:Point)=>void;
-    onPlayRoundForward:(payload:PlayHistory)=>void;
-    onBlockHighlight:(value:sudokuValue)=>void;
     onClose:()=>void;
 }
 
-const DigitBoard:FC<Props>=memo(({open,point,onChooseDigit,onPlayRoundForward,onBlockHighlight,onClose})=>{
+const DigitBoard:FC<localProps & Props>=memo(({open,point,chooseDigitAction,playRoundForwardAction,blockHighlightAction,onClose})=>{
     const numbers:number[][]=[
                                 [1,2,3],
                                 [4,5,6],
@@ -45,10 +39,10 @@ const DigitBoard:FC<Props>=memo(({open,point,onChooseDigit,onPlayRoundForward,on
                                     <Button
                                         size='small'
                                         color='secondary'
-                                        onMouseEnter={()=>{if(num!=undefined) onBlockHighlight(num as sudokuValue)}}
+                                        onMouseEnter={()=>{if(num!=undefined) blockHighlightAction(num as sudokuValue)}}
                                         onClick={e=>{
-                                                    onChooseDigit({...point,value:num as sudokuValue});
-                                                    onPlayRoundForward({x:point.x,y:point.y,from:point.value,to:num as sudokuValue});
+                                                    chooseDigitAction({...point,value:num as sudokuValue});
+                                                    playRoundForwardAction({x:point.x,y:point.y,from:point.value,to:num as sudokuValue});
                                                     }
                                                 }
                                     >

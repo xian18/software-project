@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
+import {Dispatch,bindActionCreators} from 'redux';
 
-import {increment,decrement, getserverValue} from '../../actions';
+import {incrementAction,decrementAction, getserverValueAction} from '../../actions';
 import {Counters} from '../../components/Counters';
 import {StoreState} from '../../reducers'
 
@@ -10,11 +10,12 @@ const mapStateToProps=({Counters:{times,serverValue}}:StoreState):{value:number,
   serverValue
 })
 
-const mapDispatchToProps=(dispatch:Dispatch)=>({
-    onIncrement:()=>dispatch(increment()),
-    onDecrement:()=>dispatch(decrement()),
-    ongetserverValue:(payload:string)=>dispatch(getserverValue(payload))
-})
+const mapDispatchToProps=(dispatch:Dispatch)=>
+  bindActionCreators({
+    incrementAction,
+    decrementAction,
+    getserverValueAction,
+  },dispatch);
 
 type StateProps=ReturnType<typeof mapStateToProps>;
 type DispatchProps=ReturnType<typeof mapDispatchToProps>;

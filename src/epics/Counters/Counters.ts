@@ -11,7 +11,7 @@ import { BehaviorSubject, Observable, of,ObservableInput } from 'rxjs';
 import {ajax} from 'rxjs/ajax';
 import {catchError,filter,mergeMap,startWith,switchMap} from 'rxjs/operators';
 
-import {getserverValue,GetserverValue,GET_SERVERVALUE,serverValueFulfilled} from '../../actions';
+import {getserverValueAction,GetserverValue,GET_SERVERVALUE,serverValueFulfilled} from '../../actions';
 import {StoreState} from '../../reducers';
 
 import {API} from '../../config/consts';

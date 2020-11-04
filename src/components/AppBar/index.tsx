@@ -12,6 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 import Modal from '../Modal';
@@ -45,6 +46,14 @@ const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
     )
     ,[open])
 
+    const MyButton:FC<{title:string,onClick?:Function}>=memo(({children,title,onClick=()=>{}})=>(
+        <Tooltip title={title} arrow>
+            <IconButton color='inherit' onClick={()=>onClick()}>
+                {children}
+            </IconButton>
+        </Tooltip>
+    ));
+
     return (
         <>
             <AppBar position='fixed' className={classes.appBar}>
@@ -65,21 +74,18 @@ const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
                     {useMemo(
                         () => (
                             <div className={classNames(classes.rightButtons)}>
-                                <IconButton color='inherit' onClick={onPlayRoundBackward}>
+                                <MyButton title='GoBack' onClick={onPlayRoundBackward}>
                                     <ArrowBack />
-                                </IconButton>
-                                <IconButton color='inherit' onClick={toggleHelper}>
+                                </MyButton>
+                                <MyButton title='Help' onClick={toggleHelper}>
                                     <HelpIcon />
-                                </IconButton>
-                                <IconButton color='inherit' onClick={onUpdateSudoku}>
-                                    <RefreshIcon />
-                                </IconButton>
-                                <IconButton color='inherit'>
+                                </MyButton>
+                                <MyButton title='Dark'>
                                     <Brightness4 />
-                                </IconButton>
-                                <IconButton color='inherit' onClick={handleClickPerson}>
+                                </MyButton>
+                                <MyButton title='Logout' onClick={handleClickPerson}>
                                     <PersonIcon />
-                                </IconButton>
+                                </MyButton>
                             </div>
                         ),
                         // eslint-disable-next-line

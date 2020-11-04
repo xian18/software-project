@@ -1,5 +1,5 @@
-import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
+import {connect, MapStateToProps} from 'react-redux';
+import {Dispatch,bindActionCreators} from 'redux';
 
 import {chooseDigitAction,
         blockHighlightAction,
@@ -14,10 +14,15 @@ const mapStateToProps=({Game:{point}}:StoreState):{point:Point}=>({
     point,
   })
 
-const mapDispatchToProps=(dispatch:Dispatch)=>({
-    onChooseDigit:(point:Point)=>dispatch(chooseDigitAction(point)),
-    onBlockHighlight:(value:sudokuValue)=>dispatch(blockHighlightAction(value)),
-    onPlayRoundForward:(payload:PlayHistory)=>dispatch(playRoundForwardAction(payload)),
-})
+const mapDispatchToProps=(dispatch:Dispatch)=>
+  bindActionCreators({
+    chooseDigitAction,
+    blockHighlightAction,
+    playRoundForwardAction,
+  },dispatch)
+
+type StateProps=ReturnType<typeof mapStateToProps>;
+type DispatchProps=ReturnType<typeof mapDispatchToProps>
+export type Props=StateProps & DispatchProps;
 
 export default connect(mapStateToProps,mapDispatchToProps)(DigitBoard);

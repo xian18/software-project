@@ -5,7 +5,7 @@ import DigitBoard from '../../containers/DigitBoard';
 import Counters from '../../containers/Counters';
 import PlayBoard from '../../containers/PlayBoard';
 import AppBar from '../../containers/AppBar';
-import Test from '../Test';
+import PlayHelper from '../PlayHelper';
 
 import Share from '../Share';
 
@@ -14,6 +14,8 @@ import { Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import useTheme from '@material-ui/core/styles/useTheme';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
+import Login from '../Login';
+import Drawer from '../Drawer';
 
 export interface Props {
 
@@ -50,7 +52,9 @@ const Testmain:FC<Props>=memo(()=>{
             <Share content='hello'/>
             <PlayBoard />
             <AppBar />
-            <Test><div>hello</div></Test>
+            <PlayHelper />
+            <Login />
+            <Drawer />
         </>
     );
 })

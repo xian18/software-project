@@ -35,27 +35,27 @@ const PlayBoard:FC<Props>=memo(({
     digitBoard,
     blockHighlight,
     playRound,
-    onToggleDigitBoard,
-    onClearBlockHighlight,
-    onUpdateSudoku,
-    onChooseDigitStart,
-    onBlockHighlight,
+    toggleDigitBoardAction,
+    clearBlockHighlightAction,
+    updateSudokuAction,
+    chooseDigitStartAction,
+    blockHighlightAction,
 })=>{
 
     const classes=useStyles();
 
     useEffect(()=>{
-        onUpdateSudoku();
+        updateSudokuAction();
     },[])
 
     return (
         <>
-            <div className={classes.playBoardContainer} onMouseLeave={onClearBlockHighlight}>
+            <div className={classes.playBoardContainer} onMouseLeave={clearBlockHighlightAction}>
                 <Grid container spacing={0}>
                     {values.map((nums:sudokuValue[],line)=>(
                         <Grid key={`PlayBoard${line}`} container item spacing={0}>
                             {nums.map((num,column)=>(
-                                <div onClick={onToggleDigitBoard}>
+                                <div onClick={toggleDigitBoardAction}>
                                     <React.Fragment key={`PlayBoardLine${line}Block${column}`}>
                                         <PlayBoardBlock
                                             num={values[line][column]}
@@ -68,8 +68,8 @@ const PlayBoard:FC<Props>=memo(({
                                                             [classes.hightLight]:blockHighlight[line][column],
                                                         }
                                                     )} square onMouseEnter={()=>{
-                                                onChooseDigitStart(line,column,num);
-                                                onBlockHighlight(num);
+                                                chooseDigitStartAction(line,column,num);
+                                                blockHighlightAction(num);
                                                 }
                                             }>{num}</Paper>
                                         </PlayBoardBlock>
@@ -80,9 +80,11 @@ const PlayBoard:FC<Props>=memo(({
                     ))}
                 </Grid>
             </div>
-            <div onClick={onToggleDigitBoard}>
-                <DigitBoard open={digitBoard} onClose={onToggleDigitBoard}/>
-            </div>
+            {useMemo(()=>(
+                <div onClick={toggleDigitBoardAction}>
+                    <DigitBoard open={digitBoard} onClose={toggleDigitBoardAction}/>
+                </div>
+            ),[digitBoard])}
         </>
     );
 })
