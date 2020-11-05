@@ -33,6 +33,7 @@ const Testmain:FC<Props>=memo(()=>{
 
     return (
         <>
+           {/*
             <br />
             <br />
             <br />
@@ -50,10 +51,13 @@ const Testmain:FC<Props>=memo(()=>{
                 <Typography>This is children</Typography>
             </Modal>
             <Share content='hello'/>
+           */}
             <PlayBoard />
+            {/*
             <AppBar />
             <PlayHelper />
             <Login />
+            */}
         </>
     );
 })
