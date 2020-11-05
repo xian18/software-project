@@ -1,7 +1,7 @@
 import * as actions from '../actions';
 import {Point} from '../types';
 import {generateSudoku} from '../algrithm/generateSudoku';
-import {sudokuValue,PlayHistory} from '../types';
+import {sudokuValue,PlayHistory,Level} from '../types';
 import {zero9x9,undefined9x9} from '../consts';
 import {calculateHighlight} from '../algrithm/calculateHighlight';
 
@@ -18,7 +18,7 @@ type ActionType=
 export interface GameStore {
     values:sudokuValue[][];
     blockHighlight:number[][];
-    level:number;
+    level:Level;
     point:Point;
     highlightPoint:Point;
     digitBoard:boolean;
@@ -42,7 +42,8 @@ export default (state=init,action:ActionType):GameStore=>{
     const {values,blockHighlight,level,point,highlightPoint,digitBoard,playRound,playHistorys} = state;
     switch(action.type){
         case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
-            return {...state,values:generateSudoku(level)};
+            const [generate,result]=generateSudoku(level);
+            return {...state,values:generate};
         case actions.BLOCK_HIGHLIGHT:   // calculate highlight matrix
             return {...state,blockHighlight:calculateHighlight(blockHighlight,values,action.value)};
         case actions.CLEAR_BLOCK_HIGHLIGHT:

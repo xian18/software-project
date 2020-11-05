@@ -16,3 +16,5 @@ export function calculateHighlight(blockHighlight:number[][],values:sudokuValue[
             else blockHighlight[m][n]=0;
     return blockHighlight;
 }
+
+export default calculateHighlight;

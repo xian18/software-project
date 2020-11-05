@@ -17,21 +17,24 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         PlayBoardLine:{
             margin:spacing(0),
             padding:spacing(0),
-            marginBottom:"-5px"
+            //marginBottom:"-5px"
         },
-        playBoardBlock:{
+        playBoardBlockContainer:{
             position:'relative',
-            //width:spacing(1),
-            //height:spacing(1),
             margin:spacing(0),
             padding:spacing(0),
-            backgroundColor:'orange',
             cursor:'pointer',
             textAlign:'center',
             verticalAlign:'',
         },
         hightLight:{
-            backgroundColor:'red',
+            backgroundColor:'gray',
+            margin:0,
+            padding:0,
+            width:"80px",
+            height:"80px"
+        },
+        normal:{
             margin:0,
             padding:0,
             width:"80px",
