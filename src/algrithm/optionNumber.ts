@@ -8,6 +8,11 @@ import {sudokuValue} from "../types";
  * 
  * @returns 棋盘中当前位置能填入什么
  */
-export function optionalNumber(value:sudokuValue[][],x:number,y:number):sudokuValue[]{
-    return [1,2,3,4,5];
+export function optionNumber(value:sudokuValue[][],x:number,y:number):sudokuValue[]{
+    const random:number=(Math.random()*10);
+    let r:number[]=[];
+    for(let i=1;i<random;i++){
+        r.push(i);
+    }
+    return r as sudokuValue[];
 }

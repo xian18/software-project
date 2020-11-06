@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import {sudokuValue,PlayHistory} from '../../types';
 import {Props} from '../../containers/PlayBoard';
 import {numberIcons} from '../../consts/elements';
-import {optionalNumber} from "../../algrithm/optionalNumber"
+import {optionNumber} from "../../algrithm/optionNumber"
 
 
 function comparePlayBoardBlock(prevProps:any,nextProps:any){
@@ -118,10 +118,6 @@ const PlayBoard:FC<Props>=memo(({
                                                 }}
                                                 onClick={()=>{handleBlockClick(line,column,num)}}
                                                 >
-
-                                        {(()=>{
-                                        if(values[line][column]!==undefined){
-                                            return (
                                                 <NumberIcon
                                                     num={values[line][column]}
                                                     showUnchangeable={showUnchangeable} /*This property needs to be configured and set by some button*/
@@ -129,25 +125,29 @@ const PlayBoard:FC<Props>=memo(({
                                                         classes.numberIconNormal,
                                                         {
                                                             [classes.hightLight]:blockHighlight[line][column],
+                                                            [classes.hideUndefinedIcon]:values[line][column]==undefined,
                                                         }
                                                     )}
                                                     >
-                                                </NumberIcon>);
-                                        } else {
-                                            let optNumber:sudokuValue[]=optionalNumber(values,line,column);
-                                            return (<Grid container item className={classes.optionNumberBlock}>
-                                                {optNumber.map((num)=>
-                                                    (<NumberIcon 
-                                                        num={num}
-                                                        showUnchangeable={false}
-                                                        className={classes.optionNumberIcon}
-                                                    >
-                                                    </NumberIcon>)
-                                                    )
-                                             }
-                                            </Grid>)
-                                        }
-                                    })()}
+                                                </NumberIcon>
+                                            {(()=>{
+                                            const optNumber:sudokuValue[]=optionNumber(values,line,column);
+                                            if(values[line][column]==undefined)
+                                                return (
+                                                    <Grid container item className={classes.optionNumberBlock}>
+                                                        {optNumber.map((num)=>
+                                                            (
+                                                                <NumberIcon 
+                                                                    num={num}
+                                                                    showUnchangeable={false}
+                                                                    className={classes.optionNumberIcon}
+                                                                >
+                                                                </NumberIcon>)
+                                                            )
+                                                        }
+                                                    </Grid>)
+                                            }
+                                        )()}
                                         </IconButton>
                                     </Grid>
                                 </div>

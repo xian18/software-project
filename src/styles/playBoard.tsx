@@ -41,7 +41,9 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             padding:0,
             width:"8vmin",
             height:"8vmin",
-            
+        },
+        hideUndefinedIcon:{
+            display:'none',
         },
         backdrop: {
             background: palette.primary.main,
