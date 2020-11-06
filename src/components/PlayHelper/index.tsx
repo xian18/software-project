@@ -17,6 +17,7 @@ const PlayHelper:FC<Props>=memo(({
                                 toggleShowUnchangeableAction,
                                 updateSudokuAction,
                                 playRoundBackwardAction,
+                                clearBlockHighlightAction,
                             })=>{
     const classes=useStyles();
     const {enqueueSnackbar,closeSnackbar}=useSnackbar();
@@ -50,6 +51,7 @@ const PlayHelper:FC<Props>=memo(({
                                     setHighlightLoc(value);
                                 }
                             }}
+                            onMouseLeave={clearBlockHighlightAction}
                             >
                             <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                                 className={classNames(

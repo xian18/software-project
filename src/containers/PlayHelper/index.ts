@@ -8,6 +8,7 @@ import {blockHighlightAction,
         toggleShowUnchangeableAction,
         updateSudokuAction,
         playRoundBackwardAction,
+        clearBlockHighlightAction,
       } from '../../actions';
 import {StoreState} from '../../reducers';
 
@@ -27,6 +28,7 @@ const mapDispatchToProps=(dispatch:Dispatch)=>
     toggleShowUnchangeableAction,
     updateSudokuAction,
     playRoundBackwardAction,
+    clearBlockHighlightAction
   },dispatch)
 
 type StateProps=ReturnType<typeof mapStateToProps>;
