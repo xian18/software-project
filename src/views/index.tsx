@@ -1,17 +1,19 @@
 import React,{FC,lazy,memo} from 'react';
 import {Route,RouteComponentProps,Switch,withRouter} from 'react-router';
 import Counters from '../containers/Counters';
-import Testmain from '../components/Testmain';
 import SnackBar from '../components/SnackBar';
 import withRoot from '../styles/withRoot';
+
+import AppBar from '../containers/AppBar';
+import Game from './game';
 
 const Index:FC=memo(()=>{
     return (
         <React.Fragment>
             <SnackBar>
-                <Testmain />
+                <AppBar />
                 <Switch>
-                    <Route path='/aaa' component={Counters} />
+                    <Route path='/' component={Game} />
                     <Route path='/bbb' component={Counters} />
                 </Switch>
             </SnackBar>
