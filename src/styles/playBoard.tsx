@@ -64,6 +64,9 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         topPadding:{
             paddingTop:spacing(1),
         },
+        unchangeableBlock:{
+            backgroundColor:'orange',
+        },
     }),
 );
 

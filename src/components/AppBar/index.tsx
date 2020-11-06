@@ -23,7 +23,7 @@ import useStyles from '../../styles/appBar';
 import {Props} from '../../containers/AppBar';
 
 
-const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
+const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
     const classes=useStyles();
 
     const [open,setOpen]=useState(true);
@@ -81,7 +81,7 @@ const Bar:FC<Props>=memo(({onUpdateSudoku,onPlayRoundBackward})=>{
                     {useMemo(
                         () => (
                             <div className={classNames(classes.rightButtons)}>
-                                <MyButton title='GoBack' onClick={onPlayRoundBackward}>
+                                <MyButton title='GoBack' onClick={playRoundBackwardAction}>
                                     <ArrowBack />
                                 </MyButton>
                                 <MyButton title='Help' onClick={toggleHelper}>

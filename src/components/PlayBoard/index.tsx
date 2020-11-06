@@ -14,8 +14,11 @@ import {numberIcons} from '../../consts/elements';
 
 
 function comparePlayBoardBlock(prevProps:any,nextProps:any){
+    if(prevProps.unchangeable === true)
+        return true;
     return  (
                 prevProps.num === nextProps.num &&
+                prevProps.showUnchangeable === nextProps.showUnchangeable &&
                 prevProps.className === nextProps.className
             );
 }
@@ -24,43 +27,72 @@ function comparePlayBoardBlock(prevProps:any,nextProps:any){
 
 const NumberIcon:FC<{
                         num:sudokuValue,
+                        showUnchangeable:boolean,
                         className:any,
-                    }> =memo(({num,className})=>
+                    }> =memo(({num,showUnchangeable,className})=>
 {
     const classes=useStyles();
-    
-    if(num==undefined)
+
+    const [initNum,setInitNum]=useState(num);
+    const [unchangeable,setUnchangeable]=useState(initNum!=undefined);
+    if(unchangeable)
         return (
-            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
-                <image width="100%" height="100%" xlinkHref="data:image/png;base64,"/>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+                className={classNames(
+                    {
+                        [classes.unchangeableBlock]:showUnchangeable,
+                    },
+                    className,
+                )}>
+                {numberIcons.get(initNum as number)}
             </svg>
         )
-    else return (
-        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
-            {numberIcons.get(num)}
-        </svg>
-        )
-
+    else{
+        if(num==undefined)
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
+                    <image width="100%" height="100%" xlinkHref="data:image/png;base64,"/>
+                </svg>
+            )
+        else return (
+            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
+                {numberIcons.get(num)}
+            </svg>
+            )
+        }
 },comparePlayBoardBlock);
 
 
 const PlayBoard:FC<Props>=memo(({
     values,
     digitBoard,
+    point,
     blockHighlight,
     playRound,
+    placeValue,
+    showUnchangeable,
     toggleDigitBoardAction,
     clearBlockHighlightAction,
     updateSudokuAction,
     chooseDigitStartAction,
+    chooseDigitAction,
+    playRoundForwardAction,
     blockHighlightAction,
 })=>{
 
     const classes=useStyles();
+    const [initValues,setInitValues]=useState(values.map(x=>Object.assign({},x)));
 
-    useEffect(()=>{
-        updateSudokuAction();
-    },[])
+    const handleBlockClick=(line:number,column:number,value:sudokuValue)=>{
+        if(initValues[line][column]==undefined){
+            if(placeValue!=undefined){
+                chooseDigitAction({x:line,y:column,value:placeValue});
+                playRoundForwardAction({x:line,y:column,from:value,to:placeValue})
+            }else{
+                toggleDigitBoardAction()
+            }
+        }
+    }
 
     return (
         <>
@@ -69,7 +101,7 @@ const PlayBoard:FC<Props>=memo(({
                     {values.map((nums:sudokuValue[],line)=>(
                         <Grid key={`PlayBoard${line}`} container item spacing={0}>
                             {nums.map((num,column)=>(
-                                <div onClick={toggleDigitBoardAction} className={classes.PlayBoardLine}>
+                                <div className={classes.PlayBoardLine}>
                                     <Grid item key={`PlayBoardLine${line}Block${column}`}>
                                         <IconButton className={classNames(
                                                 classes.playBoardBlockContainer,
@@ -83,9 +115,13 @@ const PlayBoard:FC<Props>=memo(({
                                             onMouseEnter={()=>{
                                             chooseDigitStartAction({x:line,y:column,value:num});
                                             blockHighlightAction(num);
-                                        }}>
+                                            }}
+                                            onClick={()=>{handleBlockClick(line,column,num)}}
+                                            >
+
                                             <NumberIcon
                                                 num={values[line][column]}
+                                                showUnchangeable={showUnchangeable} /*This property needs to be configured and set by some button*/
                                                 className={classNames(
                                                     classes.numberIconNormal,
                                                     {

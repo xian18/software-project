@@ -105,3 +105,28 @@ export interface PlayRoundBackwardAction {
 }
 export const playRoundBackwardAction=createActionFunc(PLAY_ROUND_BACKWARD);
 
+/** 设置placeValue值*/
+export const SET_PLACE_VALUE='SET_PLACE_VALUE';
+export type SET_PLACE_VALUE=typeof SET_PLACE_VALUE;
+export interface SetPlaceValueAction {
+    type:SET_PLACE_VALUE;
+    value:sudokuValue;
+}
+export const setPlaceValueAction=createActionFunc(SET_PLACE_VALUE,'value');
+
+/** 清空placeValue值，设置为undefined*/
+export const CLEAR_PLACE_VALUE='CLEAR_PLACE_VALUE';
+export type CLEAR_PLACE_VALUE=typeof CLEAR_PLACE_VALUE;
+export interface ClearPlaceValueAction {
+    type:CLEAR_PLACE_VALUE;
+    value:sudokuValue;
+}
+export const clearPlaceValueAction=createActionFunc(CLEAR_PLACE_VALUE,'value');
+
+/** */
+export const TOGGLE_SHOW_UNCHANGEABLE='TOGGLE_SHOW_UNCHANGEABLE';
+export type TOGGLE_SHOW_UNCHANGEABLE=typeof TOGGLE_SHOW_UNCHANGEABLE;
+export interface ToggleShowUnchangeableAction {
+    type:TOGGLE_SHOW_UNCHANGEABLE
+}
+export const toggleShowUnchangeableAction=createActionFunc(TOGGLE_SHOW_UNCHANGEABLE);

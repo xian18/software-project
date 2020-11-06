@@ -8,24 +8,29 @@ import {chooseDigitStartAction,
         blockHighlightAction,
         playRoundForwardAction,
         playRoundBackwardAction,
+        chooseDigitAction,
     } from '../../actions';
 import {PlayHistory, Point,sudokuValue} from '../../types';
 import {StoreState} from '../../reducers';
 import PlayBoard from '../../components/PlayBoard';
 
-const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight,playRound}}:StoreState):
+const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight,playRound,placeValue,showUnchangeable}}:StoreState):
     {
         values:sudokuValue[][],
         point:Point,
         digitBoard:boolean,
         blockHighlight:number[][],
         playRound:number,
+        placeValue:sudokuValue,
+        showUnchangeable:boolean,
     }=>({
     values,
     point,
     digitBoard,
     blockHighlight,
     playRound,
+    placeValue,
+    showUnchangeable
 })
 
 const mapDispatchToProps=(dispatch:Dispatch)=>
@@ -37,6 +42,7 @@ const mapDispatchToProps=(dispatch:Dispatch)=>
         clearBlockHighlightAction,
         playRoundForwardAction,
         playRoundBackwardAction,
+        chooseDigitAction,
     },dispatch);
 
 type StateProps=ReturnType<typeof mapStateToProps>;

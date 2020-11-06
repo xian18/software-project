@@ -1,9 +1,9 @@
 import * as actions from '../actions';
 import {Point} from '../types';
-import {generateSudoku} from '../algrithm/generateSudoku';
 import {sudokuValue,PlayHistory,Level} from '../types';
 import {zero9x9,undefined9x9} from '../consts';
-import {calculateHighlight} from '../algrithm/calculateHighlight';
+import calculateHighlight from '../algrithm/calculateHighlight';
+import generateSudoku from '../algrithm/generateSudoku';
 
 type ActionType=
     | actions.ChooseDigitAction
@@ -14,6 +14,9 @@ type ActionType=
     | actions.ToggleDigitBoardAction
     | actions.PlayRoundBackwardAction
     | actions.PlayRoundForwardAction
+    | actions.SetPlaceValueAction
+    | actions.ClearPlaceValueAction
+    | actions.ToggleShowUnchangeableAction
 
 export interface GameStore {
     values:sudokuValue[][];
@@ -24,11 +27,13 @@ export interface GameStore {
     digitBoard:boolean;
     playRound:number;
     playHistorys:PlayHistory[];
+    placeValue:sudokuValue;
+    showUnchangeable:boolean;
 }
 
 
 const init:GameStore={
-    values:undefined9x9,
+    values:generateSudoku(1)[0],
     blockHighlight:zero9x9.map(x=>Object.assign({},x)) as number[][],
     level:1,
     point:{x:0,y:0,value:undefined},
@@ -36,10 +41,12 @@ const init:GameStore={
     digitBoard:false,
     playRound:0,
     playHistorys:[],
+    placeValue:undefined,
+    showUnchangeable:true,
 }
 
 export default (state=init,action:ActionType):GameStore=>{
-    const {values,blockHighlight,level,point,highlightPoint,digitBoard,playRound,playHistorys} = state;
+    const {values,blockHighlight,level,point,highlightPoint,digitBoard,playRound,playHistorys,showUnchangeable} = state;
     switch(action.type){
         case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
             const [generate,result]=generateSudoku(level);
@@ -63,6 +70,12 @@ export default (state=init,action:ActionType):GameStore=>{
         case actions.PLAY_ROUND_FORWARD:
             playHistorys.push(action.payload);
             return {...state,playRound:playRound+1,playHistorys,blockHighlight:calculateHighlight(values,action.payload.to)};
+        case actions.SET_PLACE_VALUE:
+            return {...state,placeValue:action.value};
+        case actions.CLEAR_PLACE_VALUE:
+            return {...state,placeValue:undefined};
+        case actions.TOGGLE_SHOW_UNCHANGEABLE:
+            return {...state,showUnchangeable:!showUnchangeable};
         default:
             return {...state};
     }
