@@ -34,11 +34,11 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             width:"80px",
             height:"80px"
         },
-        normal:{
+        numberIconNormal:{
             margin:0,
             padding:0,
-            width:"80px",
-            height:"80px"
+            width:"90px",
+            height:"90px"
         },
         backdrop: {
             background: palette.primary.main,
@@ -48,7 +48,22 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             padding:0,
             position:"relative",
         },
-
+        rightPaddingBorder:{
+            paddingRight:spacing(1),
+            borderRadius:'0',
+            borderRight:'5px solid black',
+        },
+        leftPadding:{
+            paddingLeft:spacing(1),
+        },
+        bottomPaddingBorder:{
+            paddingBottom:spacing(1),
+            borderRadius:'0',
+            borderBottom:'5px solid black',
+        },
+        topPadding:{
+            paddingTop:spacing(1),
+        },
     }),
 );
 

@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 import {sudokuValue,PlayHistory} from '../../types';
 import {Props} from '../../containers/PlayBoard';
-import {numberIcons} from './consts';
+import {numberIcons} from '../../consts/elements';
 
 
 function comparePlayBoardBlock(prevProps:any,nextProps:any){
@@ -28,17 +28,6 @@ const NumberIcon:FC<{
                     }> =memo(({num,className})=>
 {
     const classes=useStyles();
-    const numIconMap={
-        1:numberIcons.OneIcon,
-        2:numberIcons.TwoIcon,
-        3:numberIcons.ThreeIcon,
-        4:numberIcons.FourIcon,
-        5:numberIcons.FiveIcon,
-        6:numberIcons.SixIcon,
-        7:numberIcons.SevenIcon,
-        8:numberIcons.EightIcon,
-        9:numberIcons.NineIcon,
-    };
     
     if(num==undefined)
         return (
@@ -48,7 +37,7 @@ const NumberIcon:FC<{
         )
     else return (
         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
-            {numIconMap[num]}
+            {numberIcons.get(num)}
         </svg>
         )
 
@@ -82,14 +71,23 @@ const PlayBoard:FC<Props>=memo(({
                             {nums.map((num,column)=>(
                                 <div onClick={toggleDigitBoardAction} className={classes.PlayBoardLine}>
                                     <Grid item key={`PlayBoardLine${line}Block${column}`}>
-                                        <IconButton className={classes.playBoardBlockContainer} onMouseEnter={()=>{
-                                            chooseDigitStartAction(line,column,num);
+                                        <IconButton className={classNames(
+                                                classes.playBoardBlockContainer,
+                                                {
+                                                    [classes.bottomPaddingBorder]:line==2 || line==5,
+                                                    [classes.topPadding]:!(line%3),
+                                                    [classes.rightPaddingBorder]:column==2 || column==5,
+                                                    [classes.leftPadding]:!(column%3),
+                                                }
+                                            )}
+                                            onMouseEnter={()=>{
+                                            chooseDigitStartAction({x:line,y:column,value:num});
                                             blockHighlightAction(num);
                                         }}>
                                             <NumberIcon
                                                 num={values[line][column]}
                                                 className={classNames(
-                                                    classes.normal,
+                                                    classes.numberIconNormal,
                                                     {
                                                         [classes.hightLight]:blockHighlight[line][column],
                                                     }

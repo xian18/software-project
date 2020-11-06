@@ -1,7 +1,7 @@
 import {Point, sudokuValue,PlayHistory} from '../types';
 import createActionFunc from './utils';
 
-/** counter increase action*/
+/** 让counter数字加一*/
 export const INCREMENT="INCREMENT";
 export type INCREMENT=typeof INCREMENT;
 export interface Increment {
@@ -9,7 +9,7 @@ export interface Increment {
 }
 export const incrementAction=createActionFunc(INCREMENT);
 
-/** counter decrease action*/
+/** 让counter数字减一*/
 export const DECREMENT="DECREMENT";
 export type DECREMENT=typeof DECREMENT;
 export interface Decrement {
@@ -37,16 +37,14 @@ export interface ServerValueFulfilled {
 export const serverValueFulfilled=createActionFunc(SERVERVALUE_FULFILLED,'key','value');
 
 
-/** launch digitBoard when want to choose a number*/
+/** 展示DigitBoard*/
 export const CHOOSE_DIGIT_START='CHOOSE_ACTION_START';
 export type CHOOSE_DIGIT_START=typeof CHOOSE_DIGIT_START;
 export interface ChooseDigitStartAction {
     type:CHOOSE_DIGIT_START;
-    line:number;
-    column:number;
-    value:sudokuValue;
+    point:Point;
 }
-export const chooseDigitStartAction=createActionFunc(CHOOSE_DIGIT_START,'line','column','value');
+export const chooseDigitStartAction=createActionFunc(CHOOSE_DIGIT_START,'point');
 
 /** DigitBoard click a number, the clicked number will update number in block*/
 export const CHOOSE_DIGIT='CHOOSE_ACTION';
@@ -57,7 +55,7 @@ export interface ChooseDigitAction {
 }
 export const chooseDigitAction=createActionFunc(CHOOSE_DIGIT,'point');
 
-/** fresh sudoku 2-dimension array*/
+/** 调用generateSudoku函数，生成新的数独9x9 matrix,放入store中*/
 export const UPDATE_SUDOKU='UPDATE_SUDOKU';
 export type UPDATE_SUDOKU=typeof UPDATE_SUDOKU;
 export interface UpdateSudokuAction {
@@ -65,7 +63,7 @@ export interface UpdateSudokuAction {
 }
 export const updateSudokuAction=createActionFunc(UPDATE_SUDOKU);
 
-/** highlight block of the same number*/
+/** 根据value计算新的blockHighlight矩阵*/
 export const BLOCK_HIGHLIGHT='BLOCK_HIGHLIGHT';
 export type BLOCK_HIGHLIGHT=typeof BLOCK_HIGHLIGHT;
 export interface BlockHighlightAction {
@@ -74,7 +72,7 @@ export interface BlockHighlightAction {
 }
 export const blockHighlightAction=createActionFunc(BLOCK_HIGHLIGHT,'value');
 
-/** clear all highlight block*/
+/** 将blockHighlight矩阵全部置0，没有任何一个块需要高亮*/
 export const CLEAR_BLOCK_HIGHLIGHT='CLEAR_BLOCK_HIGHLIGHT';
 export type CLEAR_BLOCK_HIGHLIGHT=typeof CLEAR_BLOCK_HIGHLIGHT;
 export interface ClearBlockHighlightAction {

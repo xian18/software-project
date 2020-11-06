@@ -5,7 +5,7 @@ import DigitBoard from '../../containers/DigitBoard';
 import Counters from '../../containers/Counters';
 import PlayBoard from '../../containers/PlayBoard';
 import AppBar from '../../containers/AppBar';
-import PlayHelper from '../PlayHelper';
+import PlayHelper from '../../containers/PlayHelper';
 
 import Share from '../Share';
 
@@ -53,10 +53,10 @@ const Testmain:FC<Props>=memo(()=>{
             <Share content='hello'/>
            */}
             <PlayBoard />
-            {
             <AppBar />
-            /*<PlayHelper />
-            <Login />
+            <PlayHelper />
+            {
+            /*<Login />
             */}
         </>
     );

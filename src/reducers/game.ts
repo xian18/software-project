@@ -52,7 +52,7 @@ export default (state=init,action:ActionType):GameStore=>{
         case actions.TOGGLE_DIGITBOARD:     // show global digitBoard
             return {...state,digitBoard:!digitBoard};
         case actions.CHOOSE_DIGIT_START:    // just for update point and highlight point mouse is howvering on
-            return {...state,point:{x:action.line,y:action.column,value:action.value},};
+            return {...state,point:action.point,};
         case actions.CHOOSE_DIGIT:
             values[action.point.x][action.point.y]=action.point.value;
             return {...state,values:values,point:action.point};
