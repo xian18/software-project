@@ -53,10 +53,10 @@ const Testmain:FC<Props>=memo(()=>{
             <Share content='hello'/>
            */}
             <PlayBoard />
-            <AppBar />
             <PlayHelper />
             {
-            /*<Login />
+                /*<Login />
+                <AppBar />
             */}
         </>
     );

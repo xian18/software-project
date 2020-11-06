@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import {sudokuValue,PlayHistory} from '../../types';
 import {Props} from '../../containers/PlayBoard';
 import {numberIcons} from '../../consts/elements';
+import {optionalNumber} from "../../algrithm/optionalNumber"
 
 
 function comparePlayBoardBlock(prevProps:any,nextProps:any){
@@ -48,12 +49,11 @@ const NumberIcon:FC<{
             </svg>
         )
     else{
-        if(num==undefined)
-            return (
-                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
-                    <image width="100%" height="100%" xlinkHref="data:image/png;base64,"/>
-                </svg>
-            )
+        if(num===undefined){
+            return (<svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
+                    <image width="100%" height="100%" xlinkHref=""/>
+            </svg>)
+        }
         else return (
             <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" className={className}>
                 {numberIcons.get(num)}
@@ -102,34 +102,52 @@ const PlayBoard:FC<Props>=memo(({
                         <Grid key={`PlayBoard${line}`} container item spacing={0}>
                             {nums.map((num,column)=>(
                                 <div className={classes.PlayBoardLine}>
-                                    <Grid item key={`PlayBoardLine${line}Block${column}`}>
-                                        <IconButton className={classNames(
-                                                classes.playBoardBlockContainer,
-                                                {
-                                                    [classes.bottomPaddingBorder]:line==2 || line==5,
-                                                    [classes.topPadding]:!(line%3),
-                                                    [classes.rightPaddingBorder]:column==2 || column==5,
-                                                    [classes.leftPadding]:!(column%3),
-                                                }
-                                            )}
-                                            onMouseEnter={()=>{
-                                            chooseDigitStartAction({x:line,y:column,value:num});
-                                            blockHighlightAction(num);
-                                            }}
-                                            onClick={()=>{handleBlockClick(line,column,num)}}
-                                            >
-
-                                            <NumberIcon
-                                                num={values[line][column]}
-                                                showUnchangeable={showUnchangeable} /*This property needs to be configured and set by some button*/
-                                                className={classNames(
-                                                    classes.numberIconNormal,
+                                    <Grid item container key={`PlayBoardLine${line}Block${column}`}>
+                                    <IconButton className={classNames(
+                                                    classes.playBoardBlockContainer,
                                                     {
-                                                        [classes.hightLight]:blockHighlight[line][column],
+                                                        [classes.bottomPaddingBorder]:line===2 || line===5,
+                                                        [classes.topPadding]:!(line%3),
+                                                        [classes.rightPaddingBorder]:column=== 2 || column===5,
+                                                        [classes.leftPadding]:!(column%3),
                                                     }
                                                 )}
+                                                onMouseEnter={()=>{
+                                                chooseDigitStartAction({x:line,y:column,value:num});
+                                                blockHighlightAction(num);
+                                                }}
+                                                onClick={()=>{handleBlockClick(line,column,num)}}
                                                 >
-                                            </NumberIcon>
+
+                                        {(()=>{
+                                        if(values[line][column]!==undefined){
+                                            return (
+                                                <NumberIcon
+                                                    num={values[line][column]}
+                                                    showUnchangeable={showUnchangeable} /*This property needs to be configured and set by some button*/
+                                                    className={classNames(
+                                                        classes.numberIconNormal,
+                                                        {
+                                                            [classes.hightLight]:blockHighlight[line][column],
+                                                        }
+                                                    )}
+                                                    >
+                                                </NumberIcon>);
+                                        } else {
+                                            let optNumber:sudokuValue[]=optionalNumber(values,line,column);
+                                            return (<Grid container item className={classes.optionNumberBlock}>
+                                                {optNumber.map((num)=>
+                                                    (<NumberIcon 
+                                                        num={num}
+                                                        showUnchangeable={false}
+                                                        className={classes.optionNumberIcon}
+                                                    >
+                                                    </NumberIcon>)
+                                                    )
+                                             }
+                                            </Grid>)
+                                        }
+                                    })()}
                                         </IconButton>
                                     </Grid>
                                 </div>

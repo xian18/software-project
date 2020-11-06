@@ -7,16 +7,19 @@ import { Height } from '@material-ui/icons';
 const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme) =>
     createStyles({
         playBoardContainer:{
-            position:'relative',
-            //display:'flex',
-            height:'100%',
-            width:'100%',
-            top:"0px",
-            left:"0px"
+            //position:'absolute',
+            display:'flex',
+            transform: 'translate(-50%,-50%)',
+            position: 'fixed',
+            top: "50%",
+            left: "50%",
+            width:"75vmin",
+            height:"72vmin"
         },
         PlayBoardLine:{
             margin:spacing(0),
             padding:spacing(0),
+            height:"8vmin"
             //marginBottom:"-5px"
         },
         playBoardBlockContainer:{
@@ -26,19 +29,19 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             cursor:'pointer',
             textAlign:'center',
             verticalAlign:'',
+            borderRadius:'0',
         },
         hightLight:{
             backgroundColor:'gray',
             margin:0,
             padding:0,
-            width:"80px",
-            height:"80px"
         },
         numberIconNormal:{
             margin:0,
             padding:0,
-            width:"90px",
-            height:"90px"
+            width:"8vmin",
+            height:"8vmin",
+            
         },
         backdrop: {
             background: palette.primary.main,
@@ -47,26 +50,37 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             margin:0,
             padding:0,
             position:"relative",
+            
         },
         rightPaddingBorder:{
-            paddingRight:spacing(1),
-            borderRadius:'0',
-            borderRight:'5px solid black',
+            paddingRight:"0.3vmin",
+            borderRight:'0.5vmin solid black',
         },
         leftPadding:{
-            paddingLeft:spacing(1),
+            paddingLeft:"0.3vmin",
         },
         bottomPaddingBorder:{
-            paddingBottom:spacing(1),
-            borderRadius:'0',
-            borderBottom:'5px solid black',
+            paddingBottom:"0.3vmin",
+            borderBottom:'0.5vmin solid black',
         },
         topPadding:{
-            paddingTop:spacing(1),
+            paddingTop:"0.3vmin",
         },
         unchangeableBlock:{
             backgroundColor:'orange',
         },
+        optionNumberIcon:{
+            background:"blue",
+            width:"2.5vmin",
+            height:"2.5vmin",
+        },
+        optionNumberBlock:{
+            width:"8vmin",
+            height:"8vmin",
+            padding:"0vmin",
+            margin:"0vmin",
+            position:"relative",
+        }
     }),
 );
 
