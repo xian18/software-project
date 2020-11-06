@@ -13,13 +13,13 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             position: 'fixed',
             top: "50%",
             left: "50%",
-            width:"75vmin",
-            height:"72vmin"
+            width:"83.5vmin",
+            height:"83.5vmin"
         },
         PlayBoardLine:{
             margin:spacing(0),
             padding:spacing(0),
-            height:"8vmin"
+            height:"9vmin"
             //marginBottom:"-5px"
         },
         playBoardBlockContainer:{
@@ -39,8 +39,8 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         numberIconNormal:{
             margin:0,
             padding:0,
-            width:"8vmin",
-            height:"8vmin",
+            width:"9vmin",
+            height:"9vmin",
         },
         hideUndefinedIcon:{
             display:'none',
@@ -72,16 +72,21 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             backgroundColor:'orange',
         },
         optionNumberIcon:{
-            background:"blue",
+            //background:"blue",
             width:"2.5vmin",
             height:"2.5vmin",
         },
         optionNumberBlock:{
-            width:"8vmin",
-            height:"8vmin",
-            padding:"0vmin",
-            margin:"0vmin",
+            width:"9vmin",
+            height:"9vmin",
+            //padding:"0vmin",
+            //margin:"0vmin",
             position:"relative",
+            fontSize:"0rem",
+        },
+        optionalNumberTopPadding:{
+            paddingTop:"0.4vmin",
+            //background:"blue",
         }
     }),
 );
