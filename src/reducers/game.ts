@@ -45,7 +45,7 @@ export default (state=init,action:ActionType):GameStore=>{
             const [generate,result]=generateSudoku(level);
             return {...state,values:generate};
         case actions.BLOCK_HIGHLIGHT:   // calculate highlight matrix
-            return {...state,blockHighlight:calculateHighlight(blockHighlight,values,action.value)};
+            return {...state,blockHighlight:calculateHighlight(values,action.value)};
         case actions.CLEAR_BLOCK_HIGHLIGHT:
             const clear=zero9x9.map(x=>Object.assign({},x));
             return {...state,blockHighlight:clear};
@@ -62,7 +62,7 @@ export default (state=init,action:ActionType):GameStore=>{
             return {...state,values:values,playRound:playRound-1,playHistorys:playHistorys.slice(0,playRound-1)};
         case actions.PLAY_ROUND_FORWARD:
             playHistorys.push(action.payload);
-            return {...state,playRound:playRound+1,playHistorys,blockHighlight:calculateHighlight(blockHighlight,values,action.payload.to)};
+            return {...state,playRound:playRound+1,playHistorys,blockHighlight:calculateHighlight(values,action.payload.to)};
         default:
             return {...state};
     }
