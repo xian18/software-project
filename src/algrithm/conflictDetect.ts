@@ -13,7 +13,7 @@ import {conflictValue} from '../types';
 export function conflictDetect(values:conflictValue[][]){
     const a:conflictValue=undefined;
 
-    const blockConflict:conflictValue[][]=[
+    const conflictValues:conflictValue[][]=[
         [a,a,a,a,a,a,a,a,a],
         [a,a,a,a,a,a,a,a,a],
         [a,a,a,a,a,a,a,a,a],
@@ -28,7 +28,7 @@ export function conflictDetect(values:conflictValue[][]){
     return {
         conflict:false,
         complete:false,
-        blockConflict,
+        conflictValues,
     }
 }
 

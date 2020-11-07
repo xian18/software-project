@@ -123,10 +123,21 @@ export interface ClearPlaceValueAction {
 }
 export const clearPlaceValueAction=createActionFunc(CLEAR_PLACE_VALUE,'value');
 
-/** */
+/** 如果需要显示哪些是初始数据不需要改变，showUnchangeable=true,否则为false*/
 export const TOGGLE_SHOW_UNCHANGEABLE='TOGGLE_SHOW_UNCHANGEABLE';
 export type TOGGLE_SHOW_UNCHANGEABLE=typeof TOGGLE_SHOW_UNCHANGEABLE;
 export interface ToggleShowUnchangeableAction {
     type:TOGGLE_SHOW_UNCHANGEABLE
 }
 export const toggleShowUnchangeableAction=createActionFunc(TOGGLE_SHOW_UNCHANGEABLE);
+
+/** 
+ * 调用algrithm中conflictDetect函数，判断此时数独盘中冲突的位置，
+ * 同时检查数独如果没有冲突并且没有undefined,则数独成功通过
+ */
+export const CONFLICT_DETECT='CONFLICT_DETECT';
+export type CONFLICT_DETECT=typeof CONFLICT_DETECT;
+export interface ConflictDetect {
+    type:CONFLICT_DETECT,
+}
+export const conflictDetectAction=createActionFunc(CONFLICT_DETECT);

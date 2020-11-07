@@ -14,9 +14,10 @@ import {PlayHistory, Point,sudokuValue} from '../../types';
 import {StoreState} from '../../reducers';
 import PlayBoard from '../../components/PlayBoard';
 
-const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight,playRound,placeValue,showUnchangeable}}:StoreState):
+const mapStateToProps=({Game:{values,initValues,point,digitBoard,blockHighlight,playRound,placeValue,showUnchangeable}}:StoreState):
     {
         values:sudokuValue[][],
+        initValues:sudokuValue[][],
         point:Point,
         digitBoard:boolean,
         blockHighlight:number[][],
@@ -25,6 +26,7 @@ const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight,playRound,p
         showUnchangeable:boolean,
     }=>({
     values,
+    initValues,
     point,
     digitBoard,
     blockHighlight,

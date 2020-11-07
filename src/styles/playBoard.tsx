@@ -75,6 +75,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             //background:"blue",
             width:"2.5vmin",
             height:"2.5vmin",
+            cursor:'pointer',
         },
         optionNumberBlock:{
             width:"9vmin",

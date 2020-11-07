@@ -23,14 +23,12 @@ function comparePlayBoardBlock(prevProps: any, nextProps: any) {
 
 const NumberIcon: FC<{
 	num: sudokuValue;
+	initNum:sudokuValue;
 	showUnchangeable: boolean;
 	className: any;
-}> = memo(({ num, showUnchangeable, className }) => {
+}> = memo(({ num, initNum, showUnchangeable, className }) => {
 	const classes = useStyles();
-
-	const [initNum, setInitNum] = useState(num);
-	const [unchangeable, setUnchangeable] = useState(initNum != undefined);
-	if (unchangeable)
+	if (initNum !== undefined)
 		return (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -69,15 +67,51 @@ const NumberIcon: FC<{
 	}
 }, comparePlayBoardBlock);
 
+function compareNumberOption(prevProps:any,nextProps:any){
+	return (
+		prevProps.num === nextProps.num
+	)
+}
+
+const NumberOption:FC<{	num:sudokuValue,
+						onMouseEnter:Function,
+						onClick:Function}>=memo(({num,onMouseEnter,onClick})=>{
+	const classes=useStyles();
+	const [highlight,setHighlight]=useState(false);
+	const toggleHighlight=()=>{
+		setHighlight((prev)=>!prev);
+	}
+
+	return (
+		<div
+			onMouseEnter={()=>{onMouseEnter();toggleHighlight()}}
+			onClick={()=>{onClick()}}
+			onMouseLeave={toggleHighlight}
+			className={classNames(classes.optionNumberIcon,{})}
+		>
+			<NumberIcon
+				num={num}
+				initNum={undefined}
+				showUnchangeable={false}
+				className={classNames(classes.optionNumberIcon,{
+					[classes.hightLight]:highlight
+				})}
+			/>
+		</div>
+	)
+},compareNumberOption);
+
 const PlayBoard: FC<Props> = memo(
 	({
 		values,
+		initValues,
 		digitBoard,
 		point,
 		blockHighlight,
 		playRound,
 		placeValue,
 		showUnchangeable,
+		
 		toggleDigitBoardAction,
 		clearBlockHighlightAction,
 		updateSudokuAction,
@@ -87,9 +121,6 @@ const PlayBoard: FC<Props> = memo(
 		blockHighlightAction
 	}) => {
 		const classes = useStyles();
-		const [initValues, setInitValues] = useState(
-			values.map(x => Object.assign({}, x))
-		);
 
 		const handleBlockClick = (
 			line: number,
@@ -106,10 +137,21 @@ const PlayBoard: FC<Props> = memo(
 						to: placeValue
 					});
 				} else {
-					//toggleDigitBoardAction();
+					toggleDigitBoardAction();
 				}
 			}
 		};
+
+		const handleOptionClick=(line:number,column:number,value:sudokuValue)=>{
+			chooseDigitAction({ x: line, y: column, value, });
+			playRoundForwardAction({
+				x: line,
+				y: column,
+				from: undefined,
+				to: value,
+			});
+		}
+
 
 		return (
 			<>
@@ -121,14 +163,16 @@ const PlayBoard: FC<Props> = memo(
 						{values.map((nums: sudokuValue[], line) => (
 							<Grid key={`PlayBoard${line}`} container item spacing={0}>
 								{nums.map((num, column) => (
-									<div className={classes.PlayBoardLine}>
-										<Grid item container key={`PlayBoardLine${line}Block${column}`}>
+									<div className={classes.PlayBoardLine} key={`PlayBoardLine${line}Block${column}`}>
+										<Grid item container className={classNames({
+											[classes.bottomPaddingBorder]: line === 2 || line === 5,
+											[classes.topPadding]: !(line % 3),
+											[classes.rightPaddingBorder]: column === 2 || column === 5,
+											[classes.leftPadding]: !(column % 3),
+										})}>
 											<IconButton
 												className={classNames(classes.playBoardBlockContainer, {
-													[classes.bottomPaddingBorder]: line === 2 || line === 5,
-													[classes.topPadding]: !(line % 3),
-													[classes.rightPaddingBorder]: column === 2 || column === 5,
-													[classes.leftPadding]: !(column % 3)
+													[classes.hideUndefinedIcon]: num === undefined
 												})}
 												onMouseEnter={() => {
 													chooseDigitStartAction({ x: line, y: column, value: num });
@@ -140,50 +184,36 @@ const PlayBoard: FC<Props> = memo(
 											>
 												<NumberIcon
 													num={values[line][column]}
+													initNum={initValues[line][column]}
 													showUnchangeable={
 														showUnchangeable
 													} /*This property needs to be configured and set by some button*/
 													className={classNames(classes.numberIconNormal, {
 														[classes.hightLight]: blockHighlight[line][column],
-														[classes.hideUndefinedIcon]: values[line][column] === undefined
 													})}
+													
 												/>
+												</IconButton>
 												{(() => {
-													const optNumber: sudokuValue[] = optionNumber(
-														values,
-														line,
-														column
+												const optNumber: sudokuValue[] = optionNumber(
+													values,
+													line,
+													column
+												);
+												if (num === undefined)
+													return (
+													<Grid container item className={classNames(classes.optionNumberBlock,{
+														[classes.optionalNumberTopPadding]:!(line%3),
+													})}>
+													{optNumber.map((num,c) => (
+														<NumberOption num={num}
+															onMouseEnter={()=>{blockHighlightAction(num)}}
+															onClick={()=>{handleOptionClick(line,column,num)}}
+														/>
+													))}
+													</Grid>
 													);
-													if (values[line][column] === undefined)
-														return (
-															<Grid container item className={classNames(classes.optionNumberBlock,{
-                                                                [classes.optionalNumberTopPadding]:!(line%3),
-                                                            })}>
-																{optNumber.map((num,c) => (
-                                                                    <div 
-                                                                        onMouseEnter={()=>{blockHighlightAction(num)}}
-                                                                        onClick={()=>{
-                                                                            chooseDigitAction({ x: line, y: column, value: num });
-                                                                            playRoundForwardAction({
-                                                                                x: line,
-                                                                                y: column,
-                                                                                from: undefined,
-                                                                                to: num
-                                                                            });
-                                                                        }}
-                                                                        className={classNames(classes.optionNumberIcon,{})}
-                                                                    >
-                                                                        <NumberIcon
-                                                                            num={num}
-                                                                            showUnchangeable={false}
-                                                                            className={classNames(classes.optionNumberIcon,{})}
-                                                                        />
-                                                                    </div>
-																))}
-															</Grid>
-														);
 												})()}
-											</IconButton>
 										</Grid>
 									</div>
 								))}

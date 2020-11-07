@@ -76,7 +76,7 @@ const PlayHelper:FC<Props>=memo(({
                         <Button variant='contained' color='primary' onClick={playRoundBackwardAction}>Go Back</Button>
                         <Button variant='contained' color='primary' onClick={updateSudokuAction}>Update Sudoku</Button>
                     </React.Fragment>
-                ),[])}
+                ),[showUnchangeableText])}
             </Grid>
         </React.Fragment>
     )
