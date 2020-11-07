@@ -26,6 +26,7 @@ const PlayBoard: FC<Props> = memo(
 		conflictValues,
 		showConflict,
 		complete,
+		showOptionNumber,
 		toggleDigitBoardAction,
 		clearBlockHighlightAction,
 		updateSudokuAction,
@@ -33,9 +34,15 @@ const PlayBoard: FC<Props> = memo(
 		chooseDigitAction,
 		playRoundForwardAction,
 		blockHighlightAction,
+		toggleShowOptionNumberAction,
 	}) => {
 		const classes = useStyles();
 
+		/**
+		 * 如果不是不可变的数字，当placeValue == undefined，点击不会对block中数字进行影响，点击应当拉起DigitBoard
+		 * 如果数字是1-9，对对应block数字设置为1-9
+		 * 如果数字是-1，代表清空block为空
+		 */
 		const handleBlockClick = (
 			line: number,
 			column: number,
@@ -43,7 +50,7 @@ const PlayBoard: FC<Props> = memo(
 		) => {
 			if (initValues[line][column] == undefined) {
 				if (placeValue != undefined) {
-					chooseDigitAction({ x: line, y: column, value: placeValue });
+					chooseDigitAction({ x: line, y: column, value: placeValue === -1 ? undefined : placeValue });
 					playRoundForwardAction({
 						x: line,
 						y: column,
@@ -86,7 +93,7 @@ const PlayBoard: FC<Props> = memo(
 										})}>
 											<IconButton
 												className={classNames(classes.playBoardBlockContainer, {
-													[classes.hideUndefinedIcon]: num === undefined
+													[classes.hideUndefinedIcon]: showOptionNumber === true && num === undefined
 												})}
 												onMouseEnter={() => {
 													chooseDigitStartAction({ x: line, y: column, value: num });
@@ -95,6 +102,7 @@ const PlayBoard: FC<Props> = memo(
 												onClick={() => {
 													handleBlockClick(line, column, num);
 												}}
+												disabled={showOptionNumber}
 											>
 												<NumberIcon
 													num={values[line][column]}
@@ -102,28 +110,29 @@ const PlayBoard: FC<Props> = memo(
 													showUnchangeable={
 														showUnchangeable
 													}
+													/** 最后一个条件num === 1 | 2 ... 可以去掉，作为优化*/
 													className={classNames(classes.numberIconNormal, {
 														[classes.hightLight]: blockHighlight[line][column],
-														[classes.conflictOne]:showConflict && conflictValues[line][column] === 1,
-														[classes.conflictTwo]:showConflict && conflictValues[line][column] === 2,
-														[classes.conflictThree]:showConflict && conflictValues[line][column] === 3,
-														[classes.conflictFour]:showConflict && conflictValues[line][column] === 4,
-														[classes.conflictFive]:showConflict && conflictValues[line][column] === 5,
-														[classes.conflictSix]:showConflict && conflictValues[line][column] === 6,
-														[classes.conflictSeven]:showConflict && conflictValues[line][column] === 7,
-														[classes.conflictEight]:showConflict && conflictValues[line][column] === 8,
-														[classes.conflictNine]:showConflict && conflictValues[line][column] === 9,
+														[classes.conflictOne]:showConflict && conflictValues[line][column] === 1 && num === 1,
+														[classes.conflictTwo]:showConflict && conflictValues[line][column] === 2 && num === 2,
+														[classes.conflictThree]:showConflict && conflictValues[line][column] === 3 && num === 3,
+														[classes.conflictFour]:showConflict && conflictValues[line][column] === 4 && num === 4,
+														[classes.conflictFive]:showConflict && conflictValues[line][column] === 5 && num === 5,
+														[classes.conflictSix]:showConflict && conflictValues[line][column] === 6 && num === 6,
+														[classes.conflictSeven]:showConflict && conflictValues[line][column] === 7 && num === 7,
+														[classes.conflictEight]:showConflict && conflictValues[line][column] === 8 && num === 8,
+														[classes.conflictNine]:showConflict && conflictValues[line][column] === 9 && num === 9,
 													})}
 													
 												/>
 												</IconButton>
 												{(() => {
-												const optNumber: sudokuValue[] = optionNumber(
-													values,
-													line,
-													column
-												);
-												if (num === undefined)
+												if (num === undefined && showOptionNumber === true){
+													const optNumber: sudokuValue[] = optionNumber(
+														values,
+														line,
+														column
+													);
 													return (
 													<Grid container item className={classNames(classes.optionNumberBlock,{
 														[classes.optionalNumberTopPadding]:!(line%3),
@@ -136,6 +145,7 @@ const PlayBoard: FC<Props> = memo(
 													))}
 													</Grid>
 													);
+												}
 												})()}
 										</Grid>
 									</div>

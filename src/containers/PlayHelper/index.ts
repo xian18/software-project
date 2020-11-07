@@ -10,15 +10,16 @@ import {blockHighlightAction,
         playRoundBackwardAction,
         clearBlockHighlightAction,
         toggleShowConflictAction,
+        toggleShowOptionNumberAction,
       } from '../../actions';
 import {StoreState} from '../../reducers';
 
 import PlayHelper from '../../components/PlayHelper';
-import { sudokuValue } from '../../types';
+import { PlaceValue} from '../../types';
 
 const mapStateToProps=({Game:{placeValue,complete}}:StoreState):
 {
-  placeValue:sudokuValue,
+  placeValue:PlaceValue,
   complete:boolean,
 }=>({
   placeValue,
@@ -36,6 +37,7 @@ const mapDispatchToProps=(dispatch:Dispatch)=>
     playRoundBackwardAction,
     clearBlockHighlightAction,
     toggleShowConflictAction,
+    toggleShowOptionNumberAction,
   },dispatch)
 
 type StateProps=ReturnType<typeof mapStateToProps>;

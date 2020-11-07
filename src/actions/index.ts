@@ -1,4 +1,4 @@
-import {Point, sudokuValue,PlayHistory} from '../types';
+import {Point, sudokuValue,PlayHistory,PlaceValue} from '../types';
 import createActionFunc from './utils';
 
 /** 让counter数字加一*/
@@ -110,7 +110,7 @@ export const SET_PLACE_VALUE='SET_PLACE_VALUE';
 export type SET_PLACE_VALUE=typeof SET_PLACE_VALUE;
 export interface SetPlaceValueAction {
     type:SET_PLACE_VALUE;
-    value:sudokuValue;
+    value:PlaceValue;
 }
 export const setPlaceValueAction=createActionFunc(SET_PLACE_VALUE,'value');
 
@@ -119,7 +119,7 @@ export const CLEAR_PLACE_VALUE='CLEAR_PLACE_VALUE';
 export type CLEAR_PLACE_VALUE=typeof CLEAR_PLACE_VALUE;
 export interface ClearPlaceValueAction {
     type:CLEAR_PLACE_VALUE;
-    value:sudokuValue;
+    value:PlaceValue;
 }
 export const clearPlaceValueAction=createActionFunc(CLEAR_PLACE_VALUE,'value');
 
@@ -138,3 +138,11 @@ export interface ToggleShowConflictAction {
     type:TOGGLE_SHOW_CONFLICT
 }
 export const toggleShowConflictAction=createActionFunc(TOGGLE_SHOW_CONFLICT);
+
+/** 控制是否展示框内可选数字*/
+export const TOGGLE_SHOW_OPTIONNUMBER='TOGGLE_SHOW_OPTIONNUMBER';
+export type TOGGLE_SHOW_OPTIONNUMBER=typeof TOGGLE_SHOW_OPTIONNUMBER;
+export interface ToggleShowOptionNumber {
+    type:TOGGLE_SHOW_OPTIONNUMBER;
+}
+export const toggleShowOptionNumberAction=createActionFunc(TOGGLE_SHOW_OPTIONNUMBER);
