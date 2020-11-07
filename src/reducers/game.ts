@@ -100,7 +100,7 @@ export default (state=init,action:ActionType):GameStore=>{
             return {...state,placeValue:undefined};
         case actions.TOGGLE_SHOW_UNCHANGEABLE:
             return {...state,showUnchangeable:!showUnchangeable};
-        case actions.TOGGLE_SHOW_UNCHANGEABLE:
+        case actions.TOGGLE_SHOW_CONFLICT:
             return {...state,showConflict:!showConflict}
         default:
             return {...state};

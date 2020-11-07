@@ -132,9 +132,9 @@ export interface ToggleShowUnchangeableAction {
 export const toggleShowUnchangeableAction=createActionFunc(TOGGLE_SHOW_UNCHANGEABLE);
 
 /** 如果需要显示哪些是冲突数字，showConflict=true,否则为false*/
-export const TOGGLE_CONFLICT='TOGGLE_CONFLICT';
-export type TOGGLE_CONFLICT=typeof TOGGLE_CONFLICT;
+export const TOGGLE_SHOW_CONFLICT='TOGGLE_SHOW_CONFLICT';
+export type TOGGLE_SHOW_CONFLICT=typeof TOGGLE_SHOW_CONFLICT;
 export interface ToggleShowConflictAction {
-    type:TOGGLE_CONFLICT
+    type:TOGGLE_SHOW_CONFLICT
 }
-export const toggleShowConflictAction=createActionFunc(TOGGLE_CONFLICT);
+export const toggleShowConflictAction=createActionFunc(TOGGLE_SHOW_CONFLICT);
