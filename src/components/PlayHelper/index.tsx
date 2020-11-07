@@ -99,7 +99,6 @@ const PlayHelper:FC<Props>=memo(({
                         </Grid>
                     ))}
                 </Grid>
-
                 {useMemo(()=>(
                         <Button variant='contained' color='primary' onClick={()=>{
                             toggleShowUnchangeableText();
