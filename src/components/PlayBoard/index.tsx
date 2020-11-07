@@ -1,105 +1,17 @@
-import React, { FC, memo, useState, useMemo, useEffect } from "react";
-import { IconButton, Grid, SvgIcon, Icon } from "@material-ui/core";
-import Paper from "@material-ui/core/Paper";
+import React, { FC, memo,useMemo,} from "react";
+import { IconButton, Grid } from "@material-ui/core";
 
 import DigitBoard from "../../containers/DigitBoard";
 
 import useStyles from "../../styles/playBoard";
 import classNames from "classnames";
 
-import { sudokuValue, PlayHistory } from "../../types";
+import { sudokuValue,} from "../../types";
 import { Props } from "../../containers/PlayBoard";
-import { numberIcons } from "../../consts/elements";
 import { optionNumber } from "../../algrithm/optionNumber";
 
-function comparePlayBoardBlock(prevProps: any, nextProps: any) {
-	if (prevProps.unchangeable === true) return true;
-	return (
-		prevProps.num === nextProps.num &&
-		prevProps.showUnchangeable === nextProps.showUnchangeable &&
-		prevProps.className === nextProps.className
-	);
-}
-
-const NumberIcon: FC<{
-	num: sudokuValue;
-	initNum:sudokuValue;
-	showUnchangeable: boolean;
-	className: any;
-}> = memo(({ num, initNum, showUnchangeable, className }) => {
-	const classes = useStyles();
-	if (initNum !== undefined)
-		return (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				xmlnsXlink="http://www.w3.org/1999/xlink"
-				className={classNames(
-					{
-						[classes.unchangeableBlock]: showUnchangeable
-					},
-					className
-				)}
-			>
-				{numberIcons.get(initNum as number)}
-			</svg>
-		);
-	else {
-		if (num === undefined) {
-			return (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					xmlnsXlink="http://www.w3.org/1999/xlink"
-					className={className}
-				>
-					<image width="100%" height="100%" xlinkHref="" />
-				</svg>
-			);
-		} else
-			return (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					xmlnsXlink="http://www.w3.org/1999/xlink"
-					className={className}
-				>
-					{numberIcons.get(num)}
-				</svg>
-			);
-	}
-}, comparePlayBoardBlock);
-
-function compareNumberOption(prevProps:any,nextProps:any){
-	return (
-		prevProps.num === nextProps.num
-	)
-}
-
-const NumberOption:FC<{	num:sudokuValue,
-						onMouseEnter:Function,
-						onClick:Function}>=memo(({num,onMouseEnter,onClick})=>{
-	const classes=useStyles();
-	const [highlight,setHighlight]=useState(false);
-	const toggleHighlight=()=>{
-		setHighlight((prev)=>!prev);
-	}
-
-	return (
-		<div
-			onMouseEnter={()=>{onMouseEnter();toggleHighlight()}}
-			onClick={()=>{onClick()}}
-			onMouseLeave={toggleHighlight}
-			className={classNames(classes.optionNumberIcon,{})}
-		>
-			<NumberIcon
-				num={num}
-				initNum={undefined}
-				showUnchangeable={false}
-				className={classNames(classes.optionNumberIcon,{
-					[classes.hightLight]:highlight
-				})}
-			/>
-		</div>
-	)
-},compareNumberOption);
+import NumberIcon from './NumberIcon';
+import NumberOption from './NumberOption';
 
 const PlayBoard: FC<Props> = memo(
 	({
@@ -111,14 +23,16 @@ const PlayBoard: FC<Props> = memo(
 		playRound,
 		placeValue,
 		showUnchangeable,
-		
+		conflictValues,
+		showConflict,
+		complete,
 		toggleDigitBoardAction,
 		clearBlockHighlightAction,
 		updateSudokuAction,
 		chooseDigitStartAction,
 		chooseDigitAction,
 		playRoundForwardAction,
-		blockHighlightAction
+		blockHighlightAction,
 	}) => {
 		const classes = useStyles();
 
@@ -187,9 +101,18 @@ const PlayBoard: FC<Props> = memo(
 													initNum={initValues[line][column]}
 													showUnchangeable={
 														showUnchangeable
-													} /*This property needs to be configured and set by some button*/
+													}
 													className={classNames(classes.numberIconNormal, {
 														[classes.hightLight]: blockHighlight[line][column],
+														[classes.conflictOne]:showConflict && conflictValues[line][column] === 1,
+														[classes.conflictTwo]:showConflict && conflictValues[line][column] === 2,
+														[classes.conflictThree]:showConflict && conflictValues[line][column] === 3,
+														[classes.conflictFour]:showConflict && conflictValues[line][column] === 4,
+														[classes.conflictFive]:showConflict && conflictValues[line][column] === 5,
+														[classes.conflictSix]:showConflict && conflictValues[line][column] === 6,
+														[classes.conflictSeven]:showConflict && conflictValues[line][column] === 7,
+														[classes.conflictEight]:showConflict && conflictValues[line][column] === 8,
+														[classes.conflictNine]:showConflict && conflictValues[line][column] === 9,
 													})}
 													
 												/>

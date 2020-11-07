@@ -131,13 +131,10 @@ export interface ToggleShowUnchangeableAction {
 }
 export const toggleShowUnchangeableAction=createActionFunc(TOGGLE_SHOW_UNCHANGEABLE);
 
-/** 
- * 调用algrithm中conflictDetect函数，判断此时数独盘中冲突的位置，
- * 同时检查数独如果没有冲突并且没有undefined,则数独成功通过
- */
-export const CONFLICT_DETECT='CONFLICT_DETECT';
-export type CONFLICT_DETECT=typeof CONFLICT_DETECT;
-export interface ConflictDetect {
-    type:CONFLICT_DETECT,
+/** 如果需要显示哪些是冲突数字，showConflict=true,否则为false*/
+export const TOGGLE_CONFLICT='TOGGLE_CONFLICT';
+export type TOGGLE_CONFLICT=typeof TOGGLE_CONFLICT;
+export interface ToggleShowConflictAction {
+    type:TOGGLE_CONFLICT
 }
-export const conflictDetectAction=createActionFunc(CONFLICT_DETECT);
+export const toggleShowConflictAction=createActionFunc(TOGGLE_CONFLICT);

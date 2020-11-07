@@ -14,15 +14,15 @@ export function conflictDetect(values:conflictValue[][]){
     const a:conflictValue=undefined;
 
     const conflictValues:conflictValue[][]=[
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
+        [1,1,1,a,a,a,a,a,a],
+        [1,1,1,a,a,a,a,a,a],
+        [1,1,1,a,a,a,a,a,a],
+        [a,a,a,2,2,2,a,a,a],
+        [a,a,a,2,2,2,a,a,a],
+        [a,a,a,2,2,2,a,a,a],
+        [a,a,a,a,a,a,3,3,3],
+        [a,a,a,a,a,a,3,3,3],
+        [a,a,a,a,a,a,3,3,3],
     ];
 
     return {

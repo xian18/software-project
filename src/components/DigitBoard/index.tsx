@@ -1,10 +1,10 @@
-import React,{FC,memo,useState} from 'react';
+import React,{FC,memo} from 'react';
 
 
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
-import {Point,sudokuValue,PlayHistory} from '../../types';
+import {sudokuValue} from '../../types';
 import Fade from '@material-ui/core/Fade';
 
 import useStyles from '../../styles/digitBoard';
@@ -32,8 +32,8 @@ const DigitBoard:FC<localProps & Props>=memo(({open,point,chooseDigitAction,play
                 <div className={classes.modal}>
                     <Grid container spacing={1}>
                     {
-                    numbers.map((nums)=>(
-                        <Grid container item spacing={0}>
+                    numbers.map((nums,index)=>(
+                        <Grid key={`DigitBoardLine${index}`} container item spacing={0}>
                             {nums.map((num,index)=>(
                                 <Grid key={`DigitBoard${num}`} item spacing={0}>
                                     <Button

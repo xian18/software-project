@@ -18,7 +18,7 @@ type ActionType=
     | actions.SetPlaceValueAction
     | actions.ClearPlaceValueAction
     | actions.ToggleShowUnchangeableAction
-    | actions.ConflictDetect
+    | actions.ToggleShowConflictAction
 
 export interface GameStore {
     values:sudokuValue[][];     /** 数独数字 9x9 matrix*/
@@ -34,7 +34,7 @@ export interface GameStore {
     showUnchangeable:boolean;   /** 是否高亮显示数独盘上不可变数字，true-高亮显示，false-不高亮显示*/
     conflictValues:conflictValue[][]; /** 数独上冲突的点，取值undefined 1-9，undefined表示无冲突，1-9表示该位置该数字冲突*/
     showConflict:boolean;       /** 是否高亮显示冲突数字*/
-    success:boolean;            /** 数独是否求解成功*/
+    complete:boolean;            /** 数独是否求解成功*/
 }
 
 const generate=generateSudoku(1)[0]
@@ -51,8 +51,8 @@ const init:GameStore={
     placeValue:undefined,
     showUnchangeable:true,
     conflictValues:undefined9x9,
-    showConflict:false,
-    success:false,
+    showConflict:true,
+    complete:false,
 }
 
 export default (state=init,action:ActionType):GameStore=>{
@@ -68,7 +68,7 @@ export default (state=init,action:ActionType):GameStore=>{
         showUnchangeable,
         conflictValues,
         showConflict,
-        success,
+        complete,
     } = state;
     switch(action.type){
         case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
@@ -85,7 +85,8 @@ export default (state=init,action:ActionType):GameStore=>{
             return {...state,point:action.point,};
         case actions.CHOOSE_DIGIT:
             values[action.point.x][action.point.y]=action.point.value;
-            return {...state,values:values,point:action.point};
+            const {conflict,complete,conflictValues}=conflictDetect(values);
+            return {...state,values:values,point:action.point,conflictValues,complete};
         case actions.PLAY_ROUND_BACKWARD:
             if(playRound==0) return {...state};
             if(playRound>0) values[playHistorys[playRound-1].x][playHistorys[playRound-1].y]=playHistorys[playRound-1].from;
@@ -99,9 +100,8 @@ export default (state=init,action:ActionType):GameStore=>{
             return {...state,placeValue:undefined};
         case actions.TOGGLE_SHOW_UNCHANGEABLE:
             return {...state,showUnchangeable:!showUnchangeable};
-        case actions.CONFLICT_DETECT:
-            const {conflict,complete,conflictValues}=conflictDetect(values);
-            return {...state}
+        case actions.TOGGLE_SHOW_UNCHANGEABLE:
+            return {...state,showConflict:!showConflict}
         default:
             return {...state};
     }
