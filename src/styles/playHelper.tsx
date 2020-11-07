@@ -34,6 +34,14 @@ const useStyles = makeStyles((theme: Theme) =>
                 top: "5vmin",
                 left: "90vmax",
             }
+        },
+        buttomNormal:{
+            height:"3vmin",
+            width:"3vmin",
+            margin:0,
+            padding:0,
+            border:0,
+            fontSize:"0.05rem",
         }
     }),
 );

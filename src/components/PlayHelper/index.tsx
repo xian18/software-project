@@ -68,15 +68,17 @@ const PlayHelper:FC<Props>=memo(({
                     </Grid>
                 ))}
             </Grid>
-            <Grid container className={classNames(classes.root,{})}>
+            <Grid container >
                 {useMemo(()=>(
                     <React.Fragment>
                         <Button variant='contained' color='primary' onClick={()=>{
                             toggleShowUnchangeableText();
                             toggleShowUnchangeableAction();
-                        }}>{showUnchangeableText}</Button>
-                        <Button variant='contained' color='primary' onClick={playRoundBackwardAction}>Go Back</Button>
-                        <Button variant='contained' color='primary' onClick={updateSudokuAction}>Update Sudoku</Button>
+                        }}
+                        className={classNames(classes.buttomNormal,{})}
+                        >{showUnchangeableText}</Button>
+                        <Button variant='contained' color='primary' onClick={playRoundBackwardAction} className={classNames(classes.buttomNormal,{})}>Go Back</Button>
+                        <Button variant='contained' color='primary' onClick={updateSudokuAction} className={classNames(classes.buttomNormal,{})}>Update Sudoku</Button>
                     </React.Fragment>
                 ),[])}
             </Grid>
