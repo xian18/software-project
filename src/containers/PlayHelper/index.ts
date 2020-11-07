@@ -1,4 +1,4 @@
-import {connect, MapStateToProps} from 'react-redux';
+import {connect} from 'react-redux';
 import {Dispatch,bindActionCreators} from 'redux';
 
 import {blockHighlightAction,
@@ -9,14 +9,20 @@ import {blockHighlightAction,
         updateSudokuAction,
         playRoundBackwardAction,
         clearBlockHighlightAction,
+        toggleShowConflictAction,
       } from '../../actions';
 import {StoreState} from '../../reducers';
 
 import PlayHelper from '../../components/PlayHelper';
 import { sudokuValue } from '../../types';
 
-const mapStateToProps=({Game:{placeValue}}:StoreState):{placeValue:sudokuValue}=>({
-  placeValue
+const mapStateToProps=({Game:{placeValue,complete}}:StoreState):
+{
+  placeValue:sudokuValue,
+  complete:boolean,
+}=>({
+  placeValue,
+  complete,
 })
 
 const mapDispatchToProps=(dispatch:Dispatch)=>
@@ -28,7 +34,8 @@ const mapDispatchToProps=(dispatch:Dispatch)=>
     toggleShowUnchangeableAction,
     updateSudokuAction,
     playRoundBackwardAction,
-    clearBlockHighlightAction
+    clearBlockHighlightAction,
+    toggleShowConflictAction,
   },dispatch)
 
 type StateProps=ReturnType<typeof mapStateToProps>;

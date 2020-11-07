@@ -123,10 +123,18 @@ export interface ClearPlaceValueAction {
 }
 export const clearPlaceValueAction=createActionFunc(CLEAR_PLACE_VALUE,'value');
 
-/** */
+/** 如果需要显示哪些是初始数据不需要改变，showUnchangeable=true,否则为false*/
 export const TOGGLE_SHOW_UNCHANGEABLE='TOGGLE_SHOW_UNCHANGEABLE';
 export type TOGGLE_SHOW_UNCHANGEABLE=typeof TOGGLE_SHOW_UNCHANGEABLE;
 export interface ToggleShowUnchangeableAction {
     type:TOGGLE_SHOW_UNCHANGEABLE
 }
 export const toggleShowUnchangeableAction=createActionFunc(TOGGLE_SHOW_UNCHANGEABLE);
+
+/** 如果需要显示哪些是冲突数字，showConflict=true,否则为false*/
+export const TOGGLE_SHOW_CONFLICT='TOGGLE_SHOW_CONFLICT';
+export type TOGGLE_SHOW_CONFLICT=typeof TOGGLE_SHOW_CONFLICT;
+export interface ToggleShowConflictAction {
+    type:TOGGLE_SHOW_CONFLICT
+}
+export const toggleShowConflictAction=createActionFunc(TOGGLE_SHOW_CONFLICT);

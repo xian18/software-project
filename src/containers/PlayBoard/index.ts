@@ -10,27 +10,47 @@ import {chooseDigitStartAction,
         playRoundBackwardAction,
         chooseDigitAction,
     } from '../../actions';
-import {PlayHistory, Point,sudokuValue} from '../../types';
+import {Point,sudokuValue,conflictValue} from '../../types';
 import {StoreState} from '../../reducers';
 import PlayBoard from '../../components/PlayBoard';
 
-const mapStateToProps=({Game:{values,point,digitBoard,blockHighlight,playRound,placeValue,showUnchangeable}}:StoreState):
+const mapStateToProps=({
+    Game:{values,
+        initValues,
+        point,
+        digitBoard,
+        blockHighlight,
+        playRound,
+        placeValue,
+        showUnchangeable,
+        conflictValues,
+        showConflict,
+        complete,
+    }}:StoreState):
     {
         values:sudokuValue[][],
+        initValues:sudokuValue[][],
         point:Point,
         digitBoard:boolean,
         blockHighlight:number[][],
         playRound:number,
         placeValue:sudokuValue,
         showUnchangeable:boolean,
+        conflictValues:conflictValue[][],
+        showConflict:boolean,
+        complete:boolean,
     }=>({
     values,
+    initValues,
     point,
     digitBoard,
     blockHighlight,
     playRound,
     placeValue,
-    showUnchangeable
+    showUnchangeable,
+    conflictValues,
+    showConflict,
+    complete,
 })
 
 const mapDispatchToProps=(dispatch:Dispatch)=>

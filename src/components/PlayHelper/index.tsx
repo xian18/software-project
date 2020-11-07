@@ -18,17 +18,27 @@ const PlayHelper:FC<Props>=memo(({
                                 updateSudokuAction,
                                 playRoundBackwardAction,
                                 clearBlockHighlightAction,
+                                toggleShowConflictAction,
                             })=>{
     const classes=useStyles();
     const {enqueueSnackbar,closeSnackbar}=useSnackbar();
     const [highlightLoc,setHighlightLoc]=useState(0);
     const showUnchangeableTexts=['取消不可变显示','显示不可变显示'];
+    const showConflictTexts=['取消显示冲突','显示冲突'];
+
     const [showUnchangeableText,setShowUnchangeableText]=useState(showUnchangeableTexts[0]);
+    const [showConflictText,setShowConflictText]=useState(showConflictTexts[0]);
 
     const toggleShowUnchangeableText=()=>{
         showUnchangeableText === showUnchangeableTexts[0] ?
             setShowUnchangeableText(showUnchangeableTexts[1]) : 
             setShowUnchangeableText(showUnchangeableTexts[0]) ;
+    }
+
+    const toggleShowConflictText=()=>{
+        showConflictText === showConflictTexts[0] ?
+            setShowConflictText(showConflictTexts[1]) :
+            setShowConflictText(showConflictTexts[0]) ;
     }
 
     return (
@@ -70,20 +80,25 @@ const PlayHelper:FC<Props>=memo(({
             </Grid>
             <Grid container >
                 {useMemo(()=>(
-                    <React.Fragment>
                         <Button variant='contained' color='primary' onClick={()=>{
                             toggleShowUnchangeableText();
                             toggleShowUnchangeableAction();
-                        }}
-                        className={classNames(classes.buttomNormal,{})}
-                        >{showUnchangeableText}</Button>
-                        <Button variant='contained' color='primary' onClick={playRoundBackwardAction} className={classNames(classes.buttomNormal,{})}>Go Back</Button>
-                        <Button variant='contained' color='primary' onClick={updateSudokuAction} className={classNames(classes.buttomNormal,{})}>Update Sudoku</Button>
-                    </React.Fragment>
+                        }}>{showUnchangeableText}</Button>
+                ),[showUnchangeableText])}
+                {useMemo(()=>(
+                    <>
+                        <Button variant='contained' color='primary' onClick={playRoundBackwardAction}>Go Back</Button>
+                        <Button variant='contained' color='primary' onClick={updateSudokuAction}>Update Sudoku</Button>
+                    </>
                 ),[])}
+                {useMemo(()=>(
+                    <Button variant='contained' color='primary'
+                    onClick={()=>{
+                        toggleShowConflictText();
+                        toggleShowConflictAction();
+                    }}>{showConflictText}</Button>
+                ),[showConflictText])}
             </Grid>
         </React.Fragment>
-    )
-})
-
+    )})
 export default PlayHelper;

@@ -13,22 +13,22 @@ import {conflictValue} from '../types';
 export function conflictDetect(values:conflictValue[][]){
     const a:conflictValue=undefined;
 
-    const blockConflict:conflictValue[][]=[
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
-        [a,a,a,a,a,a,a,a,a],
+    const conflictValues:conflictValue[][]=[
+        [1,1,1,a,a,a,a,a,a],
+        [1,1,1,a,a,a,a,a,a],
+        [1,1,1,a,a,a,a,a,a],
+        [a,a,a,2,2,2,a,a,a],
+        [a,a,a,2,2,2,a,a,a],
+        [a,a,a,2,2,2,a,a,a],
+        [a,a,a,a,a,a,3,3,3],
+        [a,a,a,a,a,a,3,3,3],
+        [a,a,a,a,a,a,3,3,3],
     ];
 
     return {
         conflict:false,
         complete:false,
-        blockConflict,
+        conflictValues,
     }
 }
 

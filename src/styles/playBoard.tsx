@@ -1,9 +1,6 @@
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-import { colorToShadow } from './index';
-import { Height } from '@material-ui/icons';
-
 const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme) =>
     createStyles({
         playBoardContainer:{
@@ -75,6 +72,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             //background:"blue",
             width:"2.5vmin",
             height:"2.5vmin",
+            cursor:'pointer',
         },
         optionNumberBlock:{
             width:"9vmin",
@@ -87,7 +85,34 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         optionalNumberTopPadding:{
             paddingTop:"0.4vmin",
             //background:"blue",
-        }
+        },
+        conflictOne:{
+            backgroundColor:'blue',
+        },
+        conflictTwo:{
+            backgroundColor:'red',
+        },
+        conflictThree:{
+            backgroundColor:'black',
+        },
+        conflictFour:{
+            backgroundColor:'yellow',
+        },
+        conflictFive:{
+
+        },
+        conflictSix:{
+
+        },
+        conflictSeven:{
+
+        },
+        conflictEight:{
+
+        },
+        conflictNine:{
+
+        },
     }),
 );
 
