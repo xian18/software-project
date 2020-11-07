@@ -99,19 +99,19 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             backgroundColor:'yellow',
         },
         conflictFive:{
-
+            backgroundColor:'green',
         },
         conflictSix:{
-
+            backgroundColor:'purple',
         },
         conflictSeven:{
-
+            backgroundColor:'gray',
         },
         conflictEight:{
-
+            backgroundColor:'#eeeeee',
         },
         conflictNine:{
-
+            backgroundColor:'red',
         },
     }),
 );

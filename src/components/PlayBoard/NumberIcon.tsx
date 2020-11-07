@@ -26,7 +26,7 @@ const NumberIcon: FC<{
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
-				className={classNames(...className,
+				className={classNames(
 					{
 						[classes.unchangeableBlock]: showUnchangeable
 					},
@@ -42,7 +42,7 @@ const NumberIcon: FC<{
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					xmlnsXlink="http://www.w3.org/1999/xlink"
-					className={className}
+					className={classNames(className,{})}
 				>
 					<image width="100%" height="100%" xlinkHref="" />
 				</svg>
@@ -52,7 +52,7 @@ const NumberIcon: FC<{
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					xmlnsXlink="http://www.w3.org/1999/xlink"
-					className={className}
+					className={classNames(className,{})}
 				>
 					{numberIcons.get(num)}
 				</svg>

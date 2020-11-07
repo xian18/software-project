@@ -9,8 +9,9 @@ import {chooseDigitStartAction,
         playRoundForwardAction,
         playRoundBackwardAction,
         chooseDigitAction,
+        toggleShowOptionNumberAction,
     } from '../../actions';
-import {Point,sudokuValue,conflictValue} from '../../types';
+import {Point,sudokuValue,conflictValue,PlaceValue} from '../../types';
 import {StoreState} from '../../reducers';
 import PlayBoard from '../../components/PlayBoard';
 
@@ -26,6 +27,7 @@ const mapStateToProps=({
         conflictValues,
         showConflict,
         complete,
+        showOptionNumber,
     }}:StoreState):
     {
         values:sudokuValue[][],
@@ -34,11 +36,12 @@ const mapStateToProps=({
         digitBoard:boolean,
         blockHighlight:number[][],
         playRound:number,
-        placeValue:sudokuValue,
+        placeValue:PlaceValue,
         showUnchangeable:boolean,
         conflictValues:conflictValue[][],
         showConflict:boolean,
         complete:boolean,
+        showOptionNumber:boolean,
     }=>({
     values,
     initValues,
@@ -51,6 +54,7 @@ const mapStateToProps=({
     conflictValues,
     showConflict,
     complete,
+    showOptionNumber,
 })
 
 const mapDispatchToProps=(dispatch:Dispatch)=>
@@ -63,6 +67,7 @@ const mapDispatchToProps=(dispatch:Dispatch)=>
         playRoundForwardAction,
         playRoundBackwardAction,
         chooseDigitAction,
+        toggleShowOptionNumberAction,
     },dispatch);
 
 type StateProps=ReturnType<typeof mapStateToProps>;

@@ -1,5 +1,5 @@
 import * as actions from '../actions';
-import {Point} from '../types';
+import {PlaceValue, Point} from '../types';
 import {sudokuValue,PlayHistory,Level,conflictValue} from '../types';
 import {zero9x9,undefined9x9} from '../consts';
 import calculateHighlight from '../algrithm/calculateHighlight';
@@ -19,6 +19,7 @@ type ActionType=
     | actions.ClearPlaceValueAction
     | actions.ToggleShowUnchangeableAction
     | actions.ToggleShowConflictAction
+    | actions.ToggleShowOptionNumber
 
 export interface GameStore {
     values:sudokuValue[][];     /** 数独数字 9x9 matrix*/
@@ -30,11 +31,12 @@ export interface GameStore {
     digitBoard:boolean;         /** 是否拉起digitBoard填数字 true-拉起 false-隐藏*/
     playRound:number;           /** 记录用户下的第几个回合*/
     playHistorys:PlayHistory[]; /** 记录每一次下棋的位置（点），以及点改变之前和改变之后的值*/
-    placeValue:sudokuValue;     /** 如果placeValue=1到9，点击数独板上block会直接对数独板赋值数字*/
+    placeValue:PlaceValue;     /** 如果placeValue=1到9，点击数独板上block会直接对数独板赋值数字*/
     showUnchangeable:boolean;   /** 是否高亮显示数独盘上不可变数字，true-高亮显示，false-不高亮显示*/
     conflictValues:conflictValue[][]; /** 数独上冲突的点，取值undefined 1-9，undefined表示无冲突，1-9表示该位置该数字冲突*/
     showConflict:boolean;       /** 是否高亮显示冲突数字*/
-    complete:boolean;            /** 数独是否求解成功*/
+    complete:boolean;           /** 数独是否求解成功*/
+    showOptionNumber:boolean;   /** 是否显示所有框里面的可选数字 true-显示 false-不显示*/
 }
 
 const generate=generateSudoku(1)[0]
@@ -53,6 +55,7 @@ const init:GameStore={
     conflictValues:undefined9x9,
     showConflict:true,
     complete:false,
+    showOptionNumber:true,
 }
 
 export default (state=init,action:ActionType):GameStore=>{
@@ -69,6 +72,7 @@ export default (state=init,action:ActionType):GameStore=>{
         conflictValues,
         showConflict,
         complete,
+        showOptionNumber,
     } = state;
     switch(action.type){
         case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
@@ -102,6 +106,8 @@ export default (state=init,action:ActionType):GameStore=>{
             return {...state,showUnchangeable:!showUnchangeable};
         case actions.TOGGLE_SHOW_CONFLICT:
             return {...state,showConflict:!showConflict}
+        case actions.TOGGLE_SHOW_OPTIONNUMBER:
+            return {...state,showOptionNumber:!showOptionNumber};
         default:
             return {...state};
     }
