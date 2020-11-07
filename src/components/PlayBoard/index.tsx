@@ -102,7 +102,7 @@ const PlayBoard: FC<Props> = memo(
 												onClick={() => {
 													handleBlockClick(line, column, num);
 												}}
-												disabled={showOptionNumber}
+												disabled={showOptionNumber === true && num === undefined}
 											>
 												<NumberIcon
 													num={values[line][column]}
