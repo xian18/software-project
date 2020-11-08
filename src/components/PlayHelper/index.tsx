@@ -121,13 +121,12 @@ const PlayHelper:FC<Props>=memo(({
             <Grid container >
                 <IconButton onClick={playRoundBackwardAction} className={classNames(classes.iconButtonContainer,{
                     [classes.haveBorder]:true,
-                })}
-                    ><Undo className={classNames(classes.iconButtonIcon,{})} />
+                })}>
+                    <Undo className={classNames(classes.iconButtonIcon,{})} />
                 </IconButton>
                 <IconButton onClick={updateSudokuAction} className={classNames(classes.iconButtonContainer,{
                     [classes.haveBorder]:true,
-                    })}
-                >
+                })}>
                     <Refresh style={{ color:"#000000" }}  className={classNames(classes.iconButtonIcon,{})} />
                 </IconButton>
                 <IconButton 

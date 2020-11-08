@@ -155,7 +155,11 @@ const PlayBoard: FC<Props> = memo(
 
 		return (
 			<>
-				{useMemo(()=>(
+				{useMemo(()=>{
+					console.log(values[0][0]);
+					console.log(values[0][1]);
+					console.log(values[0][2]);
+					return (
 					<div
 						className={classes.playBoardContainer}
 						onMouseLeave={clearBlockHighlightAction}
@@ -164,7 +168,7 @@ const PlayBoard: FC<Props> = memo(
 							{values.map(mapPlayBoardBlock)}
 						</Grid>
 					</div>
-				),[values,showOptionNumber,initValues,showUnchangeable,showConflict,conflictValues,blockHighlight])}
+				)},[playRound,values,showOptionNumber,initValues,showUnchangeable,showConflict,conflictValues,blockHighlight])}
 
 				{useMemo(
 					() => (
