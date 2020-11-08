@@ -47,8 +47,8 @@ const PlayBoard: FC<Props> = memo(
 			column: number,
 			value: sudokuValue
 		) => {
-			if (initValues[line][column] == undefined) {
-				if (placeValue != undefined) {
+			if (initValues[line][column] === undefined) {
+				if (placeValue !== undefined) {
 					chooseDigitAction({ x: line, y: column, value: placeValue === -1 ? undefined : placeValue });
 					playRoundForwardAction({
 						x: line,
