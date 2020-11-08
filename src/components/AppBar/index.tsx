@@ -144,7 +144,6 @@ const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
                     [classes.hide]:open,
                 })} />
             </TipButton>
-            <Button variant='contained' color='primary' onClick={toggleOpen}><Typography>Hide</Typography></Button>
         </>
     )
 })

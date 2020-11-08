@@ -48,10 +48,6 @@ const CustomDrawer: FC<localProps> = memo(({open}) => {
                 <ListItem button>
                   <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
                   <ListItemText primary={text} />
-                  <FormControlLabel
-                  control={<Switch size="small" checked={true} onChange={()=>{}} />}
-                  label="Small"
-                  />
                 </ListItem>
                 ))}
             </List>

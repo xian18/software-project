@@ -5,6 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Switch from '@material-ui/core/Switch';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import classNames from 'classnames';
 import {numberIcons} from '../../consts/elements';
@@ -47,22 +51,26 @@ const PlayHelper:FC<Props>=memo(({
     //const showOptionNumberTexts=['取消可选数字','展示可选数字'];
     const showOptionNumberIcons=[false,true];//true 为可见 false 为不可见
 
+    const [showUnchangeableSwitch,setShowUnchangeableSwitch]=useState(true);
     const [showUnchangeableText,setShowUnchangeableText]=useState(showUnchangeableTexts[0]);
+    const [showConflictSwitch,setShowConflictSwitch]=useState(true);
     const [showConflictText,setShowConflictText]=useState(showConflictTexts[0]);
     const [showOptionNumberIcon,setShowOptionNumberIcon]=useState(showOptionNumberIcons[0]);
 
     /** toggle button text*/
-    const toggleShowUnchangeableText=()=>{
+    const toggleShowUnchangeable=()=>{
         showUnchangeableText === showUnchangeableTexts[0] ?
             setShowUnchangeableText(showUnchangeableTexts[1]) : 
             setShowUnchangeableText(showUnchangeableTexts[0]) ;
+        setShowUnchangeableSwitch((prev)=>!prev);
     }
 
     /** toggle button text*/
-    const toggleShowConflictText=()=>{
+    const toggleShowConflict=()=>{
         showConflictText === showConflictTexts[0] ?
             setShowConflictText(showConflictTexts[1]) :
             setShowConflictText(showConflictTexts[0]) ;
+        setShowConflictSwitch((prev)=>!prev);
     }
 
     /** toggle button text*/
@@ -163,24 +171,35 @@ const PlayHelper:FC<Props>=memo(({
                     })} />
                 </TipButton>
             </Grid>
-            <Grid container >
+            <FormControl component="fieldset">
+            <FormGroup aria-label="position" row>
                 {useMemo(()=>(
-                        <Button variant='contained' color='primary' onClick={()=>{
-                            toggleShowUnchangeableText();
+                      <FormControlLabel
+                        value={'unchangeable'}
+                        control={<Switch checked={showUnchangeableSwitch} onChange={()=>{
+                            toggleShowUnchangeable();
                             toggleShowUnchangeableAction();
-                        }}><Typography>{showUnchangeableText}</Typography></Button>
+                        }}
+                        color='primary' />}
+                        label={showUnchangeableText}
+                        labelPlacement={'bottom'}
+                        />
                 ),[showUnchangeableText])}
 
                 {useMemo(()=>(
-                    <Button variant='contained' color='primary'
-                    onClick={()=>{
-                        toggleShowConflictText();
-                        toggleShowConflictAction();
-                    }}><Typography>{showConflictText}</Typography></Button>
+                      <FormControlLabel
+                        value={'conflict'}
+                        control={<Switch checked={showConflictSwitch} onChange={()=>{
+                            toggleShowConflict();
+                            toggleShowConflictAction();
+                        }}
+                        color='primary' />}
+                        label={showConflictText}
+                        labelPlacement={'bottom'}
+                        />
                 ),[showConflictText])}
-
-                
-            </Grid>
+            </FormGroup> 
+            </FormControl>              
         </React.Fragment>
     )})
 export default PlayHelper;
