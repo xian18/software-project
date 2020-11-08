@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme: Theme) =>
             width:"8vmin",
             display:"flex",
             borderRadius:"20%",
+            '&:hover':{
+                backgroundColor:"grey",
+            },
         },
         numberContainerNormal:{
             margin:0,
@@ -24,10 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
                 width:"18vmin",
                 height:"50vmin",
                 display:'flex',
-                transform: 'translate(-0%,-50%)',
+                transform: 'translate(0%,-50%)',
                 position: 'fixed',
                 top: "50vh",
-                left: "85vw",
+                right: "3vw",
             },
             [theme.breakpoints.only("md")]:{
                 width:"8vmin",
@@ -36,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 transform: 'translate(0%,-50%)',
                 position: 'fixed',
                 top: "50vh",
-                left: "91vw",
+                right: "1vw",
             }
         },
         haveBorder:{
@@ -46,6 +49,9 @@ const useStyles = makeStyles((theme: Theme) =>
         iconButtonContainer:{
             height:"8vmin",
             width:"8vmin",
+            '&:hover':{
+                backgroundColor:"grey",
+            },
         },
         iconButtonIcon:{
             height:"5.5vmin",
@@ -55,6 +61,21 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         hideElement:{
             display:"none",
+        },
+        buttonContainers:{
+            position:'fixed',
+            display:'flex',
+            transform:"translate(0%,-50%)",
+            top:"50vh",
+            left:"2vw",
+            [theme.breakpoints.up("lg")]:{
+                width:"26vmin",
+                height:"8vmin",
+            },
+            [theme.breakpoints.only("md")]:{
+                width:"8vmin",
+                height:"26vmin",
+            },
         }
     }),
 );

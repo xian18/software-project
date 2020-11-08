@@ -4,7 +4,6 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme) =>
     createStyles({
         playBoardContainer:{
-            //position:'absolute',
             display:'flex',
             transform: 'translate(-50%,-50%)',
             position: 'fixed',
@@ -17,7 +16,6 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             margin:spacing(0),
             padding:spacing(0),
             height:"9vmin"
-            //marginBottom:"-5px"
         },
         playBoardBlockContainer:{
             position:'relative',

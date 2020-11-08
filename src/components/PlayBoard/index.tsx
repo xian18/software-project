@@ -156,9 +156,6 @@ const PlayBoard: FC<Props> = memo(
 		return (
 			<>
 				{useMemo(()=>{
-					console.log(values[0][0]);
-					console.log(values[0][1]);
-					console.log(values[0][2]);
 					return (
 					<div
 						className={classes.playBoardContainer}

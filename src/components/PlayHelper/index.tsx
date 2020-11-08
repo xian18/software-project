@@ -2,16 +2,16 @@ import React,{FC,memo,useState,useMemo, useEffect} from 'react';
 import {useSnackbar} from 'notistack';
 
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import {IconButton, Button, Typography} from '@material-ui/core';
 import classNames from 'classnames';
 import {numberIcons} from '../../consts/elements';
 import useStyles from '../../styles/playHelper';
 
 import {Props} from '../../containers/PlayHelper';
+import {TipButton} from '../SmallComponents'
 
 import {Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined} from '@material-ui/icons';
+import { title } from 'process';
 
 const PlayHelper:FC<Props>=memo(({
                                 complete,
@@ -43,7 +43,7 @@ const PlayHelper:FC<Props>=memo(({
     const showUnchangeableTexts=['取消不可变显示','显示不可变显示'];
     const showConflictTexts=['取消显示冲突','显示冲突'];
     //const showOptionNumberTexts=['取消可选数字','展示可选数字'];
-    const showOptionNumberIcons=[true,false];//true 为可见 false 为不可见
+    const showOptionNumberIcons=[false,true];//true 为可见 false 为不可见
 
     const [showUnchangeableText,setShowUnchangeableText]=useState(showUnchangeableTexts[0]);
     const [showConflictText,setShowConflictText]=useState(showConflictTexts[0]);
@@ -64,7 +64,7 @@ const PlayHelper:FC<Props>=memo(({
     }
 
     /** toggle button text*/
-    const toggleShowOptionNumberText=()=>{
+    const toggleShowOptionNumberIcon=()=>{
         showOptionNumberIcon === showOptionNumberIcons[0] ?
             setShowOptionNumberIcon(showOptionNumberIcons[1]) :
             setShowOptionNumberIcon(showOptionNumberIcons[0]) ;
@@ -118,25 +118,40 @@ const PlayHelper:FC<Props>=memo(({
             <Grid container className={classNames(classes.numberContainerNormal,{})}>
                 {useMemo(()=> Array.from(numberIcons.keys()).map(mapNumberIcon) ,[highlightLoc])}
             </Grid>
-            <Grid container >
-                <IconButton onClick={playRoundBackwardAction} className={classNames(classes.iconButtonContainer,{
-                    [classes.haveBorder]:true,
-                })}>
-                    <Undo className={classNames(classes.iconButtonIcon,{})} />
-                </IconButton>
-                <IconButton onClick={updateSudokuAction} className={classNames(classes.iconButtonContainer,{
-                    [classes.haveBorder]:true,
-                })}>
-                    <Refresh style={{ color:"#000000" }}  className={classNames(classes.iconButtonIcon,{})} />
-                </IconButton>
-                <IconButton 
-                    onClick={()=>{
-                        toggleShowOptionNumberText();
-                        toggleShowOptionNumberAction();
+            <Grid container className={classes.buttonContainers}>
+                <TipButton
+                    TooltipProp={{title:"撤回上一步",children:<></>,arrow:true}}
+                    IconButtonProp={{
+                        onClick:playRoundBackwardAction,
+                        className:classNames(classes.iconButtonContainer,{
+                            [classes.haveBorder]:true,
+                        })
                     }}
-                    className={classNames(classes.iconButtonContainer,{
-                        [classes.haveBorder]:true,
-                    })}
+                >
+                    <Undo className={classNames(classes.iconButtonIcon,{})} />
+                </TipButton>
+                <TipButton
+                    TooltipProp={{title:"开始新一局",children:<></>,arrow:true}}
+                    IconButtonProp={{
+                        onClick:updateSudokuAction,
+                        className:classNames(classes.iconButtonContainer,{
+                            [classes.haveBorder]:true,
+                        })
+                    }}
+                >
+                    <Refresh style={{ color:"#000000" }}  className={classNames(classes.iconButtonIcon,{})} />
+                </TipButton>
+                <TipButton
+                    TooltipProp={{title:showOptionNumberIcon?"显示可选数字":"隐藏可选数字",children:<></>,arrow:true}}
+                    IconButtonProp={{
+                        onClick:()=>{
+                            toggleShowOptionNumberIcon();
+                            toggleShowOptionNumberAction();
+                        },
+                        className:classNames(classes.iconButtonContainer,{
+                            [classes.haveBorder]:true,
+                        })
+                    }}
                 >
                     <VisibilityOutlined className={classNames(classes.iconButtonIcon,{
                         [classes.hideElement]:showOptionNumberIcon
@@ -144,7 +159,7 @@ const PlayHelper:FC<Props>=memo(({
                     <VisibilityOffOutlined className={classNames(classes.iconButtonIcon,{
                         [classes.hideElement]:!showOptionNumberIcon
                     })} />
-                </IconButton>
+                </TipButton>
             </Grid>
             <Grid container >
                 {useMemo(()=>(

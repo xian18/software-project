@@ -23,6 +23,8 @@ import useStyles from '../../styles/appBar';
 
 import {Props} from '../../containers/AppBar';
 import { ThemeContext } from '../../styles/withRoot';
+import {TipButton} from '../SmallComponents/'
+import { title } from 'process';
 
 
 const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
@@ -64,14 +66,6 @@ const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
     )
     ,[open])
 
-    const MyButton:FC<{title:string,onClick?:Function}>=memo(({children,title,onClick=()=>{}})=>(
-        <Tooltip title={title} arrow>
-            <IconButton color='inherit' onClick={()=>onClick()}>
-                {children}
-            </IconButton>
-        </Tooltip>
-    ));
-
     const trigger = useScrollTrigger({ target:undefined });
 
     return (
@@ -106,18 +100,30 @@ const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
                         {useMemo(
                             () => (
                                 <div className={classNames(classes.rightButtons)}>
-                                    <MyButton title='GoBack' onClick={playRoundBackwardAction}>
+                                    <TipButton 
+                                        TooltipProp={{title:"GoBack",children:<></>}} 
+                                        IconButtonProp={{onClick:()=>playRoundBackwardAction(),color:"inherit"}}
+                                    >
                                         <ArrowBack />
-                                    </MyButton>
-                                    <MyButton title='Help' onClick={toggleHelper}>
+                                    </TipButton>
+                                    <TipButton 
+                                        TooltipProp={{title:"Help",children:<></>}} 
+                                        IconButtonProp={{onClick:()=>toggleHelper(),color:"inherit"}}
+                                    >
                                         <HelpIcon />
-                                    </MyButton>
-                                    <MyButton title='Dark'>
+                                    </TipButton>
+                                    <TipButton 
+                                        TooltipProp={{title:"Dark",children:<></>}} 
+                                        IconButtonProp={{onClick:()=>{},color:"inherit"}}
+                                    >
                                         <Brightness4 />
-                                    </MyButton>
-                                    <MyButton title='Logout' onClick={handleClickPerson}>
+                                    </TipButton>
+                                    <TipButton 
+                                        TooltipProp={{title:"Logout",children:<></>}} 
+                                        IconButtonProp={{onClick:handleClickPerson,color:"inherit"}}
+                                    >
                                         <PersonIcon />
-                                    </MyButton>
+                                    </TipButton>
                                 </div>
                             ),
                             // eslint-disable-next-line
