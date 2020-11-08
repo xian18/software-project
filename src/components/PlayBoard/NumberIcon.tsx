@@ -3,7 +3,7 @@ import React,{FC,memo} from 'react';
 import {sudokuValue} from '../../types';
 import useStyles from '../../styles/playBoard';
 import classNames from 'classnames';
-import { numberIcons } from "../../consts/elements";
+import {NumberSvg} from '../SmallComponents/NumberSvg'
 
 function comparePlayBoardBlock(prevProps: any, nextProps: any) {
 	if (prevProps.unchangeable === true) return true;
@@ -23,18 +23,14 @@ const NumberIcon: FC<{
 	const classes = useStyles();
 	if (initNum !== undefined)
 		return (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				xmlnsXlink="http://www.w3.org/1999/xlink"
-				className={classNames(
-					{
-						[classes.unchangeableBlock]: showUnchangeable
-					},
-					className
-				)}
-			>
-				{numberIcons.get(initNum as number)}
-			</svg>
+			<NumberSvg 
+				num={initNum as number}
+				SvgProp={{
+					className:classNames(className,{
+							[classes.unchangeableBlock]: showUnchangeable
+					})
+				}}
+			></NumberSvg>
 		);
 	else {
 		if (num === undefined) {
@@ -49,13 +45,12 @@ const NumberIcon: FC<{
 			);
 		} else
 			return (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					xmlnsXlink="http://www.w3.org/1999/xlink"
-					className={classNames(className,{})}
-				>
-					{numberIcons.get(num)}
-				</svg>
+				<NumberSvg 
+				num={num as number}
+				SvgProp={{
+					className:classNames(className,{})
+				}}
+			></NumberSvg>
 			);
 	}
 }, comparePlayBoardBlock);

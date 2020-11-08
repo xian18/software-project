@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) =>
             height:"5.5vmin",
             width:"5.5vmin",
             //fontSize:"6vmin",
-            color:"#000000",
+            //color:"#000000",
         },
         hideElement:{
             display:"none",

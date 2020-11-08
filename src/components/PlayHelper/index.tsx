@@ -18,6 +18,7 @@ import {Props} from '../../containers/PlayHelper';
 import TipButton from '../SmallComponents/TipButton';
 
 import {Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined} from '@material-ui/icons';
+import NumberSvg from '../SmallComponents/NumberSvg';
 
 const PlayHelper:FC<Props>=memo(({
                                 complete,
@@ -109,16 +110,15 @@ const PlayHelper:FC<Props>=memo(({
                 onMouseLeave={clearBlockHighlightAction}
                 className={classNames(classes.numberIconNormal)}
                 >
-                <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-                    className={classNames(
-                        classes.numberIconNormal,
-                            {
-                                [classes.hightLight]:highlightLoc === value,
-                                [classes.haveBorder]:value===-1,
-                            }
-                    )}>
-                    {numberIcons.get(value)}
-                </svg>
+                <NumberSvg num={value}
+                    SvgProp={{
+                        className:classNames(
+                            classes.numberIconNormal,
+                                {
+                                    [classes.hightLight]:highlightLoc === value,
+                                }
+                        )
+                    }}></NumberSvg>
             </IconButton>
         </Grid>
     )
@@ -133,9 +133,7 @@ const PlayHelper:FC<Props>=memo(({
                     TooltipProp={{title:"撤回上一步",children:<></>,arrow:true}}
                     IconButtonProp={{
                         onClick:playRoundBackwardAction,
-                        className:classNames(classes.iconButtonContainer,{
-                            [classes.haveBorder]:true,
-                        })
+                        className:classNames(classes.iconButtonContainer,{})
                     }}
                 >
                     <Undo className={classNames(classes.iconButtonIcon,{})} />
@@ -144,12 +142,10 @@ const PlayHelper:FC<Props>=memo(({
                     TooltipProp={{title:"开始新一局",children:<></>,arrow:true}}
                     IconButtonProp={{
                         onClick:updateSudokuAction,
-                        className:classNames(classes.iconButtonContainer,{
-                            [classes.haveBorder]:true,
-                        })
+                        className:classNames(classes.iconButtonContainer,{})
                     }}
                 >
-                    <Refresh style={{ color:"#000000" }}  className={classNames(classes.iconButtonIcon,{})} />
+                    <Refresh  className={classNames(classes.iconButtonIcon,{})} />
                 </TipButton>
                 <TipButton
                     TooltipProp={{title:showOptionNumberIcon?"显示可选数字":"隐藏可选数字",children:<></>,arrow:true}}
@@ -158,9 +154,7 @@ const PlayHelper:FC<Props>=memo(({
                             toggleShowOptionNumberIcon();
                             toggleShowOptionNumberAction();
                         },
-                        className:classNames(classes.iconButtonContainer,{
-                            [classes.haveBorder]:true,
-                        })
+                        className:classNames(classes.iconButtonContainer,{})
                     }}
                 >
                     <VisibilityOutlined className={classNames(classes.iconButtonIcon,{

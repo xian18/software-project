@@ -1,4 +1,4 @@
-import React, { FC, memo,useMemo,} from "react";
+import React, { FC, memo,useMemo, useContext} from "react";
 import { IconButton, Grid } from "@material-ui/core";
 
 import DigitBoard from "../../containers/DigitBoard";
@@ -12,6 +12,7 @@ import { optionNumber } from "../../algrithm/optionNumber";
 
 import NumberIcon from './NumberIcon';
 import NumberOption from './NumberOption';
+import { ThemeContext } from "../../styles/withRoot";
 
 const PlayBoard: FC<Props> = memo(
 	({
@@ -36,7 +37,7 @@ const PlayBoard: FC<Props> = memo(
 		toggleShowOptionNumberAction,
 	}) => {
 		const classes = useStyles();
-
+		const {darkMode} = useContext(ThemeContext);
 		/**
 		 * 如果不是不可变的数字，当placeValue == undefined，点击不会对block中数字进行影响，点击应当拉起DigitBoard
 		 * 如果数字是1-9，对对应block数字设置为1-9
@@ -165,7 +166,7 @@ const PlayBoard: FC<Props> = memo(
 							{values.map(mapPlayBoardBlock)}
 						</Grid>
 					</div>
-				)},[playRound,values,showOptionNumber,initValues,showUnchangeable,showConflict,conflictValues,blockHighlight])}
+				)},[playRound,values,showOptionNumber,initValues,showUnchangeable,showConflict,conflictValues,blockHighlight,darkMode])}
 
 				{useMemo(
 					() => (
