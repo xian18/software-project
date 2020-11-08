@@ -2,7 +2,7 @@ import React,{FC,memo,useState,useMemo,MouseEventHandler,useContext} from 'react
 import {AppBar, Menu, MenuItem, IconButton, Toolbar, Typography, Slide, Button} from '@material-ui/core';
 import {useScrollTrigger} from '@material-ui/core';
 
-import {Brightness4, ArrowBack } from '@material-ui/icons';
+import {Brightness4, ArrowBack ,KeyboardArrowDown,KeyboardArrowUp} from '@material-ui/icons';
 import HelpIcon from '@material-ui/icons/HelpOutline';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
@@ -14,7 +14,8 @@ import useStyles from '../../styles/appBar';
 
 import {Props} from '../../containers/AppBar';
 import { ThemeContext } from '../../styles/withRoot';
-import {TipButton} from '../SmallComponents/'
+import TipButton from '../SmallComponents/TipButton'
+import { classicNameResolver } from 'typescript';
 
 
 const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
@@ -129,6 +130,22 @@ const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
                     {HelpMessage}
                 </Modal>
             <Drawer open={drawer}/>
+            <TipButton
+                TooltipProp={{title:open?"隐藏":"显示",children:<></>}}
+                IconButtonProp={{
+                    className:classNames(classes.hideButtonShowing,{
+                        [classes.hideButton]:!open,
+                    }),
+                    onClick:toggleOpen
+                }}
+            >
+                <KeyboardArrowUp className={classNames({
+                    [classes.hide]:!open,
+                })} />
+                <KeyboardArrowDown className={classNames({
+                    [classes.hide]:open,
+                })} />
+            </TipButton>
             <Button variant='contained' color='primary' onClick={toggleOpen}><Typography>Hide</Typography></Button>
         </>
     )
