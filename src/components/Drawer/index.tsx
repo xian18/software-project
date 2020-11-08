@@ -4,16 +4,15 @@ import classNames from 'classnames';
 
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import HomeIcon from '@material-ui/icons/Home';
-import PeopleIcon from '@material-ui/icons/People';
-import PieChartIcon from '@material-ui/icons/PieChart';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 import useStyles from '../../styles/drawer';
 
@@ -42,9 +41,6 @@ const CustomDrawer: FC<localProps> = memo(({open}) => {
             classes={{ paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose) }}
             open={open}>
             <div className={classes.toolbar}>
-                <IconButton>
-                    <ChevronLeftIcon />
-                </IconButton>
             </div>
             <Divider />
             <List>
@@ -52,6 +48,10 @@ const CustomDrawer: FC<localProps> = memo(({open}) => {
                 <ListItem button>
                   <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
                   <ListItemText primary={text} />
+                  <FormControlLabel
+                  control={<Switch size="small" checked={true} onChange={()=>{}} />}
+                  label="Small"
+                  />
                 </ListItem>
                 ))}
             </List>

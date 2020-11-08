@@ -2,16 +2,18 @@ import React,{FC,memo,useState,useMemo, useEffect} from 'react';
 import {useSnackbar} from 'notistack';
 
 import Grid from '@material-ui/core/Grid';
-import {IconButton, Button, Typography} from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 import classNames from 'classnames';
 import {numberIcons} from '../../consts/elements';
 import useStyles from '../../styles/playHelper';
 
 import {Props} from '../../containers/PlayHelper';
-import {TipButton} from '../SmallComponents'
+import TipButton from '../SmallComponents/TipButton';
 
 import {Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined} from '@material-ui/icons';
-import { title } from 'process';
 
 const PlayHelper:FC<Props>=memo(({
                                 complete,
