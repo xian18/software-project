@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
             height:"8vmin",
             width:"8vmin",
             display:"flex",
+            borderRadius:"20%",
         },
         numberContainerNormal:{
             margin:0,
@@ -38,18 +39,23 @@ const useStyles = makeStyles((theme: Theme) =>
                 left: "91vw",
             }
         },
-        buttomNormal:{
-            height:"3vmin",
-            width:"3vmin",
-            margin:0,
-            padding:0,
-            border:0,
-            fontSize:"0.05rem",
-        },
         haveBorder:{
             border:"0.7vmin solid black",
             borderRadius:"20%",
         },
+        iconButtonContainer:{
+            height:"8vmin",
+            width:"8vmin",
+        },
+        iconButtonIcon:{
+            height:"5.5vmin",
+            width:"5.5vmin",
+            //fontSize:"6vmin",
+            color:"#000000",
+        },
+        hideElement:{
+            display:"none",
+        }
     }),
 );
 

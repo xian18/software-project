@@ -38,6 +38,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             padding:0,
             width:"9vmin",
             height:"9vmin",
+            borderRadius:"20%",
         },
         hideUndefinedIcon:{
             display:'none',

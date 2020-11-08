@@ -11,7 +11,7 @@ import useStyles from '../../styles/playHelper';
 
 import {Props} from '../../containers/PlayHelper';
 
-import {Undo} from '@material-ui/icons';
+import {Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined} from '@material-ui/icons';
 
 const PlayHelper:FC<Props>=memo(({
                                 complete,
@@ -42,11 +42,12 @@ const PlayHelper:FC<Props>=memo(({
     /** 按钮文本，可更改*/
     const showUnchangeableTexts=['取消不可变显示','显示不可变显示'];
     const showConflictTexts=['取消显示冲突','显示冲突'];
-    const showOptionNumberTexts=['取消可选数字','展示可选数字'];
+    //const showOptionNumberTexts=['取消可选数字','展示可选数字'];
+    const showOptionNumberIcons=[true,false];//true 为可见 false 为不可见
 
     const [showUnchangeableText,setShowUnchangeableText]=useState(showUnchangeableTexts[0]);
     const [showConflictText,setShowConflictText]=useState(showConflictTexts[0]);
-    const [showOptionNumberText,setShowOptionNumberText]=useState(showOptionNumberTexts[0]);
+    const [showOptionNumberIcon,setShowOptionNumberIcon]=useState(showOptionNumberIcons[0]);
 
     /** toggle button text*/
     const toggleShowUnchangeableText=()=>{
@@ -64,9 +65,9 @@ const PlayHelper:FC<Props>=memo(({
 
     /** toggle button text*/
     const toggleShowOptionNumberText=()=>{
-        showOptionNumberText === showOptionNumberTexts[0] ?
-            setShowOptionNumberText(showOptionNumberTexts[1]) :
-            setShowOptionNumberText(showOptionNumberTexts[0]) ;
+        showOptionNumberIcon === showOptionNumberIcons[0] ?
+            setShowOptionNumberIcon(showOptionNumberIcons[1]) :
+            setShowOptionNumberIcon(showOptionNumberIcons[0]) ;
     }
 
     /** 
@@ -118,19 +119,41 @@ const PlayHelper:FC<Props>=memo(({
                 {useMemo(()=> Array.from(numberIcons.keys()).map(mapNumberIcon) ,[highlightLoc])}
             </Grid>
             <Grid container >
+                <IconButton onClick={playRoundBackwardAction} className={classNames(classes.iconButtonContainer,{
+                    [classes.haveBorder]:true,
+                })}
+                    ><Undo className={classNames(classes.iconButtonIcon,{})} />
+                </IconButton>
+                <IconButton onClick={updateSudokuAction} className={classNames(classes.iconButtonContainer,{
+                    [classes.haveBorder]:true,
+                    })}
+                >
+                    <Refresh style={{ color:"#000000" }}  className={classNames(classes.iconButtonIcon,{})} />
+                </IconButton>
+                <IconButton 
+                    onClick={()=>{
+                        toggleShowOptionNumberText();
+                        toggleShowOptionNumberAction();
+                    }}
+                    className={classNames(classes.iconButtonContainer,{
+                        [classes.haveBorder]:true,
+                    })}
+                >
+                    <VisibilityOutlined className={classNames(classes.iconButtonIcon,{
+                        [classes.hideElement]:showOptionNumberIcon
+                    })} />
+                    <VisibilityOffOutlined className={classNames(classes.iconButtonIcon,{
+                        [classes.hideElement]:!showOptionNumberIcon
+                    })} />
+                </IconButton>
+            </Grid>
+            <Grid container >
                 {useMemo(()=>(
                         <Button variant='contained' color='primary' onClick={()=>{
                             toggleShowUnchangeableText();
                             toggleShowUnchangeableAction();
                         }}><Typography>{showUnchangeableText}</Typography></Button>
                 ),[showUnchangeableText])}
-
-                {useMemo(()=>(
-                    <>
-                        <IconButton onClick={playRoundBackwardAction}><Undo style={{color:"#000000"}} /></IconButton>
-                        <IconButton onClick={updateSudokuAction}>Update Sudoku</IconButton>
-                    </>
-                ),[])}
 
                 {useMemo(()=>(
                     <Button variant='contained' color='primary'
@@ -140,13 +163,7 @@ const PlayHelper:FC<Props>=memo(({
                     }}><Typography>{showConflictText}</Typography></Button>
                 ),[showConflictText])}
 
-                {useMemo(()=>(
-                    <Button variant='contained' color='primary'
-                    onClick={()=>{
-                        toggleShowOptionNumberText();
-                        toggleShowOptionNumberAction();
-                    }}><Typography>{showOptionNumberText}</Typography></Button>
-                ),[showOptionNumberText])}
+                
             </Grid>
         </React.Fragment>
     )})
