@@ -2,6 +2,7 @@ import React,{FC,memo} from 'react';
 
 import PlayBoard from '../containers/PlayBoard';
 import PlayHelper from '../containers/PlayHelper';
+import Share from '../components/Share';
 import AppBar from '../containers/AppBar';
 
 const Game:FC=memo(({})=>{
@@ -10,6 +11,7 @@ const Game:FC=memo(({})=>{
         <>
             <PlayBoard />
             <PlayHelper />
+            <Share content={''}/>
         </>
     )
 })

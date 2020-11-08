@@ -10,7 +10,7 @@ const Index:FC=memo(()=>{
     return (<React.Fragment>
 
             <SnackBar>
-                {/*<AppBar />*/}
+                <AppBar />
                 <Switch>
                     <Route path='/' component={Game} />
                     <Route path='/bbb' component={Counters} />

@@ -1,84 +1,62 @@
-import React, { FC,memo,MouseEvent, MouseEventHandler,useState } from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
+import React, { FC,memo,useState } from 'react';
+
+import classNames from 'classnames';
+
 import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
+import PeopleIcon from '@material-ui/icons/People';
+import PieChartIcon from '@material-ui/icons/PieChart';
 
-import useStyles from '../../styles/Drawer';
+import useStyles from '../../styles/drawer';
 
-export interface DrawerItem {
-  text:string;
-  icon:any;
-  handler:Function;
-}
+import Anchor from '../Anchor';
 
 export interface localProps {
   open:boolean;
-  onOpen:()=>void;
-  onClose:()=>void;
 }
 
-const Drawer:FC<localProps>=memo(({open,onOpen,onClose})=>{
-
-  const classes = useStyles();
-
-  const items:DrawerItem[]=[
-    {
-      text:'Inbox',
-      icon:<InboxIcon />,
-      handler:()=>{console.log('Drawer Inbox')},
-    },{
-      text:'Starred',
-      icon:<MailIcon />,
-      handler:()=>{console.log('Drawer MailIcon')},
-    }
-  ]
-
-  const list=(drawerItems:DrawerItem[])=>{
-    {
-      return (
-        drawerItems.map((item:DrawerItem,index:number)=>{
-          return (
-            <ListItem button key={item.text}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText>{item.text}</ListItemText>
-            </ListItem>
-          );
-        })
-      )
-    }
+const listItems=[
+  {
+    icon:<DashboardIcon />,
+    text:'dashboard',
+  },{
+    icon:<HomeIcon />,
+    text:'home',
   }
+]
 
-  return (
-    <div>
-        <React.Fragment>
-            <SwipeableDrawer
-                open={open}
-                onClose={onClose}
-                onOpen={onOpen}
-            >
-              <div
-                role="presentation"
-                onClick={onClose}
-                onKeyDown={onClose}
-              >
-                <List>
-                  <>
-                    {list(items)}
-                  </>
-                </List>
-              </div>
-            </SwipeableDrawer>
-        </React.Fragment>
-    </div>
-  )
-})
+const CustomDrawer: FC<localProps> = memo(({open}) => {
+    const classes = useStyles();
 
-export default Drawer;
+    return (
+        <Drawer
+            variant='permanent'
+            classes={{ paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose) }}
+            open={open}>
+            <div className={classes.toolbar}>
+                <IconButton>
+                    <ChevronLeftIcon />
+                </IconButton>
+            </div>
+            <Divider />
+            <List>
+              {listItems.map(({icon,text}, index) => (
+                <ListItem button>
+                  <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+                ))}
+            </List>
+        </Drawer>
+    );
+});
+
+export default CustomDrawer;
