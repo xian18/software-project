@@ -13,7 +13,9 @@ function compareNumberOption(prevProps:any,nextProps:any){
 
 const NumberOption:FC<{	num:sudokuValue,
 						onMouseEnter:Function,
-						onClick:Function}>=memo(({num,onMouseEnter,onClick})=>{
+						onClick:Function,
+						onMouseLeave:Function,
+					}>=memo(({num,onMouseEnter,onClick,onMouseLeave})=>{
 	const classes=useStyles();
 	const [highlight,setHighlight]=useState(false);
 	const toggleHighlight=()=>{
@@ -24,7 +26,10 @@ const NumberOption:FC<{	num:sudokuValue,
 		<div
 			onMouseEnter={()=>{onMouseEnter();toggleHighlight()}}
 			onClick={()=>{onClick()}}
-			onMouseLeave={toggleHighlight}
+			onMouseLeave={()=>{
+				toggleHighlight();
+				onMouseLeave();
+			}}
 			className={classNames(classes.optionNumberIcon,{})}
 		>
 			<NumberIcon
