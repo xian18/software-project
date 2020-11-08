@@ -103,7 +103,7 @@ const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
                                     </TipButton>
                                     <TipButton 
                                         TooltipProp={{title:"Dark",children:<></>}} 
-                                        IconButtonProp={{onClick:()=>{},color:"inherit"}}
+                                        IconButtonProp={{onClick:()=>{setDarkMode()},color:"inherit"}}
                                     >
                                         <Brightness4 />
                                     </TipButton>
