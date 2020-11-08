@@ -64,6 +64,16 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             },
             right: 0,
         },
+
+        hideButton:{
+                        
+            top:spacing(0),
+        },
+        hideButtonShowing:{
+            display:"flex",
+            position:"fixed",
+            right:0,
+        },
     }),
 );
 
