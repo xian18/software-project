@@ -11,6 +11,8 @@ import useStyles from '../../styles/playHelper';
 
 import {Props} from '../../containers/PlayHelper';
 
+import {Undo} from '@material-ui/icons';
+
 const PlayHelper:FC<Props>=memo(({
                                 complete,
                                 blockHighlightAction,
@@ -78,7 +80,7 @@ const PlayHelper:FC<Props>=memo(({
      * @returns JSX.Element 
      */
     const mapNumberIcon=(value:number,index:number)=>(
-        <Grid item>
+        <Grid item className={classes.numberIconNormal}>
             <IconButton
                 onMouseEnter={()=>{
                     blockHighlightAction(value);
@@ -94,13 +96,14 @@ const PlayHelper:FC<Props>=memo(({
                     }
                 }}
                 onMouseLeave={clearBlockHighlightAction}
-                className={classNames(classes.numberContainerNormal)}
+                className={classNames(classes.numberIconNormal)}
                 >
                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                     className={classNames(
                         classes.numberIconNormal,
                             {
-                                [classes.hightLight]:highlightLoc === value
+                                [classes.hightLight]:highlightLoc === value,
+                                [classes.haveBorder]:value===-1,
                             }
                     )}>
                     {numberIcons.get(value)}
@@ -111,12 +114,10 @@ const PlayHelper:FC<Props>=memo(({
 
     return (
         <React.Fragment >
-            <Grid container className={classNames(classes.root,{})}>
-                {useMemo(()=>(
-                    <Grid container className={classNames(classes.numbers,{})}>
-                        {Array.from(numberIcons.keys()).map(mapNumberIcon)}
-                    </Grid>
-                ),[highlightLoc])}
+            <Grid container className={classNames(classes.numberContainerNormal,{})}>
+                {useMemo(()=> Array.from(numberIcons.keys()).map(mapNumberIcon) ,[highlightLoc])}
+            </Grid>
+            <Grid container >
                 {useMemo(()=>(
                         <Button variant='contained' color='primary' onClick={()=>{
                             toggleShowUnchangeableText();
@@ -126,8 +127,8 @@ const PlayHelper:FC<Props>=memo(({
 
                 {useMemo(()=>(
                     <>
-                        <Button variant='contained' color='primary' onClick={playRoundBackwardAction}>Go Back</Button>
-                        <Button variant='contained' color='primary' onClick={updateSudokuAction}>Update Sudoku</Button>
+                        <IconButton onClick={playRoundBackwardAction}><Undo style={{color:"#000000"}} /></IconButton>
+                        <IconButton onClick={updateSudokuAction}>Update Sudoku</IconButton>
                     </>
                 ),[])}
 
