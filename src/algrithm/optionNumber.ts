@@ -17,3 +17,5 @@ export function optionNumber(value:sudokuValue[][],x:number,y:number):sudokuValu
     }
     return r as sudokuValue[];
 }
+
+export default optionNumber;
