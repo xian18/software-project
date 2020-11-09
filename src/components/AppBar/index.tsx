@@ -20,7 +20,7 @@ import TipButton from '../SmallComponents/TipButton';
 const Bar:FC<Props>=memo(({updateSudokuAction,playRoundBackwardAction})=>{
     const classes=useStyles();
 
-    const [open,setOpen]=useState(false);
+    const [open,setOpen]=useState(true);
     const [right,setRight]=useState(false);
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
     const [helper,setHelper]=useState(false);

@@ -1,7 +1,8 @@
 import React, { ComponentType, createContext, useEffect, useState } from 'react';
 
+import blue from '@material-ui/core/colors/blue';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -54,7 +55,7 @@ const darkTheme = createMuiTheme({
 
 const defaultTheme = createMuiTheme({
     palette: {
-        //primary: purple,
+        primary: blue,
         background: {
             default: '#f1f1f1',
         },
@@ -66,7 +67,7 @@ function withRoot<T>(Component: ComponentType<T>) {
     return (props: T) => {
         const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
         const [darkMode, setDarkMode] = useState(false);
-        console.log("darkMode:",darkMode);
+
         // using a stand alone `useEffect()` because I would like to
         // switch theme mode automaticly when system setting change (e.g. useMediaQuery returns)
         useEffect(() => {
@@ -75,10 +76,10 @@ function withRoot<T>(Component: ComponentType<T>) {
 
         return (
             <ThemeContext.Provider value={{ darkMode, setDarkMode: () => setDarkMode(!darkMode) }}>
-                <MuiThemeProvider theme={darkMode ? darkTheme : defaultTheme}>
+                <ThemeProvider theme={darkMode ? darkTheme : defaultTheme}>
                     <CssBaseline />
                     <Component {...props} />
-                </MuiThemeProvider>
+                </ThemeProvider>
             </ThemeContext.Provider>
         );
     };

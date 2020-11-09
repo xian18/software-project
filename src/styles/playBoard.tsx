@@ -16,7 +16,8 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         PlayBoardLine:{
             margin:spacing(0),
             padding:spacing(0),
-            height:"9vmin"
+            height:"9vmin",
+            width:'9vmin',
         },
         playBoardBlockContainer:{
             position:'relative',
