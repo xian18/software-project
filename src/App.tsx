@@ -1,6 +1,5 @@
 import {createBrowserHistory as createHistory} from 'history';
 import React,{FC,memo} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Counters} from './components/Counters'
 import {applyMiddleware,createStore} from 'redux';

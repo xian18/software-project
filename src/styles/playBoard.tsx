@@ -11,7 +11,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             left: "50%",
             width:"83.5vmin",
             height:"83.5vmin",
-            backgroundColor: `${palette.primary.main}`,
+            backgroundColor: `${palette.primary.light}`,
         },
         PlayBoardLine:{
             margin:spacing(0),
@@ -43,7 +43,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             display:'none',
         },
         backdrop: {
-            background: palette.primary.main,
+            background: palette.primary.light,
         },
         playBoardBlockButton:{
             margin:0,

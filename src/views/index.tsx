@@ -7,8 +7,8 @@ import withRoot from '../styles/withRoot';
 import AppBar from '../containers/AppBar';
 import Game from './game';
 const Index:FC=memo(()=>{
-    return (<React.Fragment>
-
+    return (
+        <React.Fragment>
             <SnackBar>
                 <AppBar />
                 <Switch>
