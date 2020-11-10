@@ -20,6 +20,7 @@ import TipButton from '../SmallComponents/TipButton';
 import {Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined} from '@material-ui/icons';
 import NumberSvg from '../SmallComponents/NumberSvg';
 
+//
 const PlayHelper:FC<Props>=memo(({
                                 complete,
                                 blockHighlightAction,
@@ -36,7 +37,7 @@ const PlayHelper:FC<Props>=memo(({
     const {enqueueSnackbar,closeSnackbar}=useSnackbar();
 
     const [completeMessageShowed,setCompleteMessageshowed]=useState(false); /** 数独正确完成，是否展示过成功信息*/
-    /** 使用enqueueSnackbar弹出消息框，展示数独成功完成，并将已经展示状态为设置为true*/
+    /** 使用enqueueSnackbar弹出消息框，展示数独成功完成，并将已经展示状态为设置为true */
     useEffect(()=>{
         if(completeMessageShowed === false && complete === true){
             enqueueSnackbar('Sudoku Complete!',{variant:'info'});
