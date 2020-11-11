@@ -11,7 +11,8 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             left: "50%",
             width:"83.5vmin",
             height:"83.5vmin",
-            backgroundColor: `${palette.primary.light}`,
+
+            backgroundColor: `${palette.boardBackgroundColor?.main}`,
         },
         PlayBoardLine:{
             margin:spacing(0),
@@ -27,11 +28,16 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             textAlign:'center',
             verticalAlign:'',
             borderRadius:'0',
+
+            backgroundColor:`${palette.numberBackgroundColor?.main}`,
+            color:`${palette.numberBackgroundColor?.contrastText}`,
         },
         hightLight:{
-            backgroundColor:'gray',
             margin:0,
             padding:0,
+
+            backgroundColor:`${palette.hightLightNumberBackgroundColor?.main}`,
+            color:`${palette.hightLightNumberBackgroundColor?.contrastText}`,
         },
         numberIconNormal:{
             margin:0,
@@ -39,6 +45,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             width:"9vmin",
             height:"9vmin",
             borderRadius:"20%",
+
         },
         hideUndefinedIcon:{
             display:'none',
@@ -46,12 +53,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         backdrop: {
             background: palette.primary.light,
         },
-        playBoardBlockButton:{
-            margin:0,
-            padding:0,
-            position:"relative",
-            
-        },
+
         rightPaddingBorder:{
             paddingRight:"0.3vmin",
             borderRight:'0.5vmin solid black',
@@ -74,6 +76,9 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             width:"2.5vmin",
             height:"2.5vmin",
             cursor:'pointer',
+
+            backgroundColor:`${palette.optionNumberBackgroudColor?.main}`,
+            color:`${palette.optionNumberBackgroudColor?.contrastText}`,
         },
         optionNumberBlock:{
             width:"9vmin",
