@@ -11,6 +11,7 @@ import Index from './views';
 import { create } from 'domain';
 import { epicMiddleware, epics } from './epics';
 import Button from '@material-ui/core/Button';
+import HotKeys from './components/HotKeys';
 createHistory();
 
 const middleware = [epicMiddleware];

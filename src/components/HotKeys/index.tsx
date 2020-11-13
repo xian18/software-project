@@ -1,7 +1,7 @@
 import { HotKeys } from "react-hotkeys";
 import React,{FC,memo,useCallback} from 'react';
 
-const customHotKeys:FC = memo(() => {
+const customHotKeys:FC = memo(({children}) => {
   const deleteNode = React.useCallback(() => {
     console.log("aaaaaa");
   }, [])
@@ -16,8 +16,8 @@ const customHotKeys:FC = memo(() => {
   };
 
   return (
-        <HotKeys keyMap={keyMap}>
-            <HotKeys handlers={handlers}>Node contents</HotKeys>
+        <HotKeys keyMap={keyMap} handlers={handlers}>
+          {children}
         </HotKeys>
     )
 })

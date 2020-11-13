@@ -11,12 +11,13 @@ const Index: FC = memo(() => {
     return (
         <React.Fragment>
             <SnackBar>
-                <HotKeys />
+                <HotKeys>
                 <AppBar />
                 <Switch>
                     <Route path='/' component={Game} />
                     <Route path='/bbb' component={Counters} />
                 </Switch>
+                </HotKeys>
             </SnackBar>
         </React.Fragment>
     );
