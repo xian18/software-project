@@ -1,7 +1,12 @@
 # SOFTWARE_PROJECT
 
-使用 npm install 来安装依赖<br/>
-使用 npm run start 来运行 react <br/>
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+使用 npm install 来安装依赖
+
+使用 npm run start 来运行 react
+
+运行 `npx prettier --write .`执行代码标准化
 
 ## About
 
