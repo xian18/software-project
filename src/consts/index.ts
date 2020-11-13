@@ -1,7 +1,7 @@
-const a = undefined;
+const a = null;
 const b = 0;
 
-export const undefined9x9 = [
+export const null9x9 = [
     [a, a, a, a, a, a, a, a, a],
     [a, a, a, a, a, a, a, a, a],
     [a, a, a, a, a, a, a, a, a],

@@ -40,14 +40,14 @@ const PlayBoard: FC<Props> = memo(
         const classes = useStyles();
         const { darkMode } = useContext(ThemeContext);
         /**
-         * 如果不是不可变的数字，当placeValue == undefined，点击不会对block中数字进行影响，点击应当拉起DigitBoard
+         * 如果不是不可变的数字，当placeValue == null，点击不会对block中数字进行影响，点击应当拉起DigitBoard
          * 如果数字是1-9，对对应block数字设置为1-9
          * 如果数字是-1，代表清空block为空
          */
         const handleBlockClick = (line: number, column: number, value: sudokuValue) => {
-            if (initValues[line][column] === undefined) {
-                if (placeValue !== undefined) {
-                    chooseDigitAction({ x: line, y: column, value: placeValue === -1 ? undefined : placeValue });
+            if (initValues[line][column] === null) {
+                if (placeValue !== null) {
+                    chooseDigitAction({ x: line, y: column, value: placeValue === -1 ? null : placeValue });
                     playRoundForwardAction({
                         x: line,
                         y: column,
@@ -65,7 +65,7 @@ const PlayBoard: FC<Props> = memo(
             playRoundForwardAction({
                 x: line,
                 y: column,
-                from: undefined,
+                from: null,
                 to: value,
             });
         };

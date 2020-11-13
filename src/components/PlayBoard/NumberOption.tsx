@@ -33,7 +33,7 @@ const NumberOption: FC<{ num: sudokuValue; onMouseEnter: Function; onClick: Func
                 className={classNames(classes.optionNumberIcon, {})}>
                 <NumberIcon
                     num={num}
-                    initNum={undefined}
+                    initNum={null}
                     showUnchangeable={false}
                     className={classNames(classes.optionNumberIcon, {
                         [classes.hightLight]: highlight,

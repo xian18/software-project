@@ -10,7 +10,7 @@ import { sudokuValue, Level } from '../types';
 
 export const generateSudoku = (level: Level): sudokuValue[][][] => {
     /*algrithm for generating soduku here*/
-    const a = undefined;
+    const a = null;
 
     return [
         [

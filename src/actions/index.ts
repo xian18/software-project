@@ -113,7 +113,7 @@ export interface SetPlaceValueAction {
 }
 export const setPlaceValueAction = createActionFunc(SET_PLACE_VALUE, 'value');
 
-/** 清空placeValue值，设置为undefined*/
+/** 清空placeValue值，设置为null*/
 export const CLEAR_PLACE_VALUE = 'CLEAR_PLACE_VALUE';
 export type CLEAR_PLACE_VALUE = typeof CLEAR_PLACE_VALUE;
 export interface ClearPlaceValueAction {
@@ -145,3 +145,19 @@ export interface ToggleShowOptionNumber {
     type: TOGGLE_SHOW_OPTIONNUMBER;
 }
 export const toggleShowOptionNumberAction = createActionFunc(TOGGLE_SHOW_OPTIONNUMBER);
+
+/** 记录多次游戏的所有数据*/
+export const SAVE_GAME = 'SAVE_GAME';
+export type SAVE_GAME = typeof SAVE_GAME;
+export interface SaveGame {
+    type: SAVE_GAME;
+}
+export const saveGameAction = createActionFunc(SAVE_GAME);
+
+/** 记录多次游戏的所有数据*/
+export const LOAD_GAME = 'LOAD_GAME';
+export type LOAD_GAME = typeof LOAD_GAME;
+export interface LoadGame {
+    type: LOAD_GAME;
+}
+export const loadGameAction = createActionFunc(LOAD_GAME);

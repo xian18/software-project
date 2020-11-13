@@ -21,7 +21,7 @@ const NumberIcon: FC<{
     className: any;
 }> = memo(({ num, initNum, showUnchangeable, className }) => {
     const classes = useStyles();
-    if (initNum !== undefined)
+    if (initNum !== null)
         return (
             <NumberSvg
                 num={initNum as number}
@@ -29,10 +29,11 @@ const NumberIcon: FC<{
                     className: classNames(className, {
                         [classes.unchangeableBlock]: showUnchangeable,
                     }),
-                }}></NumberSvg>
+                }}
+                ></NumberSvg>
         );
     else {
-        if (num === undefined) {
+        if (num === null) {
             return (
                 <svg className={classNames(className, {})}>
                     <image width='100%' height='100%' xlinkHref='' />

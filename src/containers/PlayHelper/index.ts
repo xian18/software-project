@@ -12,6 +12,8 @@ import {
     clearBlockHighlightAction,
     toggleShowConflictAction,
     toggleShowOptionNumberAction,
+    saveGameAction,
+    loadGameAction,
 } from '../../actions';
 import { StoreState } from '../../reducers';
 
@@ -41,6 +43,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
             clearBlockHighlightAction,
             toggleShowConflictAction,
             toggleShowOptionNumberAction,
+            saveGameAction,
+            loadGameAction,
         },
         dispatch,
     );

@@ -1,10 +1,11 @@
 import * as actions from '../actions';
 import { PlaceValue, Point } from '../types';
 import { sudokuValue, PlayHistory, Level, conflictValue } from '../types';
-import { zero9x9, undefined9x9 } from '../consts';
+import { zero9x9, null9x9 } from '../consts';
 import calculateHighlight from '../algrithm/calculateHighlight';
 import generateSudoku from '../algrithm/generateSudoku';
 import conflictDetect from '../algrithm/conflictDetect';
+import {serialize,deserialize} from 'typescript-json-serializer';
 
 type ActionType =
     | actions.ChooseDigitAction
@@ -19,7 +20,9 @@ type ActionType =
     | actions.ClearPlaceValueAction
     | actions.ToggleShowUnchangeableAction
     | actions.ToggleShowConflictAction
-    | actions.ToggleShowOptionNumber;
+    | actions.ToggleShowOptionNumber
+    | actions.SaveGame
+    | actions.LoadGame
 
 export interface GameStore {
     values: sudokuValue[][] /** 数独数字 9x9 matrix*/;
@@ -33,7 +36,7 @@ export interface GameStore {
     playHistorys: PlayHistory[] /** 记录每一次下棋的位置（点），以及点改变之前和改变之后的值*/;
     placeValue: PlaceValue /** 如果placeValue=1到9，点击数独板上block会直接对数独板赋值数字*/;
     showUnchangeable: boolean /** 是否高亮显示数独盘上不可变数字，true-高亮显示，false-不高亮显示*/;
-    conflictValues: conflictValue[][] /** 数独上冲突的点，取值undefined 1-9，undefined表示无冲突，1-9表示该位置该数字冲突*/;
+    conflictValues: conflictValue[][] /** 数独上冲突的点，取值null 1-9，null表示无冲突，1-9表示该位置该数字冲突*/;
     showConflict: boolean /** 是否高亮显示冲突数字*/;
     complete: boolean /** 数独是否求解成功*/;
     showOptionNumber: boolean /** 是否显示所有框里面的可选数字 true-显示 false-不显示*/;
@@ -42,17 +45,17 @@ export interface GameStore {
 const generate = generateSudoku(1)[0];
 const init: GameStore = {
     values: generate,
-    initValues: generate.map((x) => Object.assign({}, x)),
+    initValues: generate.map((x) =>[...x] as sudokuValue[]),
     blockHighlight: zero9x9.map((x) => Object.assign({}, x)) as number[][],
     level: 1,
-    point: { x: 0, y: 0, value: undefined },
-    highlightPoint: { x: 0, y: 0, value: undefined },
+    point: { x: 0, y: 0, value: null },
+    highlightPoint: { x: 0, y: 0, value: null },
     digitBoard: false,
     playRound: 0,
     playHistorys: [],
-    placeValue: undefined,
+    placeValue: null,
     showUnchangeable: true,
-    conflictValues: undefined9x9,
+    conflictValues: null9x9,
     showConflict: true,
     complete: false,
     showOptionNumber: true,
@@ -61,6 +64,7 @@ const init: GameStore = {
 export default (state = init, action: ActionType): GameStore => {
     const {
         values,
+        initValues,
         blockHighlight,
         level,
         point,
@@ -112,13 +116,30 @@ export default (state = init, action: ActionType): GameStore => {
         case actions.SET_PLACE_VALUE:
             return { ...state, placeValue: action.value };
         case actions.CLEAR_PLACE_VALUE:
-            return { ...state, placeValue: undefined };
+            return { ...state, placeValue: null };
         case actions.TOGGLE_SHOW_UNCHANGEABLE:
             return { ...state, showUnchangeable: !showUnchangeable };
         case actions.TOGGLE_SHOW_CONFLICT:
             return { ...state, showConflict: !showConflict };
         case actions.TOGGLE_SHOW_OPTIONNUMBER:
             return { ...state, showOptionNumber: !showOptionNumber };
+        case actions.SAVE_GAME:
+            localStorage.setItem('values',JSON.stringify(values));
+            localStorage.setItem('initValues',JSON.stringify(initValues));
+            localStorage.setItem('playHistorys',JSON.stringify(playHistorys));
+            return {...state};
+        case actions.LOAD_GAME:
+            let valuesSerialized=localStorage.getItem('values');
+            let initValuesSerialized=localStorage.getItem('initValues');
+            let playHistorysSerialized=localStorage.getItem('playHistorys');
+            if(valuesSerialized && initValuesSerialized && playHistorysSerialized){
+                let values:sudokuValue[][]=JSON.parse(valuesSerialized);
+                let initValues:sudokuValue[][]=JSON.parse(initValuesSerialized);
+                let playHistorys:PlayHistory[]=JSON.parse(playHistorysSerialized);
+                console.log(initValues);
+                return {...state,values,initValues,playHistorys};
+            }
+            return {...state};
         default:
             return { ...state };
     }

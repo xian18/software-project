@@ -28,7 +28,7 @@ export interface localProps {
 
 function compareNumberBlock(prevProps: any, nextProps: any) {
     /**
-     * 注意有一种情况，当initValue=undefined,showOptionNumber变为true或者变为false
+     * 注意有一种情况，当initValue=null,showOptionNumber变为true或者变为false
      *
      */
     return (
@@ -76,18 +76,18 @@ const NumberBlock: FC<localProps> = memo(
                     })}>
                     <IconButton
                         className={classNames(classes.playBoardBlockContainer, {
-                            [classes.hideUndefinedIcon]: showOptionNumber === true && num === undefined,
+                            [classes.hidenullIcon]: showOptionNumber === true && num === null,
                         })}
                         onMouseEnter={() => {
                             blockOnMouseEnter(line, column, num);
                         }}
                         onClick={() => {
-                            if (initValue === undefined) blockOnClick(line, column, num);
+                            if (initValue === null) blockOnClick(line, column, num);
                         }}
                         onMouseLeave={() => {
                             blockOnMouseLeave();
                         }}
-                        disabled={showOptionNumber === true && num === undefined}>
+                        disabled={showOptionNumber === true && num === null}>
                         <NumberIcon
                             num={num}
                             initNum={initValue}
@@ -108,7 +108,7 @@ const NumberBlock: FC<localProps> = memo(
                         />
                     </IconButton>
                     {useMemo(() => {
-                        if (num === undefined && showOptionNumber === true && initValue === undefined) {
+                        if (num === null && showOptionNumber === true && initValue === null) {
                             const optNumber: sudokuValue[] = optionNumber(values, line, column);
                             return (
                                 <Grid

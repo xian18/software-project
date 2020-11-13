@@ -20,6 +20,8 @@ import TipButton from '../SmallComponents/TipButton';
 import { Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined } from '@material-ui/icons';
 import NumberSvg from '../SmallComponents/NumberSvg';
 
+
+
 //
 const PlayHelper: FC<Props> = memo(
     ({
@@ -33,6 +35,8 @@ const PlayHelper: FC<Props> = memo(
         clearBlockHighlightAction,
         toggleShowConflictAction,
         toggleShowOptionNumberAction,
+        saveGameAction,
+        loadGameAction,
     }) => {
         const classes = useStyles();
         const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -171,6 +175,8 @@ const PlayHelper: FC<Props> = memo(
                             })}
                         />
                     </TipButton>
+                    <Button variant='contained' color='primary' onClick={saveGameAction}>saveGame</Button>
+                    <Button variant='contained' color='primary' onClick={loadGameAction}>loadGame</Button>
                 </Grid>
                 <FormControl component='fieldset'>
                     <FormGroup aria-label='position' row>

@@ -30,7 +30,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             borderRadius: '0',
 
             backgroundColor: `${palette.numberBackgroundColor?.main}`,
-            color: `${palette.numberBackgroundColor?.contrastText}`,
+            fill: `${palette.numberBackgroundColor?.contrastText}`,
         },
         hightLight: {
             margin: 0,
@@ -46,7 +46,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             height: '9vmin',
             borderRadius: '20%',
         },
-        hideUndefinedIcon: {
+        hidenullIcon: {
             display: 'none',
         },
         backdrop: {
@@ -77,7 +77,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             cursor: 'pointer',
 
             backgroundColor: `${palette.optionNumberBackgroudColor?.main}`,
-            color: `${palette.optionNumberBackgroudColor?.contrastText}`,
+            fill: `${palette.optionNumberBackgroudColor?.contrastText}`,
         },
         optionNumberBlock: {
             width: '9vmin',

@@ -36,7 +36,7 @@ const DigitBoard: FC<localProps & Props> = memo(
                                                 size='small'
                                                 color='secondary'
                                                 onMouseEnter={() => {
-                                                    if (num != undefined) blockHighlightAction(num as sudokuValue);
+                                                    if (num != null) blockHighlightAction(num as sudokuValue);
                                                 }}
                                                 onClick={(e) => {
                                                     chooseDigitAction({ ...point, value: num as sudokuValue });

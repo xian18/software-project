@@ -13,7 +13,7 @@ interface ContextProps {
 
 export const ThemeContext = createContext<ContextProps>({
     darkMode: false,
-    setDarkMode: () => undefined,
+    setDarkMode: () => null,
 });
 
 const darkTheme = createMuiTheme({
@@ -33,6 +33,9 @@ const darkTheme = createMuiTheme({
         },
         boardBackgroundColor: {
             main: '#000000',
+        },
+        optionNumberBackgroudColor:{
+            main:'#000000',
         },
     },
     overrides: {
@@ -64,6 +67,14 @@ const defaultTheme = createMuiTheme({
         },
         boardBackgroundColor: {
             main: '#FF8000',
+        },
+        numberBackgroundColor:{
+            main:'rgba(0,0,0,0)',
+            contrastText:'#ffffff',
+        },
+        optionNumberBackgroudColor:{
+            main:'rgba(0,0,0,0)',
+            contrastText:"#ffffff",
         },
     },
 });
