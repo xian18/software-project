@@ -3,121 +3,120 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme) =>
     createStyles({
-        playBoardContainer:{
-            display:'flex',
+        playBoardContainer: {
+            display: 'flex',
             transform: 'translate(-50%,-50%)',
             position: 'fixed',
-            top: "50%",
-            left: "50%",
-            width:"83.5vmin",
-            height:"83.5vmin",
+            top: '50%',
+            left: '50%',
+            width: '83.5vmin',
+            height: '83.5vmin',
 
             backgroundColor: `${palette.boardBackgroundColor?.main}`,
         },
-        PlayBoardLine:{
-            margin:spacing(0),
-            padding:spacing(0),
-            height:"9vmin",
-            width:'9vmin',
+        PlayBoardLine: {
+            margin: spacing(0),
+            padding: spacing(0),
+            height: '9vmin',
+            width: '9vmin',
         },
-        playBoardBlockContainer:{
-            position:'relative',
-            margin:spacing(0),
-            padding:spacing(0),
-            cursor:'pointer',
-            textAlign:'center',
-            verticalAlign:'',
-            borderRadius:'0',
+        playBoardBlockContainer: {
+            position: 'relative',
+            margin: spacing(0),
+            padding: spacing(0),
+            cursor: 'pointer',
+            textAlign: 'center',
+            verticalAlign: '',
+            borderRadius: '0',
 
-            backgroundColor:`${palette.numberBackgroundColor?.main}`,
-            color:`${palette.numberBackgroundColor?.contrastText}`,
+            backgroundColor: `${palette.numberBackgroundColor?.main}`,
+            color: `${palette.numberBackgroundColor?.contrastText}`,
         },
-        hightLight:{
-            margin:0,
-            padding:0,
+        hightLight: {
+            margin: 0,
+            padding: 0,
 
-            backgroundColor:`${palette.hightLightNumberBackgroundColor?.main}`,
-            color:`${palette.hightLightNumberBackgroundColor?.contrastText}`,
+            backgroundColor: `${palette.hightLightNumberBackgroundColor?.main}`,
+            color: `${palette.hightLightNumberBackgroundColor?.contrastText}`,
         },
-        numberIconNormal:{
-            margin:0,
-            padding:0,
-            width:"9vmin",
-            height:"9vmin",
-            borderRadius:"20%",
-
+        numberIconNormal: {
+            margin: 0,
+            padding: 0,
+            width: '9vmin',
+            height: '9vmin',
+            borderRadius: '20%',
         },
-        hideUndefinedIcon:{
-            display:'none',
+        hideUndefinedIcon: {
+            display: 'none',
         },
         backdrop: {
             background: palette.primary.light,
         },
 
-        rightPaddingBorder:{
-            paddingRight:"0.3vmin",
-            borderRight:'0.5vmin solid black',
+        rightPaddingBorder: {
+            paddingRight: '0.3vmin',
+            borderRight: '0.5vmin solid black',
         },
-        leftPadding:{
-            paddingLeft:"0.3vmin",
+        leftPadding: {
+            paddingLeft: '0.3vmin',
         },
-        bottomPaddingBorder:{
-            paddingBottom:"0.3vmin",
-            borderBottom:'0.5vmin solid black',
+        bottomPaddingBorder: {
+            paddingBottom: '0.3vmin',
+            borderBottom: '0.5vmin solid black',
         },
-        topPadding:{
-            paddingTop:"0.3vmin",
+        topPadding: {
+            paddingTop: '0.3vmin',
         },
-        unchangeableBlock:{
-            backgroundColor:'orange',
+        unchangeableBlock: {
+            backgroundColor: 'orange',
         },
-        optionNumberIcon:{
+        optionNumberIcon: {
             //background:"blue",
-            width:"2.5vmin",
-            height:"2.5vmin",
-            cursor:'pointer',
+            width: '2.5vmin',
+            height: '2.5vmin',
+            cursor: 'pointer',
 
-            backgroundColor:`${palette.optionNumberBackgroudColor?.main}`,
-            color:`${palette.optionNumberBackgroudColor?.contrastText}`,
+            backgroundColor: `${palette.optionNumberBackgroudColor?.main}`,
+            color: `${palette.optionNumberBackgroudColor?.contrastText}`,
         },
-        optionNumberBlock:{
-            width:"9vmin",
-            height:"9vmin",
+        optionNumberBlock: {
+            width: '9vmin',
+            height: '9vmin',
             //padding:"0vmin",
             //margin:"0vmin",
-            position:"relative",
-            fontSize:"0rem",
+            position: 'relative',
+            fontSize: '0rem',
         },
-        optionalNumberTopPadding:{
-            paddingTop:"0.4vmin",
+        optionalNumberTopPadding: {
+            paddingTop: '0.4vmin',
             //background:"blue",
         },
-        conflictOne:{
-            backgroundColor:'blue',
+        conflictOne: {
+            backgroundColor: 'blue',
         },
-        conflictTwo:{
-            backgroundColor:'red',
+        conflictTwo: {
+            backgroundColor: 'red',
         },
-        conflictThree:{
-            backgroundColor:'black',
+        conflictThree: {
+            backgroundColor: 'black',
         },
-        conflictFour:{
-            backgroundColor:'yellow',
+        conflictFour: {
+            backgroundColor: 'yellow',
         },
-        conflictFive:{
-            backgroundColor:'green',
+        conflictFive: {
+            backgroundColor: 'green',
         },
-        conflictSix:{
-            backgroundColor:'purple',
+        conflictSix: {
+            backgroundColor: 'purple',
         },
-        conflictSeven:{
-            backgroundColor:'gray',
+        conflictSeven: {
+            backgroundColor: 'gray',
         },
-        conflictEight:{
-            backgroundColor:'#eeeeee',
+        conflictEight: {
+            backgroundColor: '#eeeeee',
         },
-        conflictNine:{
-            backgroundColor:'red',
+        conflictNine: {
+            backgroundColor: 'red',
         },
     }),
 );

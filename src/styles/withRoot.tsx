@@ -31,9 +31,9 @@ const darkTheme = createMuiTheme({
         background: {
             default: '#121212',
         },
-        boardBackgroundColor:{
-            main:"#000000"
-        }
+        boardBackgroundColor: {
+            main: '#000000',
+        },
     },
     overrides: {
         MuiIconButton: {
@@ -62,9 +62,9 @@ const defaultTheme = createMuiTheme({
         background: {
             default: '#f1f1f1',
         },
-        boardBackgroundColor:{
-            main:"#FF8000",
-        }
+        boardBackgroundColor: {
+            main: '#FF8000',
+        },
     },
 });
 

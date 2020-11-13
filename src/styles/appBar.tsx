@@ -7,7 +7,7 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
     createStyles({
         appBar: {
             zIndex: zIndex.drawer + 1,
-            background: `${palette.primary.main}`,//`linear-gradient(60deg, ${palette.primary.main}, ${palette.primary.dark})`,
+            background: `${palette.primary.main}`, //`linear-gradient(60deg, ${palette.primary.main}, ${palette.primary.dark})`,
             transition: transitions.create(['width', 'margin'], {
                 easing: transitions.easing.sharp,
                 duration: transitions.duration.leavingScreen,
@@ -65,14 +65,13 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             right: 0,
         },
 
-        hideButton:{
-                        
-            top:spacing(0),
+        hideButton: {
+            top: spacing(0),
         },
-        hideButtonShowing:{
-            display:"flex",
-            position:"fixed",
-            right:0,
+        hideButtonShowing: {
+            display: 'flex',
+            position: 'fixed',
+            right: 0,
         },
     }),
 );

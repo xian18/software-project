@@ -1,4 +1,4 @@
-import React, { FC,memo,useState } from 'react';
+import React, { FC, memo, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -13,26 +13,26 @@ import HomeIcon from '@material-ui/icons/Home';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-
 import useStyles from '../../styles/drawer';
 
 import Anchor from '../Anchor';
 
 export interface localProps {
-  open:boolean;
+    open: boolean;
 }
 
-const listItems=[
-  {
-    icon:<DashboardIcon />,
-    text:'dashboard',
-  },{
-    icon:<HomeIcon />,
-    text:'home',
-  }
-]
+const listItems = [
+    {
+        icon: <DashboardIcon />,
+        text: 'dashboard',
+    },
+    {
+        icon: <HomeIcon />,
+        text: 'home',
+    },
+];
 
-const CustomDrawer: FC<localProps> = memo(({open}) => {
+const CustomDrawer: FC<localProps> = memo(({ open }) => {
     const classes = useStyles();
 
     return (
@@ -40,15 +40,14 @@ const CustomDrawer: FC<localProps> = memo(({open}) => {
             variant='permanent'
             classes={{ paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose) }}
             open={open}>
-            <div className={classes.toolbar}>
-            </div>
+            <div className={classes.toolbar}></div>
             <Divider />
             <List>
-              {listItems.map(({icon,text}, index) => (
-                <ListItem button>
-                  <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
+                {listItems.map(({ icon, text }, index) => (
+                    <ListItem button>
+                        <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
                 ))}
             </List>
         </Drawer>

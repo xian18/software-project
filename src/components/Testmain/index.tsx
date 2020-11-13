@@ -1,4 +1,4 @@
-import React,{FC,memo,useState} from 'react';
+import React, { FC, memo, useState } from 'react';
 
 import Modal from '../Modal';
 import DigitBoard from '../../containers/DigitBoard';
@@ -17,23 +17,21 @@ import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import Login from '../Login';
 import Drawer from '../Drawer';
 
-export interface Props {
+export interface Props {}
 
-}
+const Testmain: FC<Props> = memo(() => {
+    const [modal, setModal] = useState(false);
 
-const Testmain:FC<Props>=memo(()=>{
-    const [modal,setModal]=useState(false);
+    const toggleOpen = (name: string) => () => {
+        if (name == 'modal') setModal(!modal);
+    };
 
-    const toggleOpen=(name:string)=>()=>{
-        if(name=='modal') setModal(!modal);
-    }
-
-    const theme=useTheme();
-    const isMobile=useMediaQuery(theme.breakpoints.down('sm'));
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <>
-           {/*
+            {/*
             <br />
             <br />
             <br />
@@ -54,12 +52,11 @@ const Testmain:FC<Props>=memo(()=>{
            */}
             <PlayBoard />
             <PlayHelper />
-            {
-                /*<Login />
+            {/*<Login />
                 <AppBar />
             */}
         </>
     );
-})
+});
 
 export default Testmain;

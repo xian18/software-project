@@ -5,8 +5,8 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
     createStyles({
         margin: {
             margin: spacing(1),
-          },
-    })
-)
+        },
+    }),
+);
 
 export default useStyles;

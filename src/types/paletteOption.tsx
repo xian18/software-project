@@ -1,84 +1,83 @@
-import {Palette,PaletteOptions,PaletteColorOptions,PaletteColor} from '@material-ui/core/styles/createPalette';
+import { Palette, PaletteOptions, PaletteColorOptions, PaletteColor } from '@material-ui/core/styles/createPalette';
 declare module '@material-ui/core/styles/createPalette' {
-    interface PaletteOptions{
+    interface PaletteOptions {
         //棋盘的背景颜色
-        boardBackgroundColor?:PaletteColorOptions,
+        boardBackgroundColor?: PaletteColorOptions;
 
         //填入的数字的颜色
         //numberColor?:PaletteColorOptions,
 
         //填入的数字的背景颜色
-        numberBackgroundColor?:PaletteColorOptions,
+        numberBackgroundColor?: PaletteColorOptions;
 
         //冲突的数字的颜色
         //conflictNumberColor?:PaletteColorOptions,
 
         //冲突的数字的背景颜色
-        conflictNumberBackgroundColor?:PaletteColorOptions,
+        conflictNumberBackgroundColor?: PaletteColorOptions;
 
         //不可变的数字的颜色
         //constNumberColor?:PaletteColorOptions,
 
         //不可变的数字的背景颜色
-        constNumberBackgroundColor?:PaletteColorOptions,
+        constNumberBackgroundColor?: PaletteColorOptions;
 
         //可选数字的颜色
         //optionNumberColor?:PaletteColorOptions,
 
         //可选数字的背景颜色
-        optionNumberBackgroudColor?:PaletteColorOptions,
+        optionNumberBackgroudColor?: PaletteColorOptions;
 
         //按钮的颜色
         //buttonColor?:PaletteColorOptions,
-        
+
         //按钮的背景颜色
-        buttonBackgroundColor?:PaletteColorOptions,
+        buttonBackgroundColor?: PaletteColorOptions;
 
         //高亮数字的颜色
         //hightLightNumberColor?:PaletteColorOptions,
 
         //高亮数字的背景颜色
-        hightLightNumberBackgroundColor?:PaletteColorOptions,
+        hightLightNumberBackgroundColor?: PaletteColorOptions;
     }
-    interface Palette{
+    interface Palette {
         //棋盘的背景颜色
-        boardBackgroundColor?:PaletteColor,
+        boardBackgroundColor?: PaletteColor;
 
         //填入的数字的颜色
         //numberColor?:PaletteColor,
 
         //填入的数字的背景颜色
-        numberBackgroundColor?:PaletteColor,
+        numberBackgroundColor?: PaletteColor;
 
         //冲突的数字的颜色
         //conflictNumberColor?:PaletteColor,
 
         //冲突的数字的背景颜色
-        conflictNumberBackgroundColor?:PaletteColor,
+        conflictNumberBackgroundColor?: PaletteColor;
 
         //不可变的数字的颜色
         //constNumberColor?:PaletteColor,
 
         //不可变的数字的背景颜色
-        constNumberBackgroundColor?:PaletteColor,
+        constNumberBackgroundColor?: PaletteColor;
 
         //可选数字的颜色
         //optionNumberColor?:PaletteColor,
 
         //可选数字的背景颜色
-        optionNumberBackgroudColor?:PaletteColor,
+        optionNumberBackgroudColor?: PaletteColor;
 
         //按钮的颜色
         //buttonColor?:PaletteColor,
-        
+
         //按钮的背景颜色
-        buttonBackgroundColor?:PaletteColor,
-        
+        buttonBackgroundColor?: PaletteColor;
+
         //高亮数字的颜色
         //hightLightNumberColor?:PaletteColorOptions,
 
         //高亮数字的背景颜色
-        hightLightNumberBackgroundColor?:PaletteColor,
-    
+        hightLightNumberBackgroundColor?: PaletteColor;
     }
 }

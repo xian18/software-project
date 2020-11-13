@@ -7,7 +7,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         error: { backgroundColor: 'purple' },
         warning: { backgroundColor: 'red' },
         info: { backgroundColor: 'purple' },
-    })
-)
+    }),
+);
 
 export default useStyles;
