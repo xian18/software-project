@@ -62,7 +62,6 @@ const NumberBlock: FC<localProps> = memo(
         optionOnMouseLeave,
     }) => {
         const classes = useStyles();
-        console.log('update');
         return (
             <div className={classes.PlayBoardLine} key={`PlayBoardLine${line}Block${column}`}>
                 <Grid

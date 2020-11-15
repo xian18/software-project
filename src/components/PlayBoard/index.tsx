@@ -1,17 +1,10 @@
-import React, { FC, memo, useMemo, useContext } from 'react';
-import { IconButton, Grid } from '@material-ui/core';
-
-import DigitBoard from '../../containers/DigitBoard';
+import React, { FC, memo, useMemo, useContext, useCallback } from 'react';
+import {Grid } from '@material-ui/core';
 
 import useStyles from '../../styles/playBoard';
-import classNames from 'classnames';
 
-import { sudokuValue } from '../../types';
+import { sudokuValue,Point } from '../../types';
 import { Props } from '../../containers/PlayBoard';
-import { optionNumber } from '../../algrithm/optionNumber';
-
-import NumberIcon from './NumberIcon';
-import NumberOption from './NumberOption';
 import NumberBlock from './NumberBlock';
 import { ThemeContext } from '../../styles/withRoot';
 
@@ -39,6 +32,11 @@ const PlayBoard: FC<Props> = memo(
     }) => {
         const classes = useStyles();
         const { darkMode } = useContext(ThemeContext);
+
+        const handleChooseDigitHotKeys=(point:Point,value: sudokuValue) => {
+            chooseDigitAction({ x:point.x , y:point.y, value});
+        };
+
         /**
          * 如果不是不可变的数字，当placeValue == null，点击不会对block中数字进行影响，点击应当拉起DigitBoard
          * 如果数字是1-9，对对应block数字设置为1-9
@@ -136,15 +134,6 @@ const PlayBoard: FC<Props> = memo(
                     blockHighlight,
                     darkMode,
                 ])}
-
-                {useMemo(
-                    () => (
-                        <div onClick={toggleDigitBoardAction}>
-                            <DigitBoard open={digitBoard} onClose={toggleDigitBoardAction} />
-                        </div>
-                    ),
-                    [digitBoard],
-                )}
             </>
         );
     },

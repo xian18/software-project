@@ -1,24 +1,23 @@
-import { HotKeys } from "react-hotkeys";
-import React,{FC,memo,useCallback} from 'react';
+import {GlobalHotKeys } from "react-hotkeys";
+import React,{FC,memo} from 'react';
+import {Props} from '../../containers/HotKeys';
 
-const customHotKeys:FC = memo(({children}) => {
-  const deleteNode = React.useCallback(() => {
-    console.log("aaaaaa");
-  }, [])
+
+const customHotKeys:FC<Props> = memo(
+  ({saveGameAction,loadGameAction}) => {
   
   const keyMap = {
-    SNAP_LEFT: "command+left",
-    DELETE_NODE: ['w'],
+    SAVE_GAME:['ctrl+s'],
+    LOAD_GAME:['ctrl+l'],
   };
 
   const handlers = {
-    DELETE_NODE: deleteNode
+    SAVE_GAME: saveGameAction,
+    LOAD_GAME:loadGameAction,
   };
 
   return (
-        <HotKeys keyMap={keyMap} handlers={handlers}>
-          {children}
-        </HotKeys>
+        <GlobalHotKeys keyMap={keyMap} handlers={handlers} />
     )
 })
 

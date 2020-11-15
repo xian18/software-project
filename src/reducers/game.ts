@@ -88,6 +88,7 @@ export default (state = init, action: ActionType): GameStore => {
             const clear = zero9x9.map((x) => Object.assign({}, x));
             return { ...state, blockHighlight: clear };
         case actions.TOGGLE_DIGITBOARD: // show global digitBoard
+            console.log("in game reducer",digitBoard);
             return { ...state, digitBoard: !digitBoard };
         case actions.CHOOSE_DIGIT_START: // just for update point and highlight point mouse is howvering on
             return { ...state, point: action.point };
@@ -136,7 +137,6 @@ export default (state = init, action: ActionType): GameStore => {
                 let values:sudokuValue[][]=JSON.parse(valuesSerialized);
                 let initValues:sudokuValue[][]=JSON.parse(initValuesSerialized);
                 let playHistorys:PlayHistory[]=JSON.parse(playHistorysSerialized);
-                console.log(initValues);
                 return {...state,values,initValues,playHistorys};
             }
             return {...state};

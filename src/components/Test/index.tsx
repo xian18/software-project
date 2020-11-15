@@ -7,13 +7,11 @@ const checkEqual = (prev: any, next: any) => {
 
 const Abcdef: FC<{ num: number }> = memo(({ children, num }) => {
     const [state2, setState2] = useState(1);
-    console.log('Abcdef fresh');
     return <div>{num}</div>;
 }, checkEqual);
 
 /* check update*/
 const Test: FC = memo(({ children }) => {
-    console.log('Test fresh');
     const [state1, setState1] = useState(1);
     function set() {
         setState1(2);
