@@ -12,7 +12,10 @@ const customHotKeys:FC<Props> = memo(
   };
 
   const handlers = {
-    SAVE_GAME: saveGameAction,
+    SAVE_GAME: (event)=>{
+      event.preventDefault();
+      saveGameAction();
+    },
     LOAD_GAME:loadGameAction,
   };
 

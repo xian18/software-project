@@ -1,4 +1,4 @@
-import React, { FC, memo, useMemo, useContext, useCallback } from 'react';
+import React, { FC, memo, useMemo, useContext, useCallback, useEffect,useState } from 'react';
 import {Grid } from '@material-ui/core';
 
 import useStyles from '../../styles/playBoard';
@@ -7,6 +7,9 @@ import { sudokuValue,Point } from '../../types';
 import { Props } from '../../containers/PlayBoard';
 import NumberBlock from './NumberBlock';
 import { ThemeContext } from '../../styles/withRoot';
+import {digitsKeyMap,createDigitsHandlers} from '../../consts/hotKeys';
+import { create } from 'domain';
+import { HotKeys } from 'react-hotkeys';
 
 const PlayBoard: FC<Props> = memo(
     ({
@@ -29,13 +32,17 @@ const PlayBoard: FC<Props> = memo(
         playRoundForwardAction,
         blockHighlightAction,
         toggleShowOptionNumberAction,
+        chooseDigitHotKeysAction,
     }) => {
+        //console.log("in component",point);
         const classes = useStyles();
         const { darkMode } = useContext(ThemeContext);
 
-        const handleChooseDigitHotKeys=(point:Point,value: sudokuValue) => {
-            chooseDigitAction({ x:point.x , y:point.y, value});
+        const handleChooseDigitHotKeys=(value: sudokuValue) => {
+            chooseDigitHotKeysAction(value);
         };
+
+        let handlers=createDigitsHandlers(handleChooseDigitHotKeys);
 
         /**
          * 如果不是不可变的数字，当placeValue == null，点击不会对block中数字进行影响，点击应当拉起DigitBoard
@@ -112,16 +119,19 @@ const PlayBoard: FC<Props> = memo(
                 ))}
             </Grid>
         );
-
         return (
             <>
                 {useMemo(() => {
                     return (
-                        <div className={classes.playBoardContainer} onMouseLeave={clearBlockHighlightAction}>
-                            <Grid container spacing={0}>
-                                {values.map(mapPlayBoardBlock)}
-                            </Grid>
-                        </div>
+                        <>
+                        <HotKeys keyMap={digitsKeyMap} handlers={handlers}>
+                            <div className={classes.playBoardContainer} onMouseLeave={clearBlockHighlightAction}>
+                                <Grid container spacing={0}>
+                                    {values.map(mapPlayBoardBlock)}
+                                </Grid>
+                            </div>
+                        </HotKeys>
+                        </>
                     );
                 }, [
                     playRound,
@@ -133,6 +143,7 @@ const PlayBoard: FC<Props> = memo(
                     conflictValues,
                     blockHighlight,
                     darkMode,
+                    point,handlers,
                 ])}
             </>
         );

@@ -9,6 +9,7 @@ import {serialize,deserialize} from 'typescript-json-serializer';
 
 type ActionType =
     | actions.ChooseDigitAction
+    | actions.ChooseDigitHotKeysAction
     | actions.ChooseDigitStartAction
     | actions.UpdateSudokuAction
     | actions.BlockHighlightAction
@@ -88,14 +89,23 @@ export default (state = init, action: ActionType): GameStore => {
             const clear = zero9x9.map((x) => Object.assign({}, x));
             return { ...state, blockHighlight: clear };
         case actions.TOGGLE_DIGITBOARD: // show global digitBoard
-            console.log("in game reducer",digitBoard);
             return { ...state, digitBoard: !digitBoard };
         case actions.CHOOSE_DIGIT_START: // just for update point and highlight point mouse is howvering on
+            console.log("in reducer",action.point);
             return { ...state, point: action.point };
         case actions.CHOOSE_DIGIT:
             values[action.point.x][action.point.y] = action.point.value;
             const { conflict, complete, conflictValues } = conflictDetect(values);
-            return { ...state, values: values, point: action.point, conflictValues, complete };
+            return { ...state, values: values, point:action.point, conflictValues, complete };
+        case actions.CHOOSE_DIGIT_HOTKEYS:
+            playHistorys.push({x:point.x,y:point.y,from:point.value,to:action.value});
+            values[point.x][point.y] = action.value;
+            return {...state,
+                point:{...point,value:action.value},
+                playHistorys,values,
+                playRound: playRound + 1,
+                blockHighlight: calculateHighlight(values, action.value),
+            };
         case actions.PLAY_ROUND_BACKWARD:
             if (playRound == 0) return { ...state };
             if (playRound > 0)

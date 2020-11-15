@@ -18,7 +18,6 @@ const DigitBoard: FC<Props> = memo(
             [7, 8, 9],
         ];
         const classes = useStyles();
-        console.log(digitBoard);
         const modal=useRef<HTMLDivElement>(null);
 
         useEffect(()=>{

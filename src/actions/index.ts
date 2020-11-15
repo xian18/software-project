@@ -46,13 +46,22 @@ export interface ChooseDigitStartAction {
 export const chooseDigitStartAction = createActionFunc(CHOOSE_DIGIT_START, 'point');
 
 /** DigitBoard click a number, the clicked number will update number in block*/
-export const CHOOSE_DIGIT = 'CHOOSE_ACTION';
+export const CHOOSE_DIGIT = 'CHOOSE_DIGIT';
 export type CHOOSE_DIGIT = typeof CHOOSE_DIGIT;
 export interface ChooseDigitAction {
     type: CHOOSE_DIGIT;
     point: Point;
 }
 export const chooseDigitAction = createActionFunc(CHOOSE_DIGIT, 'point');
+
+/** DigitBoard click a number, the clicked number will update number in block*/
+export const CHOOSE_DIGIT_HOTKEYS = 'CHOOSE_DIGIT_HOTKEYS';
+export type CHOOSE_DIGIT_HOTKEYS = typeof CHOOSE_DIGIT_HOTKEYS;
+export interface ChooseDigitHotKeysAction {
+    type: CHOOSE_DIGIT_HOTKEYS;
+    value:sudokuValue;
+}
+export const chooseDigitHotKeysAction = createActionFunc(CHOOSE_DIGIT_HOTKEYS, 'value');
 
 /** 调用generateSudoku函数，生成新的数独9x9 matrix,放入store中*/
 export const UPDATE_SUDOKU = 'UPDATE_SUDOKU';
