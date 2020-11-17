@@ -33,10 +33,16 @@ const darkTheme = createMuiTheme({
         },
         boardBackgroundColor: {
             main: '#000000',
+            contrastText:'#ffffff',
         },
         optionNumberBackgroudColor:{
             main:'#000000',
+            contrastText:'#ffffff',
         },
+        numberBackgroundColor:{
+            main:'rgba(0,0,0,0)',
+            contrastText:'#ffffff',
+        }
     },
     overrides: {
         MuiIconButton: {

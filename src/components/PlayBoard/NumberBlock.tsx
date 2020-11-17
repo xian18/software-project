@@ -77,6 +77,7 @@ const NumberBlock: FC<localProps> = memo(
                         [classes.topPadding]: !(line % 3),
                         [classes.rightPaddingBorder]: column === 2 || column === 5,
                         [classes.leftPadding]: !(column % 3),
+                        [classes.splitBorder]:true,
                     })}>
                     <IconButton
                         className={classNames(classes.playBoardBlockContainer, {
@@ -125,7 +126,7 @@ const NumberBlock: FC<localProps> = memo(
                                         <NumberOption
                                             num={num}
                                             onMouseEnter={() => {
-                                                optionOnMouseEnter(num);
+                                               optionOnMouseEnter(num);
                                             }}
                                             onClick={() => {
                                                 optionOnClick(line, column, num);

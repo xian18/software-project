@@ -9,7 +9,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             position: 'fixed',
             top: '50%',
             left: '50%',
-            width: '83.5vmin',
+            width: '84vmin',
             height: '83.5vmin',
 
             backgroundColor: `${palette.boardBackgroundColor?.main}`,
@@ -18,7 +18,15 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             margin: spacing(0),
             padding: spacing(0),
             height: '9vmin',
-            width: '9vmin',
+        },
+        splitBorder:{
+            padding:'0.3vmin',
+            margin:0,
+            //borderTop:`dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
+            borderBottom:`dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
+            borderRight:`dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
+            width:'9.3vmin',
+            height:'9vmin',
         },
         playBoardBlockContainer: {
             position: 'relative',
@@ -28,7 +36,6 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             textAlign: 'center',
             verticalAlign: '',
             borderRadius: '0',
-
             backgroundColor: `${palette.numberBackgroundColor?.main}`,
             fill: `${palette.numberBackgroundColor?.contrastText}`,
         },
@@ -42,8 +49,8 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         numberIconNormal: {
             margin: 0,
             padding: 0,
-            width: '9vmin',
-            height: '9vmin',
+            width:'8.25vmin',
+            //height:'8.7vmin',
             borderRadius: '20%',
         },
         hidenullIcon: {
@@ -55,14 +62,14 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
 
         rightPaddingBorder: {
             paddingRight: '0.3vmin',
-            borderRight: '0.5vmin solid black',
+            borderRight: '0.3vmin solid black',
         },
         leftPadding: {
             paddingLeft: '0.3vmin',
         },
         bottomPaddingBorder: {
             paddingBottom: '0.3vmin',
-            borderBottom: '0.5vmin solid black',
+            borderBottom: '0.3vmin solid black',
         },
         topPadding: {
             paddingTop: '0.3vmin',
@@ -80,9 +87,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             fill: `${palette.optionNumberBackgroudColor?.contrastText}`,
         },
         optionNumberBlock: {
-            width: '9vmin',
-            height: '9vmin',
-            //padding:"0vmin",
+            paddingTop:"0.3vmin",
             //margin:"0vmin",
             position: 'relative',
             fontSize: '0rem',

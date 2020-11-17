@@ -82,7 +82,7 @@ const PlayBoard: FC<Props> = memo(
          *
          * @returns JSX.ELEMENT array
          */
-        const mapPlayBoardBlock = (nums: sudokuValue[], line: number) => (
+        const mapPlayBoardBlockLine = (nums: sudokuValue[], line: number) => (
             <Grid key={`PlayBoard${line}`} container item spacing={0}>
                 {nums.map((num: sudokuValue, column: number) => (
                     <NumberBlock
@@ -118,7 +118,7 @@ const PlayBoard: FC<Props> = memo(
                         <HotKeys keyMap={digitsKeyMap} handlers={handlers}>
                             <div className={classes.playBoardContainer} onMouseLeave={clearBlockHighlightAction}>
                                 <Grid container spacing={0}>
-                                    {values.map(mapPlayBoardBlock)}
+                                    {values.map(mapPlayBoardBlockLine)}
                                 </Grid>
                             </div>
                         </HotKeys>

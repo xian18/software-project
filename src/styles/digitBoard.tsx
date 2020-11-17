@@ -13,27 +13,36 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         modal: {
             display: 'flex',
             flexDirection: 'column',
-            position: 'relative',
+
             borderRadius: 10,
+            transform: 'translate(-50%,-50%)',
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            
             //boxShadow: shadows[5],
-            padding: spacing(1),
-            outline: 'none',
-            [breakpoints.down('xs')]: {
-                maxWidth: '100%',
-            },
-            maxHeight: '100%',
-            maxWidth: '100%',
+            //padding: spacing(1),
         },
-        digitsContainer:{
+        digitsContainerLine:{
             display:'flex',
-            maxWidth:'35%',
-            margin:'auto',
+            width:'40vmin', 
+            //maxWidth:'35%',
+            //margin:'auto',
             backgroundColor:palette.primary.main,
         },
+        digitButtonContainer:{
+            width:'12vmin',
+            padding:'0.3vmin',
+            margin:'0.3vmin',
+        },
         digitButton:{
-            color:palette.secondary.light,
+            //color:palette.secondary.light,
+            fill:palette.secondary.contrastText,
             borderRadius:15,
-            margin:spacing(2),
+            width:'12vmin',
+            height:'12vmin',
+            //margin:spacing(2),
+            padding:0,
         },
         backdrop: {
             background: palette.primary.main,

@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
-import {Grid,Button} from '@material-ui/core';
+import {Grid, IconButton} from '@material-ui/core';
 import useStyles from '../../styles/digitBoard';
-
+import {NumberSvg} from '../SmallComponents/NumberSvg'
 export interface localProps {
     numbers:number[][];
     onMouseEnter:Function;
@@ -14,21 +14,24 @@ const Digits:FC<localProps>=memo(
     const classes=useStyles();
     
     return (
-        <Grid container spacing={1} className={classes.digitsContainer}>
+        <Grid container className={classes.digitsContainerLine}>
         {numbers.map((nums, index) => (
             <Grid key={`DigitBoardLine${index}`} container item spacing={0}>
                 {nums.map((num, index) => (
                     <Grid key={`DigitBoard${num}`} item spacing={0}>
-                        <Button
-                            className={classes.digitButton}
+                        <IconButton className={classes.digitButtonContainer}
                             onMouseEnter={() => {
                                 onMouseEnter(num);
                             }}
                             onClick={()=>{
                                 onClick(num);
-                            }}>
-                            {num}
-                        </Button>
+                        }}>
+                            <NumberSvg
+                                num={num}
+                                SvgProp={{className:classes.digitButton}}
+                            >
+                            </NumberSvg>
+                        </IconButton>
                     </Grid>
                 ))}
             </Grid>
