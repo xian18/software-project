@@ -9,7 +9,6 @@ import {serialize,deserialize} from 'typescript-json-serializer';
 
 type ActionType =
     | actions.ChooseDigitAction
-    | actions.ChooseDigitHotKeysAction
     | actions.ChooseDigitStartAction
     | actions.UpdateSudokuAction
     | actions.BlockHighlightAction
@@ -97,15 +96,6 @@ export default (state = init, action: ActionType): GameStore => {
             values[action.point.x][action.point.y] = action.point.value;
             const { conflict, complete, conflictValues } = conflictDetect(values);
             return { ...state, values: values, point:action.point, conflictValues, complete };
-        case actions.CHOOSE_DIGIT_HOTKEYS:
-            playHistorys.push({x:point.x,y:point.y,from:point.value,to:action.value});
-            values[point.x][point.y] = action.value;
-            return {...state,
-                point:{...point,value:action.value},
-                playHistorys,values,
-                playRound: playRound + 1,
-                blockHighlight: calculateHighlight(values, action.value),
-            };
         case actions.PLAY_ROUND_BACKWARD:
             if (playRound == 0) return { ...state };
             if (playRound > 0)
@@ -125,7 +115,6 @@ export default (state = init, action: ActionType): GameStore => {
                 blockHighlight: calculateHighlight(values, action.payload.to),
             };
         case actions.SET_PLACE_VALUE:
-            console.log("set place Valye",action.value);
             return { ...state, placeValue: action.value };
         case actions.CLEAR_PLACE_VALUE:
             return { ...state, placeValue: null };
@@ -135,22 +124,8 @@ export default (state = init, action: ActionType): GameStore => {
             return { ...state, showConflict: !showConflict };
         case actions.TOGGLE_SHOW_OPTIONNUMBER:
             return { ...state, showOptionNumber: !showOptionNumber };
-        case actions.SAVE_GAME:
-            localStorage.setItem('values',JSON.stringify(values));
-            localStorage.setItem('initValues',JSON.stringify(initValues));
-            localStorage.setItem('playHistorys',JSON.stringify(playHistorys));
-            return {...state};
         case actions.LOAD_GAME:
-            let valuesSerialized=localStorage.getItem('values');
-            let initValuesSerialized=localStorage.getItem('initValues');
-            let playHistorysSerialized=localStorage.getItem('playHistorys');
-            if(valuesSerialized && initValuesSerialized && playHistorysSerialized){
-                let values:sudokuValue[][]=JSON.parse(valuesSerialized);
-                let initValues:sudokuValue[][]=JSON.parse(initValuesSerialized);
-                let playHistorys:PlayHistory[]=JSON.parse(playHistorysSerialized);
-                return {...state,values,initValues,playHistorys};
-            }
-            return {...state};
+            return {...state,values:action.values,initValues:action.initValues,playHistorys:action.playHistorys};
         default:
             return { ...state };
     }

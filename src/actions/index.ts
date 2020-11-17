@@ -54,15 +54,6 @@ export interface ChooseDigitAction {
 }
 export const chooseDigitAction = createActionFunc(CHOOSE_DIGIT, 'point');
 
-/** DigitBoard click a number, the clicked number will update number in block*/
-export const CHOOSE_DIGIT_HOTKEYS = 'CHOOSE_DIGIT_HOTKEYS';
-export type CHOOSE_DIGIT_HOTKEYS = typeof CHOOSE_DIGIT_HOTKEYS;
-export interface ChooseDigitHotKeysAction {
-    type: CHOOSE_DIGIT_HOTKEYS;
-    value:sudokuValue;
-}
-export const chooseDigitHotKeysAction = createActionFunc(CHOOSE_DIGIT_HOTKEYS, 'value');
-
 /** 调用generateSudoku函数，生成新的数独9x9 matrix,放入store中*/
 export const UPDATE_SUDOKU = 'UPDATE_SUDOKU';
 export type UPDATE_SUDOKU = typeof UPDATE_SUDOKU;
@@ -168,5 +159,8 @@ export const LOAD_GAME = 'LOAD_GAME';
 export type LOAD_GAME = typeof LOAD_GAME;
 export interface LoadGame {
     type: LOAD_GAME;
+    values:sudokuValue[][];
+    initValues:sudokuValue[][];
+    playHistorys:PlayHistory[];
 }
-export const loadGameAction = createActionFunc(LOAD_GAME);
+export const loadGameAction = createActionFunc(LOAD_GAME,'values','initValues','playHistorys');

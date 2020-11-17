@@ -11,7 +11,6 @@ import {
     playRoundBackwardAction,
     chooseDigitAction,
     toggleShowOptionNumberAction,
-    chooseDigitHotKeysAction,
 } from '../../actions';
 import { Point, sudokuValue, conflictValue, PlaceValue } from '../../types';
 import { StoreState } from '../../reducers';
@@ -64,7 +63,6 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     bindActionCreators(
         {
             chooseDigitStartAction,
-            chooseDigitHotKeysAction,
             updateSudokuAction,
             toggleDigitBoardAction,
             blockHighlightAction,

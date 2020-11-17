@@ -32,14 +32,19 @@ const PlayBoard: FC<Props> = memo(
         playRoundForwardAction,
         blockHighlightAction,
         toggleShowOptionNumberAction,
-        chooseDigitHotKeysAction,
     }) => {
         const classes = useStyles();
         const { darkMode } = useContext(ThemeContext);
 
-        const handleChooseDigitHotKeys=(value: sudokuValue) => {
-            chooseDigitHotKeysAction(value);
-        };
+        const handleChooseDigitHotKeys=useCallback((value:sudokuValue) => {
+            chooseDigitAction({ x: point.x, y: point.y, value});
+            playRoundForwardAction({
+                x: point.x,
+                y: point.y,
+                from: point.value,
+                to: value,
+            });
+        },[point]);
 
         let handlers=createDigitsHandlers(handleChooseDigitHotKeys);
 
@@ -115,7 +120,7 @@ const PlayBoard: FC<Props> = memo(
                 {useMemo(() => {
                     return (
                         <>
-                        <HotKeys keyMap={digitsKeyMap} handlers={handlers}>
+                        <HotKeys keyMap={digitsKeyMap} handlers={handlers} allowChanges>
                             <div className={classes.playBoardContainer} onMouseLeave={clearBlockHighlightAction}>
                                 <Grid container spacing={0}>
                                     {values.map(mapPlayBoardBlockLine)}

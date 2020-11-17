@@ -59,9 +59,8 @@ const PlayHelper: FC<Props> = memo(
         /** 按钮文本，可更改*/
         const showUnchangeableTexts = ['取消不可变显示', '显示不可变显示'];
         const showConflictTexts = ['取消显示冲突', '显示冲突'];
-        //const showOptionNumberTexts=['取消可选数字','展示可选数字'];
-        const showOptionNumberIcons = [false, true]; //true 为可见 false 为不可见
 
+        const [showOptionNumberIcons,setShowOptionNumberIcons] = useState(false); //true 为可见 false 为不可见
         const [showUnchangeableSwitch, setShowUnchangeableSwitch] = useState(true);
         const [showUnchangeableText, setShowUnchangeableText] = useState(showUnchangeableTexts[0]);
         const [showConflictSwitch, setShowConflictSwitch] = useState(true);
@@ -85,10 +84,8 @@ const PlayHelper: FC<Props> = memo(
         };
 
         /** toggle button text*/
-        const toggleShowOptionNumberIcon = () => {
-            showOptionNumberIcon === showOptionNumberIcons[0]
-                ? setShowOptionNumberIcon(showOptionNumberIcons[1])
-                : setShowOptionNumberIcon(showOptionNumberIcons[0]);
+        const toggleShowOptionNumberIcon=()=>{
+            setShowOptionNumberIcons((prev)=>!prev);
         };
 
         /**
@@ -108,7 +105,6 @@ const PlayHelper: FC<Props> = memo(
                         blockHighlightAction(value);
                     }}
                     onClick={() => {
-                        console.log("click numberIcon",value);
                         if (highlightLoc === value) {
                             clearPlaceValueAction();
                             setHighlightLoc(0);
