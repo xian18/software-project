@@ -125,6 +125,7 @@ export default (state = init, action: ActionType): GameStore => {
                 blockHighlight: calculateHighlight(values, action.payload.to),
             };
         case actions.SET_PLACE_VALUE:
+            console.log("set place Valye",action.value);
             return { ...state, placeValue: action.value };
         case actions.CLEAR_PLACE_VALUE:
             return { ...state, placeValue: null };

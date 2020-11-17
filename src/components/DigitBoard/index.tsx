@@ -38,7 +38,7 @@ const DigitBoard: FC<Props> = memo(
         const handlers=createDigitsHandlers(handleChooseDigit);
 
         return (
-            <Modal open={digitBoard}>
+            <Modal open={digitBoard} hideBackdrop={true} className={classes.modalContainer}>
                 <Fade in={digitBoard}>
                     <HotKeys keyMap={digitsKeyMap} handlers={handlers}>
                         <div className={classes.modal} ref={modal}> 

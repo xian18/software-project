@@ -2,7 +2,7 @@ import React, { FC, memo, useMemo } from 'react';
 import useStyles from '../../styles/playBoard';
 import classNames from 'classnames';
 import { Grid, IconButton } from '@material-ui/core';
-import { sudokuValue, conflictValue } from '../../types';
+import { sudokuValue, conflictValue,PlaceValue } from '../../types';
 import NumberIcon from './NumberIcon';
 import optionNumber from '../../algrithm/optionNumber';
 import NumberOption from './NumberOption';
@@ -11,6 +11,7 @@ export interface localProps {
     line: number;
     column: number;
     num: sudokuValue;
+    placeValue:PlaceValue;
     initValue: sudokuValue;
     conflictValue: conflictValue;
     showOptionNumber: boolean;
@@ -29,7 +30,9 @@ export interface localProps {
 function compareNumberBlock(prevProps: any, nextProps: any) {
     /**
      * 注意有一种情况，当initValue=null,showOptionNumber变为true或者变为false
-     *
+     * 
+     * 让组件onBlockClick函数使用useCallBack调用PlayBoard组件里面的placeValue全局变量。在PlayBoard里面该函数更新
+     * 了以后，需要让此组件同样跟去placeValue去更新一下才行！这样里面的函数才能同样被更新！
      */
     return (
         prevProps.num === nextProps.num &&
@@ -38,7 +41,8 @@ function compareNumberBlock(prevProps: any, nextProps: any) {
         prevProps.showOptionNumber === nextProps.showOptionNumber &&
         prevProps.showConflict === nextProps.showConflict &&
         prevProps.showUnchangeable === nextProps.showUnchangeable &&
-        prevProps.conflictValue === nextProps.conflictValue
+        prevProps.conflictValue === nextProps.conflictValue &&
+        prevProps.placeValue === nextProps.placeValue
     );
 }
 
@@ -47,6 +51,7 @@ const NumberBlock: FC<localProps> = memo(
         line,
         column,
         num,
+        placeValue,
         initValue,
         showOptionNumber,
         showConflict,

@@ -7,23 +7,33 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
     createStyles({
         modalContainer: {
             display: 'flex',
-            alignItems: 'center',
+            alignItems:'center',
             justifyContent: 'center',
         },
         modal: {
             display: 'flex',
             flexDirection: 'column',
-            position: 'absolute',
-            borderRadius: 6,
-            backgroundColor: palette.background.paper,
-            boxShadow: shadows[5],
+            position: 'relative',
+            borderRadius: 10,
+            //boxShadow: shadows[5],
             padding: spacing(1),
             outline: 'none',
             [breakpoints.down('xs')]: {
                 maxWidth: '100%',
             },
-            maxHeight: '90%',
-            maxWidth: '75%',
+            maxHeight: '100%',
+            maxWidth: '100%',
+        },
+        digitsContainer:{
+            display:'flex',
+            maxWidth:'35%',
+            margin:'auto',
+            backgroundColor:palette.primary.main,
+        },
+        digitButton:{
+            color:palette.secondary.light,
+            borderRadius:15,
+            margin:spacing(2),
         },
         backdrop: {
             background: palette.primary.main,

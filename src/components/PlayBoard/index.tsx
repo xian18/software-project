@@ -3,7 +3,7 @@ import {Grid } from '@material-ui/core';
 
 import useStyles from '../../styles/playBoard';
 
-import { sudokuValue,Point } from '../../types';
+import { sudokuValue,Point,PlaceValue } from '../../types';
 import { Props } from '../../containers/PlayBoard';
 import NumberBlock from './NumberBlock';
 import { ThemeContext } from '../../styles/withRoot';
@@ -34,7 +34,6 @@ const PlayBoard: FC<Props> = memo(
         toggleShowOptionNumberAction,
         chooseDigitHotKeysAction,
     }) => {
-        //console.log("in component",point);
         const classes = useStyles();
         const { darkMode } = useContext(ThemeContext);
 
@@ -49,7 +48,7 @@ const PlayBoard: FC<Props> = memo(
          * 如果数字是1-9，对对应block数字设置为1-9
          * 如果数字是-1，代表清空block为空
          */
-        const handleBlockClick = (line: number, column: number, value: sudokuValue) => {
+        const handleBlockClick = useCallback((line: number, column: number, value: sudokuValue) => {
             if (initValues[line][column] === null) {
                 if (placeValue !== null) {
                     chooseDigitAction({ x: line, y: column, value: placeValue === -1 ? null : placeValue });
@@ -60,12 +59,13 @@ const PlayBoard: FC<Props> = memo(
                         to: placeValue,
                     });
                 } else {
+                    console.log("toggleDigitBoard");
                     toggleDigitBoardAction();
                 }
             }
-        };
+        },[placeValue])
 
-        const handleOptionClick = (line: number, column: number, value: sudokuValue) => {
+        const handleOptionClick = useCallback((line: number, column: number, value: sudokuValue) => {
             chooseDigitAction({ x: line, y: column, value });
             playRoundForwardAction({
                 x: line,
@@ -73,7 +73,7 @@ const PlayBoard: FC<Props> = memo(
                 from: null,
                 to: value,
             });
-        };
+        },[]);
 
         /**
          * 将1x9数组展开成一横行9个数独block
@@ -90,6 +90,7 @@ const PlayBoard: FC<Props> = memo(
                         column={column}
                         values={values}
                         num={num}
+                        placeValue={placeValue}
                         initValue={initValues[line][column]}
                         conflictValue={conflictValues[line][column]}
                         showConflict={showConflict}
@@ -100,21 +101,11 @@ const PlayBoard: FC<Props> = memo(
                             chooseDigitStartAction({ x: line, y: column, value: num });
                             blockHighlightAction(num);
                         }}
-                        blockOnClick={(line: number, column: number, num: sudokuValue) => {
-                            handleBlockClick(line, column, num);
-                        }}
-                        blockOnMouseLeave={() => {
-                            clearBlockHighlightAction();
-                        }}
-                        optionOnMouseEnter={(num: sudokuValue) => {
-                            blockHighlightAction(num);
-                        }}
-                        optionOnClick={(line: number, column: number, num: sudokuValue) => {
-                            handleOptionClick(line, column, num);
-                        }}
-                        optionOnMouseLeave={() => {
-                            clearBlockHighlightAction();
-                        }}
+                        blockOnClick={handleBlockClick}
+                        blockOnMouseLeave={clearBlockHighlightAction}
+                        optionOnMouseEnter={blockHighlightAction}
+                        optionOnClick={handleOptionClick}
+                        optionOnMouseLeave={clearBlockHighlightAction}
                     />
                 ))}
             </Grid>
@@ -144,6 +135,7 @@ const PlayBoard: FC<Props> = memo(
                     blockHighlight,
                     darkMode,
                     point,handlers,
+                    placeValue
                 ])}
             </>
         );

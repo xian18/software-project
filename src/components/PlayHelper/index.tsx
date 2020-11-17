@@ -108,6 +108,7 @@ const PlayHelper: FC<Props> = memo(
                         blockHighlightAction(value);
                     }}
                     onClick={() => {
+                        console.log("click numberIcon",value);
                         if (highlightLoc === value) {
                             clearPlaceValueAction();
                             setHighlightLoc(0);
