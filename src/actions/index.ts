@@ -1,4 +1,4 @@
-import { Point, sudokuValue, PlayHistory, PlaceValue } from '../types';
+import { Point, sudokuValue, PlayHistory, PlaceValue, Message } from '../types';
 import createActionFunc from './utils';
 
 /** 让counter数字加一*/
@@ -164,3 +164,12 @@ export interface LoadGame {
     playHistorys:PlayHistory[];
 }
 export const loadGameAction = createActionFunc(LOAD_GAME,'values','initValues','playHistorys');
+
+/** 记录多次游戏的所有数据*/
+export const SEND_MESSAGE = 'SEND_MESSAGE';
+export type SEND_MESSAGE = typeof SEND_MESSAGE;
+export interface SendMessage {
+    type: SEND_MESSAGE;
+    message:Message;
+}
+export const sendMessageAction = createActionFunc(SEND_MESSAGE,'message');

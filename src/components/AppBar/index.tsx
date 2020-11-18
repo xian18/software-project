@@ -1,11 +1,12 @@
 import React, { FC, memo, useState, useMemo, MouseEventHandler, useContext } from 'react';
-import { AppBar, Menu, MenuItem, IconButton, Toolbar, Typography, Slide, Button } from '@material-ui/core';
+import { AppBar, Menu, MenuItem, IconButton, Toolbar, Typography, Slide, Button, Collapse } from '@material-ui/core';
 import { useScrollTrigger } from '@material-ui/core';
 
 import { Brightness4, ArrowBack, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import HelpIcon from '@material-ui/icons/HelpOutline';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
+import ChatIcon from '@material-ui/icons/Chat';
 import Drawer from '../Drawer';
 
 import Modal from '../Modal';
@@ -16,6 +17,8 @@ import { Props } from '../../containers/AppBar';
 import { ThemeContext } from '../../styles/withRoot';
 import TipButton from '../SmallComponents/TipButton';
 
+import Messenger from '../../containers/Messenger';
+
 const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) => {
     const classes = useStyles();
 
@@ -24,31 +27,30 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
     const [helper, setHelper] = useState(false);
     const [drawer, setDrawer] = useState(false);
+    const [messenger,setMessenger]=useState(false);
     const { darkMode, setDarkMode } = useContext(ThemeContext);
 
     const handleClickPerson: MouseEventHandler = ({ currentTarget }) => {
         setAnchorEl(currentTarget);
     };
-
     const handleClosePerson = () => {
         setAnchorEl(null);
     };
-
     const toggleOpen = () => {
         setOpen((open) => !open);
     };
-
     const toggleRight = () => {
         setRight((right) => !right);
     };
-
     const toggleHelper = () => {
         setHelper((prev) => !prev);
     };
-
     const toggleDrawer = () => {
         setDrawer((drawer) => !drawer);
     };
+    const toggleMessenger=()=>{
+        setMessenger((messenger)=>!messenger);
+    }
 
     const HelpMessage = useMemo(() => <Typography>这里是我们要做的东西</Typography>, [open]);
 
@@ -85,21 +87,19 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
                             () => (
                                 <div className={classNames(classes.rightButtons)}>
                                     <TipButton
-                                        TooltipProp={{ title: 'GoBack', children: <></> }}
-                                        IconButtonProp={{ onClick: () => playRoundBackwardAction(), color: 'inherit' }}>
-                                        <ArrowBack />
+                                        TooltipProp={{ title: 'Messenger', children: <></> }}
+                                        IconButtonProp={{ onClick:toggleMessenger, color: 'inherit' }}>
+                                        <ChatIcon />
                                     </TipButton>
                                     <TipButton
                                         TooltipProp={{ title: 'Help', children: <></> }}
-                                        IconButtonProp={{ onClick: () => toggleHelper(), color: 'inherit' }}>
+                                        IconButtonProp={{ onClick:toggleHelper, color: 'inherit' }}>
                                         <HelpIcon />
                                     </TipButton>
                                     <TipButton
                                         TooltipProp={{ title: 'Dark', children: <></> }}
                                         IconButtonProp={{
-                                            onClick: () => {
-                                                setDarkMode();
-                                            },
+                                            onClick:setDarkMode,
                                             color: 'inherit',
                                         }}>
                                         <Brightness4 />
@@ -120,6 +120,9 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
                     </Toolbar>
                 </AppBar>
             </Slide>
+            <Collapse in={messenger} classes={{ container: classes.collapse }}>
+                <Messenger />
+            </Collapse>
             <Modal title='help' open={helper} onClose={toggleHelper}>
                 {HelpMessage}
             </Modal>

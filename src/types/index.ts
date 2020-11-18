@@ -20,3 +20,11 @@ export interface PlayHistory {
     from: sudokuValue;
     to: sudokuValue;
 }
+
+export interface Message {
+    content: string;
+    isSelf: boolean;
+    name: string;
+    time: number;
+    isImage: boolean;
+}
