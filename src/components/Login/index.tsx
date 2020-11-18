@@ -1,4 +1,4 @@
-import React,{FC,memo} from 'react';
+import React, { FC, memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -7,28 +7,29 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import useStyles from '../../styles/login';
 
-const Login:FC=memo(({})=>{
-
-    const classes=useStyles();
+const Login: FC = memo(({}) => {
+    const classes = useStyles();
 
     return (
-    <React.Fragment>
-        <div>
-            <div className={classes.margin}>
-                <Grid container spacing={1} alignItems="flex-end">
-                    <Grid item>
-                        <AccountCircle />
+        <React.Fragment>
+            <div>
+                <div className={classes.margin}>
+                    <Grid container spacing={1} alignItems='flex-end'>
+                        <Grid item>
+                            <AccountCircle />
+                        </Grid>
+                        <Grid item>
+                            <TextField id='account-name' label='With a grid' />
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <TextField id="account-name" label="With a grid" />
-                    </Grid>
-                </Grid>
-            </div>
+                </div>
 
-            <Button variant='contained' color='primary'>Login</Button>
-        </div>
-    </React.Fragment>
-    )
+                <Button variant='contained' color='primary'>
+                    Login
+                </Button>
+            </div>
+        </React.Fragment>
+    );
 });
 
 export default Login;

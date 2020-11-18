@@ -1,0 +1,1 @@
+export declare function createDigitsHandlers(handler:Function,...args:any):{ [key: string]: (keyEvent?: KeyboardEvent) => void };
