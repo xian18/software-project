@@ -26,14 +26,14 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
         },
         regular: {
             minHeight: spacing(8),
-            [breakpoints.down('xs')]: {
+            [breakpoints.down('md')]: {
                 minHeight: spacing(6),
             },
         },
         menuButton: {
             marginLeft: spacing(2),
             marginRight: spacing(4),
-            [breakpoints.down('xs')]: {
+            [breakpoints.down('md')]: {
                 marginLeft: 0,
                 marginRight: 0,
                 padding: spacing(1),
@@ -43,7 +43,7 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             marginLeft: 'auto',
             display: 'flex',
             '& button': {
-                [breakpoints.down('xs')]: {
+                [breakpoints.down('md')]: {
                     padding: spacing(1),
                 },
             },
@@ -59,7 +59,7 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             zIndex: zIndex.drawer + 1,
             position: 'fixed',
             top: spacing(8),
-            [breakpoints.down('xs')]: {
+            [breakpoints.down('md')]: {
                 top: spacing(6),
             },
             right: 0,
