@@ -13,7 +13,6 @@ const Game: FC = memo(({}) => {
             <PlayBoard />
             <PlayHelper />
             <DigitBoard />
-            <Counters />
             <Share content={''} />
         </>
     );

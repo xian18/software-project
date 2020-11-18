@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
         numberContainerNormal: {
             margin: 0,
             padding: 0,
-            [theme.breakpoints.up('lg')]: {
+            [theme.breakpoints.up('md')]: {
                 width: '18vmin',
                 height: '50vmin',
                 display: 'flex',
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
             transform: 'translate(0%,-50%)',
             top: '50vh',
             left: '2vw',
-            [theme.breakpoints.up('lg')]: {
+            [theme.breakpoints.up('md')]: {
                 width: '26vmin',
                 height: '8vmin',
             },
