@@ -161,12 +161,17 @@ const Messenger: FC<Props> = memo(({
             </div>
         </div>
     );
+
+    const AvatarBox = ({ avatar: messageAvatar, name }: Message) => (
+        <Avatar alt={name} src={messageAvatar} className={classes.avatar} children={<FaceIcon />} />
+    );
+
     return (
         <Paper className={classes.messenger}>
             <div className={classes.messages} ref={setContainer}>
                 {messages.map((message, index) => (
                     <div key={index} className={classNames(classes.messageContainer, { [classes.my]: message.isSelf })}>
-                        {/*AvatarBox(message)*/}
+                        {AvatarBox(message)}
                         <Chip
                             label={MessageChip(message)}
                             classes={{ root: classNames(classes.chipRoot, { [classes.myChip]: message.isSelf }) }}

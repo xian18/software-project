@@ -1,20 +1,25 @@
-import React, { FC, lazy, memo } from 'react';
-import { Route,Switch, withRouter } from 'react-router';
+import React, { FC, lazy, memo,Suspense } from 'react';
+import { Route,Switch, withRouter,RouteComponentProps } from 'react-router';
 import Counters from '../containers/Counters';
 import SnackBar from '../components/SnackBar';
 import withRoot from '../styles/withRoot';
-import HotKeys from '../containers/HotKeys';
+import Progress from '../components/Progress';
 
-import AppBar from '../containers/AppBar';
 import Game from './game';
+import Frame from '../containers/Frame';
 const Index: FC = memo(() => {
+
+    const routeRender = (Component: JSX.Element) => (props: RouteComponentProps) => (
+        <Frame {...props}>
+            <Suspense fallback={<Progress />}>{Component}</Suspense>
+        </Frame>
+    );
+
     return (
         <React.Fragment>
             <SnackBar>
-                <HotKeys />
-                <AppBar />
                 <Switch>
-                    <Route path='/' component={Game} />
+                    <Route path='/' render={routeRender(<Game />)} />
                     <Route path='/bbb' component={Counters} />
                 </Switch>
             </SnackBar>
