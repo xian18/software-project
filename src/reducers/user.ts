@@ -7,6 +7,7 @@ type ActionType=
 export interface UserStore {
     messages:Message[];
     info:Userinfo;
+    loading:boolean;
 }
 
 const init:UserStore={
@@ -15,7 +16,7 @@ const init:UserStore={
         username:'cherro',
         avatar:'',
     } as Userinfo,
-
+    loading:false,
 }
 
 const insert = (item: Message, arr: Message[]) => {
