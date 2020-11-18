@@ -30,13 +30,21 @@ import useStyles from '../../styles/messenger';
 
 import {Props} from '../../containers/Messenger';
 
-const Messenger: FC<Props> = memo(({messages,sendMessageAction}) => {
+const Messenger: FC<Props> = memo(({
+    messages,
+    sendMessageAction,
+    startSocketAction,
+}) => {
     const classes = useStyles();
     const [content, setContent] = useState('');
     const [container, setContainer] = useState<Element | null>(null);
     const {enqueueSnackbar,closeSnackbar}=useSnackbar();
 
     const username='cherro';
+
+    useEffect(()=>{
+        startSocketAction();
+    },[])
 
     useEffect(() => {
         if (container && container.scrollHeight - container.scrollTop < 1000) {
@@ -120,6 +128,7 @@ const Messenger: FC<Props> = memo(({messages,sendMessageAction}) => {
     };
 
     const send = () => {
+        console.log("send");
         sendMessageAction(generateMessage(content));
         setContent('');
     };

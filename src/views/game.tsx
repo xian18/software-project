@@ -5,6 +5,7 @@ import PlayHelper from '../containers/PlayHelper';
 import Share from '../components/Share';
 import AppBar from '../containers/AppBar';
 import DigitBoard from '../containers/DigitBoard';
+import Counters from '../containers/Counters';
 
 const Game: FC = memo(({}) => {
     return (
@@ -12,6 +13,7 @@ const Game: FC = memo(({}) => {
             <PlayBoard />
             <PlayHelper />
             <DigitBoard />
+            <Counters />
             <Share content={''} />
         </>
     );

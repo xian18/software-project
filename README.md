@@ -41,3 +41,7 @@
 ### epic
 
 > When fetching data from API, define a getData action that handle the request process in epics. Also define a getDataFulfilled action that send by epic handler. The getDataFulfilled action is handled by the component's reducer.
+
+> Obout the directory structure of epics. We just define only one epic function which looks like `(action$, state$, {...})=>{return of(...);}` for an action. So, under one topic, such as under the chat topic, we will have multi actions to deal with in multi epics. So, just write each epic function in its seperate file and combine them in the directory index.
+
+> `margeMap` is defined in pipe. The function in mergeMap function automatically get the actual action(which contains its type and data with). Do something with these data passed in, and return a sequence of actions with `of(...)`

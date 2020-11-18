@@ -1,3 +1,3 @@
-import { getserverValueEpic } from './Counters';
+import getserverValueEpic from './Counters';
 
 export default [getserverValueEpic];

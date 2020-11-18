@@ -1,27 +1,20 @@
 import { Action, AnyAction } from 'redux';
 import { isOfType } from 'typesafe-actions';
-import {
-    ActionsObservable,
-    combineEpics,
-    createEpicMiddleware,
-    EpicMiddleware,
-    StateObservable,
-} from 'redux-observable';
-import { BehaviorSubject, Observable, of, ObservableInput } from 'rxjs';
+import {ActionsObservable, ofType,} from 'redux-observable';
+import {of} from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { catchError, filter, mergeMap, startWith, switchMap } from 'rxjs/operators';
+import {filter, mergeMap,} from 'rxjs/operators';
 
-import { getserverValueAction, GetserverValue, GET_SERVERVALUE, serverValueFulfilled } from '../../actions';
-import { StoreState } from '../../reducers';
-
+import { GetserverValue, GET_SERVERVALUE, serverValueFulfilled } from '../../actions';
+import {Epic} from '../';
 import { API } from '../../config/consts';
 
 export type ActionType = GetserverValue;
 
-export const getserverValueEpic = (action$: ActionsObservable<any>) =>
+export const getserverValueEpic:Epic<GetserverValue> = (action$,state$,{}) =>
     action$.pipe(
-        filter(isOfType(GET_SERVERVALUE)),
-        mergeMap(() =>
+        ofType<Action,GetserverValue>(GET_SERVERVALUE),
+        mergeMap((action) =>
             ajax.getJSON<{ type: string; message: string }>(`${API}/user/qrCode`).pipe(
                 mergeMap((res) => {
                     if (res.type === 'success') {
@@ -32,3 +25,5 @@ export const getserverValueEpic = (action$: ActionsObservable<any>) =>
             ),
         ),
     );
+
+export default getserverValueEpic;

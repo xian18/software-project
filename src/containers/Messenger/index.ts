@@ -1,7 +1,7 @@
 import { connect} from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import {sendMessageAction} from '../../actions';
+import {sendMessageAction,startSocketAction} from '../../actions';
 import { StoreState } from '../../reducers';
 
 import Messenger from '../../components/Messenger';
@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
     bindActionCreators(
         {
             sendMessageAction,
+            startSocketAction,
         },
         dispatch,
     );

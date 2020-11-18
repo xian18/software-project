@@ -165,7 +165,7 @@ export interface LoadGame {
 }
 export const loadGameAction = createActionFunc(LOAD_GAME,'values','initValues','playHistorys');
 
-/** 记录多次游戏的所有数据*/
+/** 在聊天框发送消息*/
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export type SEND_MESSAGE = typeof SEND_MESSAGE;
 export interface SendMessage {
@@ -173,3 +173,21 @@ export interface SendMessage {
     message:Message;
 }
 export const sendMessageAction = createActionFunc(SEND_MESSAGE,'message');
+
+/** 启动socket连接*/
+export const START_SOCKET='START_SOCKET';
+export type START_SOCKET=typeof START_SOCKET;
+export interface StartSocket {
+    type:START_SOCKET,
+}
+export const startSocketAction=createActionFunc(START_SOCKET);
+
+/** 添加一条信息到面板*/
+export const ADD_MESSAGE='ADD_MESSAGE';
+export type ADD_MESSAGE=typeof ADD_MESSAGE;
+export interface AddMessage {
+    type:ADD_MESSAGE,
+    message:Message;
+}
+export const addMessageAction=createActionFunc(ADD_MESSAGE,'message');
+

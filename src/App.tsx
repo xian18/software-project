@@ -8,9 +8,7 @@ import { reducers } from './reducers';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import Index from './views';
-import { create } from 'domain';
 import { epicMiddleware, epics } from './epics';
-import Button from '@material-ui/core/Button';
 createHistory();
 
 const middleware = [epicMiddleware];
