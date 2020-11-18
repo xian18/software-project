@@ -1,15 +1,20 @@
 import * as actions from '../actions';
-import {Message} from '../types';
+import {Message,Userinfo} from '../types';
 
 type ActionType=
     | actions.SendMessage
 
-export interface ChatStore {
+export interface UserStore {
     messages:Message[];
+    info:Userinfo;
 }
 
-const init:ChatStore={
+const init:UserStore={
     messages:[],
+    info:{
+        username:'cherro',
+        avatar:'',
+    } as Userinfo,
 
 }
 
@@ -29,7 +34,7 @@ const insert = (item: Message, arr: Message[]) => {
     return arr.slice(-100); // just have the last n messages
 };
 
-export default (state=init,action:ActionType):ChatStore=>{
+export default (state=init,action:ActionType):UserStore=>{
     switch(action.type){
         case actions.SEND_MESSAGE:
             const messages=insert(action.message,[...state.messages]);

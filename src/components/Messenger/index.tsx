@@ -32,6 +32,8 @@ import {Props} from '../../containers/Messenger';
 
 const Messenger: FC<Props> = memo(({
     messages,
+    username,
+    avatar,
     sendMessageAction,
     startSocketAction,
 }) => {
@@ -39,8 +41,6 @@ const Messenger: FC<Props> = memo(({
     const [content, setContent] = useState('');
     const [container, setContainer] = useState<Element | null>(null);
     const {enqueueSnackbar,closeSnackbar}=useSnackbar();
-
-    const username='cherro';
 
     useEffect(()=>{
         startSocketAction();
@@ -58,6 +58,7 @@ const Messenger: FC<Props> = memo(({
         time: Date.now(),
         isImage,
         name: username,
+        avatar
     });
 
     const handleKey: KeyboardEventHandler = (event) => {

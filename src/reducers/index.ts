@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
 import CountersReducer, { CountersStore } from './counters';
-import ChatReducer,{ChatStore} from './chat';
+import UserReducer,{UserStore} from './user';
 import GameReducer, { GameStore } from './game';
 
 export interface StoreState {
     Counters: CountersStore;
     Game: GameStore;
-    Chat:ChatStore;
+    User:UserStore;
 }
 
 export const reducers = combineReducers({
     Counters: CountersReducer,
     Game: GameReducer,
-    Chat:ChatReducer,
+    User:UserReducer,
 });

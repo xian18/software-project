@@ -7,11 +7,14 @@ import { StoreState } from '../../reducers';
 import Messenger from '../../components/Messenger';
 import { Message} from '../../types';
 
-const mapStateToProps = ({ Chat: {messages} }: StoreState): {
+const mapStateToProps = ({ User: {messages,info:{username,avatar}} }: StoreState): {
     messages:Message[];
+    username:string;
+    avatar:string;
 } => ({
     messages,
-
+    username,
+    avatar,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
