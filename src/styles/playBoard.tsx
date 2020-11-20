@@ -5,13 +5,17 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
     createStyles({
         playBoardContainer: {
             display: 'flex',
-            transform: 'translate(-50%,-50%)',
             position: 'fixed',
-            top: '50%',
             left: '50%',
             width: '84vmin',
             height: '83.5vmin',
 
+            top: '50%',
+            transform: 'translate(-50%,-50%)',
+            [breakpoints.down('sm')]:{
+                transform: 'translate(-50%,0%)',
+                top: '10%',
+            },
             backgroundColor: `${palette.boardBackgroundColor?.main}`,
         },
         PlayBoardLine: {

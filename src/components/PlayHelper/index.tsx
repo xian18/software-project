@@ -60,12 +60,12 @@ const PlayHelper: FC<Props> = memo(
         const showUnchangeableTexts = ['取消不可变显示', '显示不可变显示'];
         const showConflictTexts = ['取消显示冲突', '显示冲突'];
 
-        const [showOptionNumberIcons,setShowOptionNumberIcons] = useState(false); //true 为可见 false 为不可见
+        const [showOptionNumberIcon,setShowOptionNumberIcon] = useState(false); //true 为可见 false 为不可见
         const [showUnchangeableSwitch, setShowUnchangeableSwitch] = useState(true);
         const [showUnchangeableText, setShowUnchangeableText] = useState(showUnchangeableTexts[0]);
         const [showConflictSwitch, setShowConflictSwitch] = useState(true);
         const [showConflictText, setShowConflictText] = useState(showConflictTexts[0]);
-        const [showOptionNumberIcon, setShowOptionNumberIcon] = useState(showOptionNumberIcons[0]);
+        //const [showOptionNumberIcon, setShowOptionNumberIcon] = useState(showOptionNumberIcons[0]);
 
         /** toggle button text*/
         const toggleShowUnchangeable = () => {
@@ -85,7 +85,7 @@ const PlayHelper: FC<Props> = memo(
 
         /** toggle button text*/
         const toggleShowOptionNumberIcon=()=>{
-            setShowOptionNumberIcons((prev)=>!prev);
+            setShowOptionNumberIcon((prev)=>!prev);
         };
 
         /**
@@ -216,7 +216,7 @@ const PlayHelper: FC<Props> = memo(
                                     labelPlacement={'bottom'}
                                 />
                             ),
-                            [showConflictText],
+                            [showConflictText,showOptionNumberIcon],
                         )}
                     </FormGroup>
                 </FormControl>
