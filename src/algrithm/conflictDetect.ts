@@ -47,10 +47,9 @@ function isConflict(values: conflictValue[][]) {
     for (row = 0; row < 9; row++) {
         for (column = 0; column < 9; column++) {
             for (num = column + 1; num < 9; num++) {
-                if (values[row][column] == values[row][num]) {
+                if (values[row][column] === values[row][num]) {
                     conflictValues[row][column] = values[row][column];
                     conflictValues[row][num] = values[row][num];
-                    console.log(row, column, num);
                     conflict = true;
                 }
             }
@@ -59,7 +58,7 @@ function isConflict(values: conflictValue[][]) {
     for (column = 0; column < 9; column++) {
         for (row = 0; row < 9; row++) {
             for (num = row + 1; num < 9; num++) {
-                if (values[row][column] == values[num][column]) {
+                if (values[row][column] === values[num][column]) {
                     conflictValues[row][column] = values[row][column];
                     conflictValues[num][column] = values[num][column];
                     conflict = true;
@@ -70,7 +69,7 @@ function isConflict(values: conflictValue[][]) {
     for (num = 0; num < 9; num++) {
         for (x = 0; x < 9; x++) {
             for (y = x + 1; y < 9; y++) {
-                if (values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] == values[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)]) {
+                if (values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] === values[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)]) {
                     conflictValues[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] = values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
                     conflictValues[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)] = values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
                     conflict = true;
@@ -95,7 +94,7 @@ function isSuccess(values: conflictValue[][]): boolean {
     else {
         for (row = 0; row < 9; row++) {
             for (column = 0; column < 9; column++) {
-                if (values[row][column] == a)
+                if (values[row][column] === a)
                     complete = false;
             }
         }

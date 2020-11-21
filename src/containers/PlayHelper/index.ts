@@ -14,6 +14,7 @@ import {
     toggleShowOptionNumberAction,
     saveGameAction,
     loadGameAction,
+    setLevelAction,
 } from '../../actions';
 import { StoreState } from '../../reducers';
 
@@ -21,13 +22,15 @@ import PlayHelper from '../../components/PlayHelper';
 import { PlaceValue } from '../../types';
 
 const mapStateToProps = ({
-    Game: { placeValue, complete },
+    Game: { placeValue, complete,playRound },
 }: StoreState): {
     placeValue: PlaceValue;
     complete: boolean;
+    playRound:number;
 } => ({
     placeValue,
     complete,
+    playRound,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
@@ -45,6 +48,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
             toggleShowOptionNumberAction,
             saveGameAction,
             loadGameAction,
+            setLevelAction,
         },
         dispatch,
     );

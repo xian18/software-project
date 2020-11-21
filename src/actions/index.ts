@@ -1,4 +1,4 @@
-import { Point, sudokuValue, PlayHistory, PlaceValue, Message } from '../types';
+import { Point, sudokuValue, PlayHistory, PlaceValue, Message,Level } from '../types';
 import createActionFunc from './utils';
 
 /** 让counter数字加一*/
@@ -162,8 +162,9 @@ export interface LoadGame {
     values:sudokuValue[][];
     initValues:sudokuValue[][];
     playHistorys:PlayHistory[];
+    playRound:number;
 }
-export const loadGameAction = createActionFunc(LOAD_GAME,'values','initValues','playHistorys');
+export const loadGameAction = createActionFunc(LOAD_GAME,'values','initValues','playHistorys','playRound');
 
 /** 在聊天框发送消息*/
 export const SEND_MESSAGE = 'SEND_MESSAGE';
@@ -191,3 +192,10 @@ export interface AddMessage {
 }
 export const addMessageAction=createActionFunc(ADD_MESSAGE,'message');
 
+export const SET_LEVEL='SET_LEVEL';
+export type SET_LEVEL=typeof SET_LEVEL;
+export interface  SetLevel {
+    type:SET_LEVEL;
+    level:Level;
+}
+export const setLevelAction=createActionFunc(SET_LEVEL,'level');

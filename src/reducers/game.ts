@@ -23,6 +23,7 @@ type ActionType =
     | actions.ToggleShowOptionNumber
     | actions.SaveGame
     | actions.LoadGame
+    | actions.SetLevel
 
 export interface GameStore {
     values: sudokuValue[][] /** 数独数字 9x9 matrix*/;
@@ -79,14 +80,14 @@ export default (state = init, action: ActionType): GameStore => {
         showOptionNumber,
     } = state;
     switch (action.type) {
-        case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
+        case actions.UPDATE_SUDOKU:{ // when click fresh button, generate sudoku and update 9x9 matrix in store
             const [generate, result] = generateSudoku(level);
-            return { ...state,
+            const { conflict, complete, conflictValues } = conflictDetect(generate);
+            return { ...init,
                 values: generate,
                 initValues: generate.map((x) => Object.assign({}, x)),
-                complete:false,
-                conflictValues:null9x9.map((x) =>[...x] as conflictValue[]),
             };
+        }
         case actions.BLOCK_HIGHLIGHT: // calculate highlight matrix
             return { ...state, blockHighlight: calculateHighlight(values, action.value) };
         case actions.CLEAR_BLOCK_HIGHLIGHT:
@@ -100,16 +101,19 @@ export default (state = init, action: ActionType): GameStore => {
             values[action.point.x][action.point.y] = action.point.value;
             const { conflict, complete, conflictValues } = conflictDetect(values);
             return { ...state, values: values, point:action.point, conflictValues, complete };
-        case actions.PLAY_ROUND_BACKWARD:
-            if (playRound == 0) return { ...state };
+        case actions.PLAY_ROUND_BACKWARD: {
+            if (playRound == 0) return {...state};
             if (playRound > 0)
                 values[playHistorys[playRound - 1].x][playHistorys[playRound - 1].y] = playHistorys[playRound - 1].from;
+            const {conflict, complete, conflictValues} = conflictDetect(values);
             return {
                 ...state,
                 values: values,
                 playRound: playRound - 1,
                 playHistorys: playHistorys.slice(0, playRound - 1),
+                conflictValues,
             };
+        }
         case actions.PLAY_ROUND_FORWARD:
             playHistorys.push(action.payload);
             return {
@@ -128,8 +132,18 @@ export default (state = init, action: ActionType): GameStore => {
             return { ...state, showConflict: !showConflict };
         case actions.TOGGLE_SHOW_OPTIONNUMBER:
             return { ...state, showOptionNumber: !showOptionNumber };
-        case actions.LOAD_GAME:
-            return {...state,values:action.values,initValues:action.initValues,playHistorys:action.playHistorys};
+        case actions.LOAD_GAME: {
+            const {conflict, complete, conflictValues} = conflictDetect(action.values);
+            return {...state,
+                values: action.values,
+                initValues: action.initValues,
+                playHistorys: action.playHistorys,
+                playRound:action.playRound,
+                conflictValues,
+            };
+        }
+        case actions.SET_LEVEL:
+            return {...state,level:action.level};
         default:
             return { ...state };
     }

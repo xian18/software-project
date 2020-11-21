@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme: Theme) =>
             borderRadius: '20%',
         },
         iconButtonContainer: {
-            height: '8vmin',
-            width: '8vmin',
+            height: '10vmin',
+            width: '10vmin',
             '&:hover': {
                 backgroundColor: 'grey',
             },

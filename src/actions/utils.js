@@ -1,5 +1,3 @@
-import { action } from 'typesafe-actions';
-
 function createActionFunc(type, ...argNames) {
     return function (...args) {
         let action = { type };

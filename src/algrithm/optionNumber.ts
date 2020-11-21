@@ -10,12 +10,6 @@ import { sudokuValue } from '../types';
  */
 export function optionNumber(value: sudokuValue[][], x: number, y: number): sudokuValue[] {
     return [1, 2, 3, 4, 5,6,7,8,9];
-    const random: number = Math.random() * 10;
-    let r: number[] = [];
-    for (let i = 1; i < random; i++) {
-        r.push(i);
-    }
-    return r as sudokuValue[];
 }
 
 export default optionNumber;

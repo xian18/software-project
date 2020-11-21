@@ -129,7 +129,6 @@ const Messenger: FC<Props> = memo(({
     };
 
     const send = () => {
-        console.log("send");
         sendMessageAction(generateMessage(content));
         setContent('');
     };

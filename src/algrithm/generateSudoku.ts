@@ -57,13 +57,8 @@ export const generateSudoku = (level: Level): sudokuValue[][][] => {
         }
     }
     while (!fillForm(0, 1));
-    let level1: number = level;
-    if (level == 0) {
-        level1 = Math.ceil(Math.random() * 3);
-    }
     digHole(20);
     getHole();
-    console.log("return generate");
     return [
         Hole, Sudoku
     ];
@@ -72,30 +67,28 @@ export const generateSudoku = (level: Level): sudokuValue[][][] => {
 export default generateSudoku;
 
 function set(x: number, y: number, val: sudokuValue): boolean {
-    ////console.log(Sudoku);
-    if (Sudoku[y][x] != a)
+    if (Sudoku[y][x] !== a)
         return false;
     let x0: number, y0: number;
     //列冲突
     for (x0 = 0; x0 < 9; x0++) {
-        if (Sudoku[y][x0] == val)
+        if (Sudoku[y][x0] === val)
             return false;
     }
     //行冲突
     for (y0 = 0; y0 < 9; y0++) {
-        if (Sudoku[y0][x] == val)
+        if (Sudoku[y0][x] === val)
             return false;
     }
     //九宫格内部冲突
     for (y0 = Math.floor(y / 3) * 3; y0 < Math.floor(y / 3) * 3 + 3; y0++) {
         for (x0 = Math.floor(x / 3) * 3; x0 < Math.floor(x / 3) * 3 + 3; x0++) {
-            if (Sudoku[y0][x0] == val)
+            if (Sudoku[y0][x0] === val)
                 return false;
         }
     }
     //没有错误则修改值
     Sudoku[y][x] = val;
-    //console.log(x, y, val);
     return true;
 }
 function reset(x: number, y: number) {
@@ -124,8 +117,8 @@ function fillForm(y: number, val: sudokuValue): boolean {
     for (i = 0; i < 9; i++) {
         x = Xord[i];
         if (set(x, y, val)) {
-            if (y == 8) {
-                if (val == 9 || fillForm(0, (val as number + 1) as sudokuValue))
+            if (y === 8) {
+                if (val === 9 || fillForm(0, (val as number + 1) as sudokuValue))
                     return true;
             }
             else {
@@ -142,7 +135,6 @@ function digHole(holeNum: number) {
     let idx = new Array<number>(81);
     let i: number, k: number, temp: number;
     for (i = 0; i < 81; i++) {
-        //console.log(Math.floor(i / 9));
         HolePosition[Math.floor(i / 9)][i % 9] = 0;
         idx[i] = i;
     }
@@ -161,7 +153,7 @@ function getHole() {
     let x: number, y: number;
     for (y = 0; y < 9; y++) {
         for (x = 0; x < 9; x++) {
-            if (HolePosition[y][x] == 1) {
+            if (HolePosition[y][x] === 1) {
                 Hole[y][x] = a;
             }
             else {

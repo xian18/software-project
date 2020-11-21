@@ -64,7 +64,6 @@ const PlayBoard: FC<Props> = memo(
                         to: placeValue,
                     });
                 } else {
-                    console.log("toggleDigitBoard");
                     toggleDigitBoardAction();
                 }
             }

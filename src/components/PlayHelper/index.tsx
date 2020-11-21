@@ -3,9 +3,9 @@ import { useSnackbar } from 'notistack';
 
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -19,7 +19,7 @@ import TipButton from '../SmallComponents/TipButton';
 
 import { Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined } from '@material-ui/icons';
 import NumberSvg from '../SmallComponents/NumberSvg';
-
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 
 //
@@ -37,6 +37,7 @@ const PlayHelper: FC<Props> = memo(
         toggleShowOptionNumberAction,
         saveGameAction,
         loadGameAction,
+        setLevelAction,
     }) => {
         const classes = useStyles();
         const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -184,6 +185,19 @@ const PlayHelper: FC<Props> = memo(
                             />
                         </TipButton>
                     ),[showOptionNumberIcon])}
+
+                    <TextField
+                        select
+                        label='难度'
+                        defaultValue={0}
+                        onChange={(event)=>{
+                            setLevelAction(event.target.value);
+                        }}>
+                        <MenuItem value={0}>0超级简单</MenuItem>
+                        <MenuItem value={1}>1简单</MenuItem>
+                        <MenuItem value={2}>2普通</MenuItem>
+                        <MenuItem value={3}>3困难</MenuItem>
+                    </TextField>
                 </Grid>
                 <FormControl component='fieldset'>
                     <FormGroup aria-label='position' row>
