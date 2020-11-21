@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
         numberContainerNormal: {
             margin: 0,
             padding: 0,
-            [theme.breakpoints.up('md')]: {
+            [theme.breakpoints.up('sm')]: {
                 width: '18vmin',
                 height: '50vmin',
                 display: 'flex',
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 top: '50vh',
                 right: '3vw',
             },
-            [theme.breakpoints.only('md')]: {
+            [theme.breakpoints.only('sm')]: {
                 width: '8vmin',
                 height: '80vh',
                 display: 'flex',
@@ -65,11 +65,11 @@ const useStyles = makeStyles((theme: Theme) =>
             transform: 'translate(0%,-50%)',
             top: '50vh',
             left: '2vw',
-            [theme.breakpoints.up('md')]: {
+            [theme.breakpoints.up('sm')]: {
                 width: '26vmin',
                 height: '8vmin',
             },
-            [theme.breakpoints.only('md')]: {
+            [theme.breakpoints.only('sm')]: {
                 width: '8vmin',
                 height: '26vmin',
             },

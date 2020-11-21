@@ -1,5 +1,4 @@
 export const drawerWidth = 200;
-
 export const colorToAlpha = (hex: string, alpha: number) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex) || ['', '', ''];
     const r = parseInt(result[1], 16);

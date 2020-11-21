@@ -57,7 +57,7 @@ export const generateSudoku = (level: Level): sudokuValue[][][] => {
         }
     }
     while (!fillForm(0, 1));
-    digHole(20);
+    digHole((level+1)*10);
     getHole();
     return [
         Hole, Sudoku

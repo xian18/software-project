@@ -11,10 +11,10 @@ const useStyles = makeStyles(({ spacing, transitions, breakpoints, palette, zInd
             margin: spacing(1),
             padding: spacing(1),
             height: 'calc(100vh - 96px)',
-            [breakpoints.up('md')]: {
+            [breakpoints.up('sm')]: {
                 width: 400,
             },
-            [breakpoints.down('md')]: {
+            [breakpoints.down('sm')]: {
                 height: '75vh',
             },
             flex: '1',

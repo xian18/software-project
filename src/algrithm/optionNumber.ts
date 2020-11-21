@@ -10,6 +10,7 @@ import { sudokuValue } from '../types';
  */
 export function optionNumber(value: sudokuValue[][], x: number, y: number): sudokuValue[] {
     return [1, 2, 3, 4, 5,6,7,8,9];
+    
 }
 
 export default optionNumber;
