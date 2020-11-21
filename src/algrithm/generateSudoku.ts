@@ -63,7 +63,6 @@ export const generateSudoku = (level: Level): sudokuValue[][][] => {
     }
     digHole(20);
     getHole();
-    console.log(Hole);
     return [
         Hole, Sudoku
     ];
