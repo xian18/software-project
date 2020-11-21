@@ -132,48 +132,58 @@ const PlayHelper: FC<Props> = memo(
                     {useMemo(() => Array.from(numberIcons.keys()).map(mapNumberIcon), [highlightLoc])}
                 </Grid>
                 <Grid container className={classes.buttonContainers}>
-                    <TipButton
-                        TooltipProp={{ title: '撤回上一步', children: <></>, arrow: true }}
-                        IconButtonProp={{
-                            onClick: playRoundBackwardAction,
-                            className: classNames(classes.iconButtonContainer, {}),
-                        }}>
-                        <Undo className={classNames(classes.iconButtonIcon, {})} />
-                    </TipButton>
-                    <TipButton
-                        TooltipProp={{ title: '开始新一局', children: <></>, arrow: true }}
-                        IconButtonProp={{
-                            onClick: updateSudokuAction,
-                            className: classNames(classes.iconButtonContainer, {}),
-                        }}>
-                        <Refresh className={classNames(classes.iconButtonIcon, {})} />
-                    </TipButton>
-                    <TipButton
-                        TooltipProp={{
-                            title: showOptionNumberIcon ? '显示可选数字' : '隐藏可选数字',
-                            children: <></>,
-                            arrow: true,
-                        }}
-                        IconButtonProp={{
-                            onClick: () => {
-                                toggleShowOptionNumberIcon();
-                                toggleShowOptionNumberAction();
-                            },
-                            className: classNames(classes.iconButtonContainer, {}),
-                        }}>
-                        <VisibilityOutlined
-                            className={classNames(classes.iconButtonIcon, {
-                                [classes.hideElement]: showOptionNumberIcon,
-                            })}
-                        />
-                        <VisibilityOffOutlined
-                            className={classNames(classes.iconButtonIcon, {
-                                [classes.hideElement]: !showOptionNumberIcon,
-                            })}
-                        />
-                    </TipButton>
-                    <Button variant='contained' color='primary' onClick={saveGameAction}>saveGame</Button>
-                    <Button variant='contained' color='primary' onClick={loadGameAction}>loadGame</Button>
+                    {/** 撤销填写数独操作*/}
+                    {useMemo(()=>(
+                        <TipButton
+                            TooltipProp={{ title: '撤回上一步', children: <></>, arrow: true }}
+                            IconButtonProp={{
+                                onClick: playRoundBackwardAction,
+                                className: classNames(classes.iconButtonContainer, {}),
+                            }}>
+                            <Undo className={classNames(classes.iconButtonIcon, {})} />
+                        </TipButton>
+                    ),[])}
+                        {/** 开始新一局数独，调用updateSudoku*/}
+                    {useMemo(()=>(
+                        <TipButton
+                            TooltipProp={{ title: '开始新一局', children: <></>, arrow: true }}
+                            IconButtonProp={{
+                                onClick: ()=> {
+                                    setCompleteMessageshowed(false);    /** 开始了新一局游戏，该局游戏还没有显示过success*/
+                                    updateSudokuAction();
+                                },
+                                className: classNames(classes.iconButtonContainer, {}),
+                            }}>
+                            <Refresh className={classNames(classes.iconButtonIcon, {})} />
+                        </TipButton>
+                    ),[])}
+                    {/** 显示或者隐藏可选数字(optionNumber)*/}
+                    {useMemo(()=>(
+                        <TipButton
+                            TooltipProp={{
+                                title: showOptionNumberIcon ? '显示可选数字' : '隐藏可选数字',
+                                children: <></>,
+                                arrow: true,
+                            }}
+                            IconButtonProp={{
+                                onClick: () => {
+                                    toggleShowOptionNumberIcon();
+                                    toggleShowOptionNumberAction();
+                                },
+                                className: classNames(classes.iconButtonContainer, {}),
+                            }}>
+                            <VisibilityOutlined
+                                className={classNames(classes.iconButtonIcon, {
+                                    [classes.hideElement]: showOptionNumberIcon,
+                                })}
+                            />
+                            <VisibilityOffOutlined
+                                className={classNames(classes.iconButtonIcon, {
+                                    [classes.hideElement]: !showOptionNumberIcon,
+                                })}
+                            />
+                        </TipButton>
+                    ),[showOptionNumberIcon])}
                 </Grid>
                 <FormControl component='fieldset'>
                     <FormGroup aria-label='position' row>

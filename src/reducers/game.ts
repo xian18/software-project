@@ -55,7 +55,7 @@ const init: GameStore = {
     playHistorys: [],
     placeValue: null,
     showUnchangeable: true,
-    conflictValues: null9x9,
+    conflictValues: null9x9.map((x) =>[...x] as conflictValue[]),
     showConflict: true,
     complete: false,
     showOptionNumber: true,
@@ -81,7 +81,12 @@ export default (state = init, action: ActionType): GameStore => {
     switch (action.type) {
         case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
             const [generate, result] = generateSudoku(level);
-            return { ...state, values: generate, initValues: generate.map((x) => Object.assign({}, x)) };
+            return { ...state,
+                values: generate,
+                initValues: generate.map((x) => Object.assign({}, x)),
+                complete:false,
+                conflictValues:null9x9.map((x) =>[...x] as conflictValue[]),
+            };
         case actions.BLOCK_HIGHLIGHT: // calculate highlight matrix
             return { ...state, blockHighlight: calculateHighlight(values, action.value) };
         case actions.CLEAR_BLOCK_HIGHLIGHT:
@@ -90,7 +95,6 @@ export default (state = init, action: ActionType): GameStore => {
         case actions.TOGGLE_DIGITBOARD: // show global digitBoard
             return { ...state, digitBoard: !digitBoard };
         case actions.CHOOSE_DIGIT_START: // just for update point and highlight point mouse is howvering on
-            console.log("in reducer",action.point);
             return { ...state, point: action.point };
         case actions.CHOOSE_DIGIT:
             values[action.point.x][action.point.y] = action.point.value;

@@ -131,7 +131,7 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
                 TooltipProp={{ title: open ? '隐藏' : '显示', children: <></> }}
                 IconButtonProp={{
                     className: classNames(classes.hideButtonShowing, {
-                        [classes.hideButton]: !open,
+                        [classes.hideButton]: open,
                     }),
                     onClick: toggleOpen,
                 }}>

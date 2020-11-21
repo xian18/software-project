@@ -34,7 +34,7 @@ let Hole: Array<Array<sudokuValue>> = [
     [a, a, a, a, a, a, a, a, a],
     [a, a, a, a, a, a, a, a, a],
 ];
-let HolePosition: Array<Array<number>> = [
+let HolePosition: number[][] = [
     [b, b, b, b, b, b, b, b, b],
     [b, b, b, b, b, b, b, b, b],
     [b, b, b, b, b, b, b, b, b],
@@ -49,14 +49,15 @@ let HolePosition: Array<Array<number>> = [
 export const generateSudoku = (level: Level): sudokuValue[][][] => {
     /*algrithm for generating soduku here*/
     //level对应挖洞个数，1-2-3对应挖洞10,20,30
-
-    for(let m=0;m<8;m++){
-        for(let n=0;n<8;n++){
+    for(let m=0;m<9;m++){
+        for(let n=0;n<9;n++){
             Sudoku[m][n]=a;
             Hole[m][n]=a;
             HolePosition[m][n]=b;
+            console.log(b);
         }
     }
+    console.log(Sudoku,Hole,HolePosition);
 
     while (!fillForm(0, 1));
     let level1: number = level;
@@ -65,6 +66,7 @@ export const generateSudoku = (level: Level): sudokuValue[][][] => {
     }
     digHole(20);
     getHole();
+    console.log("return generate");
     return [
         Hole, Sudoku
     ];
@@ -117,7 +119,7 @@ function initXOrd(Xord: Array<number>) {
     }
 }
 function fillForm(y: number, val: sudokuValue): boolean {
-    //console.log(val);
+
     let Xord: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let i: number, x: number;
     //随机生成一个序列0-9
