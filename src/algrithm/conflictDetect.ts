@@ -25,6 +25,11 @@ let conflictValues: conflictValue[][] = [
 let conflict: boolean = false;
 let complete: boolean = false;
 export function conflictDetect(values: conflictValue[][]) {
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            conflictValues[i][j] = a;
+        }
+    }
     conflict = false;
     complete = false;
     isConflict(values);
@@ -37,7 +42,7 @@ export function conflictDetect(values: conflictValue[][]) {
 }
 
 function isConflict(values: conflictValue[][]) {
-    let row: number, column: number, num: number, innernum: number;
+    let row: number, column: number, num: number, x: number, y: number;
     //按照行遍历是否冲突
     for (row = 0; row < 9; row++) {
         for (column = 0; column < 9; column++) {
@@ -62,21 +67,27 @@ function isConflict(values: conflictValue[][]) {
             }
         }
     }
-    // for (num = 0; num < 9; num++) {
-    //     for (row = Math.floor(num / 3); row < Math.floor(num / 3) + 3; row++) {
-    //         for (column = num % 3; column < num % 3 + 3; column++) {
-    //             for (innernum = 0; innernum < 9; innernum++) {
-    //                 if (values[row][column] = values[Math.floor(num / 3) + Math.floor(innernum / 3)][(num % 3) * 3 + (innernum % 3)]) {
-    //                     conflictValues[row][column] = values[row][column];
-    //                     conflictValues[Math.floor(num / 3) + Math.floor(innernum / 3)][(num % 3) * 3 + (innernum % 3)] = values[row][column]
-    //                     conflict = true;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    for (num = 0; num < 9; num++) {
+        for (x = 0; x < 9; x++) {
+            for (y = x + 1; y < 9; y++) {
+                if (values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] == values[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)]) {
+                    conflictValues[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] = values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
+                    conflictValues[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)] = values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
+                    conflict = true;
+                }
+            }
+        }
+    }
+    return conflict;
 }
 
+function ROW(x: number): number {
+    return Math.floor(x / 3);
+}
+
+function COLUMN(x: number): number {
+    return x % 3;
+}
 function isSuccess(values: conflictValue[][]): boolean {
     let row: number, column: number;
     if (conflict)
