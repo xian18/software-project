@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import {Epic,Socket} from '../';
 import {START_SOCKET} from '../../actions';
-import {EMPTY,Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {switchMap,tap,ignoreElements} from 'rxjs/operators';
 import {API} from '../../config/consts';
 

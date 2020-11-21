@@ -1,14 +1,13 @@
-import React, { FC, memo, useMemo, useContext, useCallback, useEffect,useState } from 'react';
+import React, { FC, memo, useMemo, useContext, useCallback} from 'react';
 import {Grid } from '@material-ui/core';
 
 import useStyles from '../../styles/playBoard';
 
-import { sudokuValue,Point,PlaceValue } from '../../types';
+import { sudokuValue} from '../../types';
 import { Props } from '../../containers/PlayBoard';
 import NumberBlock from './NumberBlock';
 import { ThemeContext } from '../../styles/withRoot';
 import {digitsKeyMap,createDigitsHandlers} from '../../consts/hotKeys';
-import { create } from 'domain';
 import { HotKeys } from 'react-hotkeys';
 
 const PlayBoard: FC<Props> = memo(
@@ -44,7 +43,7 @@ const PlayBoard: FC<Props> = memo(
                 from: point.value,
                 to: value,
             });
-        },[point]);
+        },[point,chooseDigitAction,playRoundForwardAction]);
 
         let handlers=createDigitsHandlers(handleChooseDigitHotKeys);
 
@@ -67,7 +66,7 @@ const PlayBoard: FC<Props> = memo(
                     toggleDigitBoardAction();
                 }
             }
-        },[placeValue])
+        },[placeValue,chooseDigitAction,playRoundForwardAction,toggleDigitBoardAction,initValues])
 
         const handleOptionClick = useCallback((line: number, column: number, value: sudokuValue) => {
             chooseDigitAction({ x: line, y: column, value });
@@ -77,7 +76,7 @@ const PlayBoard: FC<Props> = memo(
                 from: null,
                 to: value,
             });
-        },[]);
+        },[chooseDigitAction,playRoundForwardAction]);
 
         /**
          * 将1x9数组展开成一横行9个数独block
@@ -90,6 +89,7 @@ const PlayBoard: FC<Props> = memo(
             <Grid key={`PlayBoard${line}`} container item spacing={0}>
                 {nums.map((num: sudokuValue, column: number) => (
                     <NumberBlock
+                        key={`NumberBlockLine${line}Column${column}`}
                         line={line}
                         column={column}
                         values={values}
@@ -100,7 +100,7 @@ const PlayBoard: FC<Props> = memo(
                         showConflict={showConflict}
                         showOptionNumber={showOptionNumber}
                         showUnchangeable={showUnchangeable}
-                        blockhighlight={blockHighlight[line][column] == 1 ? true : false}
+                        blockhighlight={blockHighlight[line][column] === 1 ? true : false}
                         blockOnMouseEnter={(line: number, column: number, num: sudokuValue) => {
                             chooseDigitStartAction({ x: line, y: column, value: num });
                             blockHighlightAction(num);
@@ -138,8 +138,13 @@ const PlayBoard: FC<Props> = memo(
                     conflictValues,
                     blockHighlight,
                     darkMode,
-                    point,handlers,
-                    placeValue
+                    point,
+                    handlers,
+                    placeValue,
+                    clearBlockHighlightAction,
+                    classes.optionNumberBlock,
+                    classes.playBoardBlockContainer,
+                    mapPlayBoardBlockLine,
                 ])}
             </>
         );

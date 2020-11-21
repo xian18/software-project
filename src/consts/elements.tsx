@@ -1,5 +1,4 @@
 import React from 'react';
-import Clear from '@material-ui/icons/Clear';
 
 export const numberIcons = new Map<number, JSX.Element>([
     [

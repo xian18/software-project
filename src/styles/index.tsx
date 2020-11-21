@@ -1,18 +1,3 @@
-import amber from '@material-ui/core/colors/amber';
-import blue from '@material-ui/core/colors/blue';
-import cyan from '@material-ui/core/colors/cyan';
-import green from '@material-ui/core/colors/green';
-import indigo from '@material-ui/core/colors/indigo';
-import orange from '@material-ui/core/colors/orange';
-import purple from '@material-ui/core/colors/purple';
-import red from '@material-ui/core/colors/red';
-import yellow from '@material-ui/core/colors/yellow';
-
-export const warningColor = amber[700];
-export const dangerColor = red[700];
-export const successColor = green[600];
-export const infoColor = blue[700];
-
 export const drawerWidth = 200;
 
 export const colorToAlpha = (hex: string, alpha: number) => {

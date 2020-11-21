@@ -13,7 +13,7 @@ const customHotKeys:FC<Props> = memo(
      playRound,
      loadGameAction}) => {
   
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar(); // eslint-disable-line
   const keyMap = {
     SAVE_GAME:['ctrl+s'],
     LOAD_GAME:['ctrl+l'],
@@ -25,7 +25,7 @@ const customHotKeys:FC<Props> = memo(
     localStorage.setItem('playHistorys',JSON.stringify(playHistorys));
     localStorage.setItem('playRound',playRound.toString());
     enqueueSnackbar('save game success!',{variant:'info'});
-  },[values,initValues,playHistorys,playRound])
+  },[values,initValues,playHistorys,playRound,enqueueSnackbar])
 
   const handleLoadGame=useCallback(()=>{
     let valuesSerialized=localStorage.getItem('values');
@@ -42,7 +42,7 @@ const customHotKeys:FC<Props> = memo(
     }else{
       enqueueSnackbar('load game fail!',{variant:'error'});
     }
-  },[])
+  },[enqueueSnackbar,loadGameAction])
 
   const handlers = {
     SAVE_GAME: (event)=>{

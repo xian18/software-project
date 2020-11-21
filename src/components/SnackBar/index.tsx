@@ -1,6 +1,5 @@
-import React, { FC, memo, useRef } from 'react';
+import React, { FC, memo} from 'react';
 import { SnackbarProvider } from 'notistack';
-import Cancel from '@material-ui/icons/Cancel';
 import useStyles from '../../styles/snackBar';
 
 const SnackBar: FC = memo(({ children }) => {

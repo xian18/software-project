@@ -5,7 +5,6 @@ import { zero9x9, null9x9 } from '../consts';
 import calculateHighlight from '../algrithm/calculateHighlight';
 import generateSudoku from '../algrithm/generateSudoku';
 import conflictDetect from '../algrithm/conflictDetect';
-import {serialize,deserialize} from 'typescript-json-serializer';
 
 type ActionType =
     | actions.ChooseDigitAction
@@ -65,24 +64,17 @@ const init: GameStore = {
 export default (state = init, action: ActionType): GameStore => {
     const {
         values,
-        initValues,
-        blockHighlight,
         level,
-        point,
-        highlightPoint,
         digitBoard,
         playRound,
         playHistorys,
         showUnchangeable,
-        conflictValues,
         showConflict,
-        complete,
         showOptionNumber,
     } = state;
     switch (action.type) {
         case actions.UPDATE_SUDOKU:{ // when click fresh button, generate sudoku and update 9x9 matrix in store
-            const [generate, result] = generateSudoku(level);
-            const { conflict, complete, conflictValues } = conflictDetect(generate);
+            const [generate, result] = generateSudoku(level);   // eslint-disable-line
             return { ...init,
                 values: generate,
                 initValues: generate.map((x) => Object.assign({}, x)),
@@ -99,13 +91,13 @@ export default (state = init, action: ActionType): GameStore => {
             return { ...state, point: action.point };
         case actions.CHOOSE_DIGIT:
             values[action.point.x][action.point.y] = action.point.value;
-            const { conflict, complete, conflictValues } = conflictDetect(values);
+            const {complete, conflictValues } = conflictDetect(values);
             return { ...state, values: values, point:action.point, conflictValues, complete };
         case actions.PLAY_ROUND_BACKWARD: {
-            if (playRound == 0) return {...state};
+            if (playRound === 0) return {...state};
             if (playRound > 0)
                 values[playHistorys[playRound - 1].x][playHistorys[playRound - 1].y] = playHistorys[playRound - 1].from;
-            const {conflict, complete, conflictValues} = conflictDetect(values);
+            const {conflictValues} = conflictDetect(values);
             return {
                 ...state,
                 values: values,
@@ -133,7 +125,7 @@ export default (state = init, action: ActionType): GameStore => {
         case actions.TOGGLE_SHOW_OPTIONNUMBER:
             return { ...state, showOptionNumber: !showOptionNumber };
         case actions.LOAD_GAME: {
-            const {conflict, complete, conflictValues} = conflictDetect(action.values);
+            const {conflictValues} = conflictDetect(action.values);
             return {...state,
                 values: action.values,
                 initValues: action.initValues,

@@ -8,6 +8,7 @@ import optionNumber from '../../algrithm/optionNumber';
 import NumberOption from './NumberOption';
 
 export interface localProps {
+    key:string;
     line: number;
     column: number;
     num: sudokuValue;
@@ -124,6 +125,7 @@ const NumberBlock: FC<localProps> = memo(
                                     })}>
                                     {optNumber.map((num, c) => (
                                         <NumberOption
+                                            key={`num${num}`}
                                             num={num}
                                             onMouseEnter={() => {
                                                optionOnMouseEnter(num);
@@ -139,7 +141,20 @@ const NumberBlock: FC<localProps> = memo(
                                 </Grid>
                             );
                         }
-                    }, [...values, num, showOptionNumber, initValue])}
+                    }, [
+                        values,
+                        num,
+                        showOptionNumber,
+                        initValue,
+                        classes.optionNumberBlock,
+                        classes.optionalNumberTopPadding,
+                        column,
+                        line,
+                        optionOnClick,
+                        optionOnMouseEnter,
+                        optionOnMouseLeave,
+
+                    ])}
                 </Grid>
             </div>
         );

@@ -1,4 +1,4 @@
-import React, { FC, memo, useState, useMemo, useEffect } from 'react';
+import React, {FC, memo, useState, useMemo, useEffect, useCallback} from 'react';
 import { useSnackbar } from 'notistack';
 
 import Grid from '@material-ui/core/Grid';
@@ -19,10 +19,7 @@ import TipButton from '../SmallComponents/TipButton';
 
 import { Undo, Refresh, VisibilityOutlined, VisibilityOffOutlined } from '@material-ui/icons';
 import NumberSvg from '../SmallComponents/NumberSvg';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
-
-//
 const PlayHelper: FC<Props> = memo(
     ({
         complete,
@@ -40,7 +37,7 @@ const PlayHelper: FC<Props> = memo(
         setLevelAction,
     }) => {
         const classes = useStyles();
-        const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+        const { enqueueSnackbar, closeSnackbar } = useSnackbar();   // eslint-disable-line
 
         const [completeMessageShowed, setCompleteMessageshowed] = useState(
             false,
@@ -51,30 +48,29 @@ const PlayHelper: FC<Props> = memo(
                 enqueueSnackbar('Sudoku Complete!', { variant: 'info' });
                 setCompleteMessageshowed(true);
             }
-        }, [complete]);
+        }, [complete,completeMessageShowed,enqueueSnackbar]);
 
         const [highlightLoc, setHighlightLoc] = useState(
             0,
         ); /** 1-9哪个数字需要高亮，0代表没有数字需要高亮,-1表示删除点击数字*/
 
         /** 按钮文本，可更改*/
-        const showUnchangeableTexts = ['取消不可变显示', '显示不可变显示'];
         const showConflictTexts = ['取消显示冲突', '显示冲突'];
 
         const [showOptionNumberIcon,setShowOptionNumberIcon] = useState(false); //true 为可见 false 为不可见
         const [showUnchangeableSwitch, setShowUnchangeableSwitch] = useState(true);
-        const [showUnchangeableText, setShowUnchangeableText] = useState(showUnchangeableTexts[0]);
+        const [showUnchangeableText, setShowUnchangeableText] = useState('取消不可变显示');
         const [showConflictSwitch, setShowConflictSwitch] = useState(true);
         const [showConflictText, setShowConflictText] = useState(showConflictTexts[0]);
-        //const [showOptionNumberIcon, setShowOptionNumberIcon] = useState(showOptionNumberIcons[0]);
 
         /** toggle button text*/
-        const toggleShowUnchangeable = () => {
+        const toggleShowUnchangeable = useCallback(() => {
+            const showUnchangeableTexts = ['取消不可变显示', '显示不可变显示'];
             showUnchangeableText === showUnchangeableTexts[0]
                 ? setShowUnchangeableText(showUnchangeableTexts[1])
                 : setShowUnchangeableText(showUnchangeableTexts[0]);
             setShowUnchangeableSwitch((prev) => !prev);
-        };
+        },[showUnchangeableText]);
 
         /** toggle button text*/
         const toggleShowConflict = () => {
@@ -99,8 +95,8 @@ const PlayHelper: FC<Props> = memo(
          *
          * @returns JSX.Element
          */
-        const mapNumberIcon = (value: number, index: number) => (
-            <Grid item className={classes.numberIconNormal}>
+        const mapNumberIcon = useCallback((value: number, index: number) => (
+            <Grid key={`value${value}`} item className={classes.numberIconNormal}>
                 <IconButton
                     onMouseEnter={() => {
                         blockHighlightAction(value);
@@ -125,12 +121,20 @@ const PlayHelper: FC<Props> = memo(
                         }}></NumberSvg>
                 </IconButton>
             </Grid>
-        );
+        ),[
+            blockHighlightAction,
+            classes.hightLight,
+            classes.numberIconNormal,
+            clearBlockHighlightAction,
+            clearPlaceValueAction,
+            highlightLoc,
+            setPlaceValueAction,
+        ]);
 
         return (
             <React.Fragment>
                 <Grid container className={classNames(classes.numberContainerNormal, {})}>
-                    {useMemo(() => Array.from(numberIcons.keys()).map(mapNumberIcon), [highlightLoc])}
+                    {useMemo(() => Array.from(numberIcons.keys()).map(mapNumberIcon), [mapNumberIcon])}
                 </Grid>
                 <Grid container className={classes.buttonContainers}>
                     {/** 撤销填写数独操作*/}
@@ -143,7 +147,7 @@ const PlayHelper: FC<Props> = memo(
                             }}>
                             <Undo className={classNames(classes.iconButtonIcon, {})} />
                         </TipButton>
-                    ),[])}
+                    ),[classes.iconButtonContainer,classes.iconButtonIcon,playRoundBackwardAction])}
                         {/** 开始新一局数独，调用updateSudoku*/}
                     {useMemo(()=>(
                         <TipButton
@@ -157,7 +161,7 @@ const PlayHelper: FC<Props> = memo(
                             }}>
                             <Refresh className={classNames(classes.iconButtonIcon, {})} />
                         </TipButton>
-                    ),[])}
+                    ),[classes.iconButtonContainer,classes.iconButtonIcon,updateSudokuAction])}
                     {/** 显示或者隐藏可选数字(optionNumber)*/}
                     {useMemo(()=>(
                         <TipButton
@@ -184,7 +188,13 @@ const PlayHelper: FC<Props> = memo(
                                 })}
                             />
                         </TipButton>
-                    ),[showOptionNumberIcon])}
+                    ),[
+                        showOptionNumberIcon,
+                        classes.hideElement,
+                        classes.iconButtonContainer,
+                        classes.iconButtonIcon,
+                        toggleShowOptionNumberAction,
+                    ])}
 
                     <TextField
                         select
@@ -219,7 +229,12 @@ const PlayHelper: FC<Props> = memo(
                                     labelPlacement={'bottom'}
                                 />
                             ),
-                            [showUnchangeableText],
+                            [
+                                showUnchangeableText,
+                                showUnchangeableSwitch,
+                                toggleShowUnchangeable,
+                                toggleShowUnchangeableAction,
+                            ],
                         )}
 
                         {useMemo(
@@ -240,7 +255,14 @@ const PlayHelper: FC<Props> = memo(
                                     labelPlacement={'bottom'}
                                 />
                             ),
-                            [showConflictText,showOptionNumberIcon],
+                            [
+                                showConflictText,
+                                showOptionNumberIcon,
+                                showConflictSwitch,
+                                toggleShowConflict,
+                                toggleShowConflictAction,
+
+                            ],
                         )}
                     </FormGroup>
                 </FormControl>

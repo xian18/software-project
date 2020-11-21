@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo} from 'react';
 
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';

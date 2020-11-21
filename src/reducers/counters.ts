@@ -13,7 +13,7 @@ const init: CountersStore = {
 };
 
 export default (state = init, action: ActionType): CountersStore => {
-    const { times } = state;
+    const {} = state;
     switch (action.type) {
         case actions.INCREMENT:
             return { ...state, times: state.times + 1 };

@@ -1,3 +1,5 @@
 import getserverValueEpic from './Counters';
 
-export default [getserverValueEpic];
+const epics=[getserverValueEpic];
+
+export default epics;

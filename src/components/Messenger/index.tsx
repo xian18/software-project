@@ -40,11 +40,11 @@ const Messenger: FC<Props> = memo(({
     const classes = useStyles();
     const [content, setContent] = useState('');
     const [container, setContainer] = useState<Element | null>(null);
-    const {enqueueSnackbar,closeSnackbar}=useSnackbar();
+    const {enqueueSnackbar,closeSnackbar}=useSnackbar();    // eslint-disable-line
 
     useEffect(()=>{
         startSocketAction();
-    },[])
+    },[startSocketAction])
 
     useEffect(() => {
         if (container && container.scrollHeight - container.scrollTop < 1000) {

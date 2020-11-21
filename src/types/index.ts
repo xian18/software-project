@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export type sudokuValue = null | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9; /** null-格子为空，1-9代表格子值为1-9*/
 /** null-此格不与任何格冲突 1-9代表此格是1-9数字的冲突*/
 export type conflictValue = null | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;

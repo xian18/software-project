@@ -1,9 +1,6 @@
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-import { colorToShadow } from './index';
-import { Height } from '@material-ui/icons';
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         hightLight: {

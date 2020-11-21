@@ -1,4 +1,6 @@
 import socketConnectEpic from './socketConnect';
 import socketReceiveEpic from './socketReceive';
 
-export default [socketConnectEpic,socketReceiveEpic];
+const epics=[socketConnectEpic,socketReceiveEpic]
+
+export default epics;

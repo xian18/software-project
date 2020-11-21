@@ -1,7 +1,7 @@
 import {Action} from 'redux';
 import {Epic} from '../';
 import {addMessageAction} from '../../actions';
-import {switchMap,ignoreElements} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {EMPTY,Observable} from 'rxjs';
 import {Message} from '../../types';
 

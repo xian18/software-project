@@ -1,5 +1,4 @@
-import React, { FC, memo, useEffect } from 'react';
-import { Redirect } from 'react-router';
+import React, { FC, memo} from 'react';
 
 import Progress from '../Progress';
 
