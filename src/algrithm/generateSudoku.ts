@@ -49,6 +49,15 @@ let HolePosition: Array<Array<number>> = [
 export const generateSudoku = (level: Level): sudokuValue[][][] => {
     /*algrithm for generating soduku here*/
     //level对应挖洞个数，1-2-3对应挖洞10,20,30
+
+    for(let m=0;m<8;m++){
+        for(let n=0;n<8;n++){
+            Sudoku[m][n]=a;
+            Hole[m][n]=a;
+            HolePosition[m][n]=b;
+        }
+    }
+
     while (!fillForm(0, 1));
     let level1: number = level;
     if (level == 0) {
@@ -56,7 +65,6 @@ export const generateSudoku = (level: Level): sudokuValue[][][] => {
     }
     digHole(20);
     getHole();
-    console.log(Hole);
     return [
         Hole, Sudoku
     ];
@@ -140,7 +148,7 @@ function digHole(holeNum: number) {
         idx[i] = i;
     }
     for (i = 0; i < holeNum; i++) {
-        k = Math.ceil(Math.random() * 81);
+        k = Math.floor(Math.random() * 81);
         temp = idx[k];
         idx[k] = idx[i];
         idx[i] = temp;
