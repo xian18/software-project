@@ -12,7 +12,7 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) =>
             marginTop: spacing(8),
             height: 'calc(100vh - 64px)',
             overflowX: 'auto',
-            [breakpoints.down('xs')]: {
+            [breakpoints.down('sm')]: {
                 marginTop: spacing(6),
                 height: 'calc(100vh - 48px)',
             },

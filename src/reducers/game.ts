@@ -5,7 +5,6 @@ import { zero9x9, null9x9 } from '../consts';
 import calculateHighlight from '../algrithm/calculateHighlight';
 import generateSudoku from '../algrithm/generateSudoku';
 import conflictDetect from '../algrithm/conflictDetect';
-import {serialize,deserialize} from 'typescript-json-serializer';
 
 type ActionType =
     | actions.ChooseDigitAction
@@ -23,6 +22,7 @@ type ActionType =
     | actions.ToggleShowOptionNumber
     | actions.SaveGame
     | actions.LoadGame
+    | actions.SetLevel
 
 export interface GameStore {
     values: sudokuValue[][] /** 数独数字 9x9 matrix*/;
@@ -55,7 +55,7 @@ const init: GameStore = {
     playHistorys: [],
     placeValue: null,
     showUnchangeable: true,
-    conflictValues: null9x9,
+    conflictValues: null9x9.map((x) =>[...x] as conflictValue[]),
     showConflict: true,
     complete: false,
     showOptionNumber: true,
@@ -64,24 +64,22 @@ const init: GameStore = {
 export default (state = init, action: ActionType): GameStore => {
     const {
         values,
-        initValues,
-        blockHighlight,
         level,
-        point,
-        highlightPoint,
         digitBoard,
         playRound,
         playHistorys,
         showUnchangeable,
-        conflictValues,
         showConflict,
-        complete,
         showOptionNumber,
     } = state;
     switch (action.type) {
-        case actions.UPDATE_SUDOKU: // when click fresh button, generate sudoku and update 9x9 matrix in store
-            const [generate, result] = generateSudoku(level);
-            return { ...state, values: generate, initValues: generate.map((x) => Object.assign({}, x)) };
+        case actions.UPDATE_SUDOKU:{ // when click fresh button, generate sudoku and update 9x9 matrix in store
+            const [generate, result] = generateSudoku(level);   // eslint-disable-line
+            return { ...init,
+                values: generate,
+                initValues: generate.map((x) => Object.assign({}, x)),
+            };
+        }
         case actions.BLOCK_HIGHLIGHT: // calculate highlight matrix
             return { ...state, blockHighlight: calculateHighlight(values, action.value) };
         case actions.CLEAR_BLOCK_HIGHLIGHT:
@@ -90,22 +88,24 @@ export default (state = init, action: ActionType): GameStore => {
         case actions.TOGGLE_DIGITBOARD: // show global digitBoard
             return { ...state, digitBoard: !digitBoard };
         case actions.CHOOSE_DIGIT_START: // just for update point and highlight point mouse is howvering on
-            console.log("in reducer",action.point);
             return { ...state, point: action.point };
         case actions.CHOOSE_DIGIT:
             values[action.point.x][action.point.y] = action.point.value;
-            const { conflict, complete, conflictValues } = conflictDetect(values);
+            const {complete, conflictValues } = conflictDetect(values);
             return { ...state, values: values, point:action.point, conflictValues, complete };
-        case actions.PLAY_ROUND_BACKWARD:
-            if (playRound == 0) return { ...state };
+        case actions.PLAY_ROUND_BACKWARD: {
+            if (playRound === 0) return {...state};
             if (playRound > 0)
                 values[playHistorys[playRound - 1].x][playHistorys[playRound - 1].y] = playHistorys[playRound - 1].from;
+            const {conflictValues} = conflictDetect(values);
             return {
                 ...state,
                 values: values,
                 playRound: playRound - 1,
                 playHistorys: playHistorys.slice(0, playRound - 1),
+                conflictValues,
             };
+        }
         case actions.PLAY_ROUND_FORWARD:
             playHistorys.push(action.payload);
             return {
@@ -124,8 +124,18 @@ export default (state = init, action: ActionType): GameStore => {
             return { ...state, showConflict: !showConflict };
         case actions.TOGGLE_SHOW_OPTIONNUMBER:
             return { ...state, showOptionNumber: !showOptionNumber };
-        case actions.LOAD_GAME:
-            return {...state,values:action.values,initValues:action.initValues,playHistorys:action.playHistorys};
+        case actions.LOAD_GAME: {
+            const {conflictValues} = conflictDetect(action.values);
+            return {...state,
+                values: action.values,
+                initValues: action.initValues,
+                playHistorys: action.playHistorys,
+                playRound:action.playRound,
+                conflictValues,
+            };
+        }
+        case actions.SET_LEVEL:
+            return {...state,level:action.level};
         default:
             return { ...state };
     }

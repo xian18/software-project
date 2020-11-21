@@ -1,8 +1,8 @@
-import { connect, MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
 import { chooseDigitAction, blockHighlightAction, playRoundForwardAction,toggleDigitBoardAction } from '../../actions';
-import { Point, sudokuValue, PlayHistory } from '../../types';
+import { Point} from '../../types';
 import { StoreState } from '../../reducers';
 
 import DigitBoard from '../../components/DigitBoard';

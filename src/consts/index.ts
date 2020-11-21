@@ -1,5 +1,4 @@
 const a = null;
-const b = 0;
 
 export const null9x9 = [
     [a, a, a, a, a, a, a, a, a],

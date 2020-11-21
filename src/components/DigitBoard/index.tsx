@@ -12,11 +12,6 @@ import {digitsKeyMap,createDigitsHandlers} from '../../consts/hotKeys';
 
 const DigitBoard: FC<Props> = memo(
     ({ digitBoard, point, chooseDigitAction, playRoundForwardAction, blockHighlightAction,toggleDigitBoardAction}) => {
-        const numbers: number[][] = [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, 9],
-        ];
         const classes = useStyles();
         const modal=useRef<HTMLDivElement>(null);
 
@@ -33,7 +28,7 @@ const DigitBoard: FC<Props> = memo(
                 to: num as sudokuValue,
             });
             toggleDigitBoardAction();
-        },[point,digitBoard]);
+        },[point,chooseDigitAction,playRoundForwardAction,toggleDigitBoardAction]);
 
         const handlers=createDigitsHandlers(handleChooseDigit);
 
@@ -42,13 +37,19 @@ const DigitBoard: FC<Props> = memo(
                 <Fade in={digitBoard}>
                     <HotKeys keyMap={digitsKeyMap} handlers={handlers}>
                         <div className={classes.modal} ref={modal}> 
-                            {useMemo(()=>(
-                                <Digits numbers={numbers}
-                                    onMouseEnter={(num:number)=>{
-                                        if (num != null) blockHighlightAction(num as sudokuValue);
-                                    }}
-                                    onClick={handleChooseDigit} />
-                            ),[numbers,digitBoard])}
+                            {useMemo(()=>{
+                                const numbers: number[][] = [
+                                    [1, 2, 3],
+                                    [4, 5, 6],
+                                    [7, 8, 9],
+                                ];
+                                return (
+                                    <Digits numbers={numbers}
+                                        onMouseEnter={(num:number)=>{
+                                            if (num != null) blockHighlightAction(num as sudokuValue);
+                                        }}
+                                        onClick={handleChooseDigit} />
+                            )},[blockHighlightAction,handleChooseDigit])}
                         </div>
                     </HotKeys>
                 </Fade>

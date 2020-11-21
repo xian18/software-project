@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo} from 'react';
 
 import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';

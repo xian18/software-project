@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo} from 'react';
 
 import classNames from 'classnames';
 
@@ -10,12 +10,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import HomeIcon from '@material-ui/icons/Home';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import useStyles from '../../styles/drawer';
-
-import Anchor from '../Anchor';
 
 export interface localProps {
     open: boolean;
@@ -44,7 +40,7 @@ const CustomDrawer: FC<localProps> = memo(({ open }) => {
             <Divider />
             <List>
                 {listItems.map(({ icon, text }, index) => (
-                    <ListItem button>
+                    <ListItem button key={`item${index}`}>
                         <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>

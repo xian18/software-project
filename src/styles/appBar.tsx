@@ -3,8 +3,9 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { drawerWidth } from './index';
 
-const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoints }: Theme) =>
-    createStyles({
+const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoints }: Theme) => {
+    let appBarWidth = 48;
+    return createStyles({
         appBar: {
             zIndex: zIndex.drawer + 1,
             background: `${palette.primary.main}`, //`linear-gradient(60deg, ${palette.primary.main}, ${palette.primary.dark})`,
@@ -25,15 +26,13 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             paddingRight: 0,
         },
         regular: {
-            minHeight: spacing(8),
-            [breakpoints.down('md')]: {
-                minHeight: spacing(6),
-            },
+            minHeight: appBarWidth,
+            height: appBarWidth,
         },
         menuButton: {
             marginLeft: spacing(2),
             marginRight: spacing(4),
-            [breakpoints.down('md')]: {
+            [breakpoints.down('sm')]: {
                 marginLeft: 0,
                 marginRight: 0,
                 padding: spacing(1),
@@ -43,7 +42,7 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             marginLeft: 'auto',
             display: 'flex',
             '& button': {
-                [breakpoints.down('md')]: {
+                [breakpoints.down('sm')]: {
                     padding: spacing(1),
                 },
             },
@@ -59,7 +58,7 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             zIndex: zIndex.drawer + 1,
             position: 'fixed',
             top: spacing(8),
-            [breakpoints.down('md')]: {
+            [breakpoints.down('sm')]: {
                 top: spacing(6),
             },
             right: 0,
@@ -73,7 +72,7 @@ const useStyles = makeStyles(({ zIndex, palette, transitions, spacing, breakpoin
             position: 'fixed',
             right: 0,
         },
-    }),
-);
+    });
+});
 
 export default useStyles;

@@ -30,7 +30,6 @@ export const customError = (error: object) => {
 };
 
 export const errHandler = ({ message, type }: CustomError, customAction?: AnyAction) =>{
-    console.log(message);
     return EMPTY;
 }
 

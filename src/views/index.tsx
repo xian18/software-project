@@ -1,12 +1,10 @@
 import React, { FC, lazy, memo,Suspense } from 'react';
-import { Route,Switch, withRouter,RouteComponentProps } from 'react-router';
-import Counters from '../containers/Counters';
+import { Route,Switch, withRouter,RouteComponentProps,Redirect } from 'react-router';
 import SnackBar from '../components/SnackBar';
 import withRoot from '../styles/withRoot';
 import Progress from '../components/Progress';
-
-import Game from './game';
 import Frame from '../containers/Frame';
+const Game=lazy(()=>import('./game'));
 const Index: FC = memo(() => {
 
     const routeRender = (Component: JSX.Element) => (props: RouteComponentProps) => (
@@ -15,12 +13,14 @@ const Index: FC = memo(() => {
         </Frame>
     );
 
+    const RedirectToGame:FC=memo(()=>(<Redirect to='/game' />));
+
     return (
         <React.Fragment>
             <SnackBar>
                 <Switch>
-                    <Route path='/' render={routeRender(<Game />)} />
-                    <Route path='/bbb' component={Counters} />
+                    <Route path='/game' render={routeRender(<Game />)} />
+                    <Route path='/' component={RedirectToGame} />
                 </Switch>
             </SnackBar>
         </React.Fragment>

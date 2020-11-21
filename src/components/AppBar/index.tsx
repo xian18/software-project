@@ -1,8 +1,8 @@
 import React, { FC, memo, useState, useMemo, MouseEventHandler, useContext } from 'react';
-import { AppBar, Menu, MenuItem, IconButton, Toolbar, Typography, Slide, Button, Collapse } from '@material-ui/core';
+import { AppBar, Menu, MenuItem, IconButton, Toolbar, Typography, Slide, Collapse } from '@material-ui/core';
 import { useScrollTrigger } from '@material-ui/core';
 
-import { Brightness4, ArrowBack, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { Brightness4, KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import HelpIcon from '@material-ui/icons/HelpOutline';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
@@ -28,7 +28,7 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
     const [helper, setHelper] = useState(false);
     const [drawer, setDrawer] = useState(false);
     const [messenger,setMessenger]=useState(false);
-    const { darkMode, setDarkMode } = useContext(ThemeContext);
+    const { darkMode, setDarkMode } = useContext(ThemeContext); // eslint-disable-line
 
     const handleClickPerson: MouseEventHandler = ({ currentTarget }) => {
         setAnchorEl(currentTarget);
@@ -52,7 +52,7 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
         setMessenger((messenger)=>!messenger);
     }
 
-    const HelpMessage = useMemo(() => <Typography>这里是我们要做的东西</Typography>, [open]);
+    const HelpMessage = useMemo(() => <Typography>这里是我们要做的东西</Typography>, []);
 
     const trigger = useScrollTrigger({ target: undefined });
 

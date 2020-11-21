@@ -5,11 +5,19 @@ import useStyles from '../../styles/playBoard';
 import classNames from 'classnames';
 import NumberIcon from './NumberIcon';
 
+export interface  localProps {
+    key:string;
+    num: sudokuValue;
+    onMouseEnter: Function;
+    onClick: Function;
+    onMouseLeave: Function;
+}
+
 function compareNumberOption(prevProps: any, nextProps: any) {
     return prevProps.num === nextProps.num;
 }
 
-const NumberOption: FC<{ num: sudokuValue; onMouseEnter: Function; onClick: Function; onMouseLeave: Function }> = memo(
+const NumberOption: FC<localProps> = memo(
     ({ num, onMouseEnter, onClick, onMouseLeave }) => {
         const classes = useStyles();
         const [highlight, setHighlight] = useState(false);

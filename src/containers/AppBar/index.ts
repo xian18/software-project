@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
 import { updateSudokuAction, playRoundBackwardAction } from '../../actions';
-import { StoreState } from '../../reducers';
 
 import AppBar from '../../components/AppBar';
 
