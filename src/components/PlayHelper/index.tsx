@@ -32,8 +32,6 @@ const PlayHelper: FC<Props> = memo(
         clearBlockHighlightAction,
         toggleShowConflictAction,
         toggleShowOptionNumberAction,
-        saveGameAction,
-        loadGameAction,
         setLevelAction,
     }) => {
         const classes = useStyles();

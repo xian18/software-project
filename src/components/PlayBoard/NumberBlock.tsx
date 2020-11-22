@@ -44,7 +44,8 @@ function compareNumberBlock(prevProps: any, nextProps: any) {
         prevProps.showConflict === nextProps.showConflict &&
         prevProps.showUnchangeable === nextProps.showUnchangeable &&
         prevProps.conflictValue === nextProps.conflictValue &&
-        prevProps.playRound === nextProps.playRound
+        prevProps.playRound === nextProps.playRound &&
+        prevProps.placeValue === nextProps.placeValue
     );
 }
 
@@ -55,6 +56,7 @@ const NumberBlock: FC<localProps> = memo(
         num,
         initValue,
         playRound,
+        placeValue,
         showOptionNumber,
         showConflict,
         showUnchangeable,
@@ -125,6 +127,12 @@ const NumberBlock: FC<localProps> = memo(
                         blockhighlight,
                         showConflict,
                         conflictValue,
+                        blockOnMouseEnter,
+                        blockOnClick,
+                        blockOnMouseLeave,
+                        optionOnMouseEnter,
+                        optionOnClick,
+                        optionOnMouseLeave,
                         ])}
 
                     {useMemo(() => {
@@ -172,8 +180,7 @@ const NumberBlock: FC<localProps> = memo(
                 </Grid>
             </div>
         );
-    },
-    compareNumberBlock,
+    }
 );
 
 export default NumberBlock;

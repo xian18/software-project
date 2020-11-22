@@ -14,7 +14,6 @@ const PlayBoard: FC<Props> = memo(
     ({
         values,
         initValues,
-        digitBoard,
         point,
         blockHighlight,
         playRound,
@@ -22,7 +21,6 @@ const PlayBoard: FC<Props> = memo(
         showUnchangeable,
         conflictValues,
         showConflict,
-        complete,
         showOptionNumber,
         toggleDigitBoardAction,
         clearBlockHighlightAction,
@@ -30,7 +28,6 @@ const PlayBoard: FC<Props> = memo(
         chooseDigitAction,
         playRoundForwardAction,
         blockHighlightAction,
-        toggleShowOptionNumberAction,
     }) => {
         const classes = useStyles();
         const { darkMode } = useContext(ThemeContext);
@@ -68,7 +65,7 @@ const PlayBoard: FC<Props> = memo(
                     toggleDigitBoardAction();
                 }
             }
-        },[placeValue,chooseDigitAction,playRoundForwardAction,toggleDigitBoardAction,initValues])
+        },[placeValue,initValues,chooseDigitAction,playRoundForwardAction,toggleDigitBoardAction])
 
         const handleOptionClick = useCallback((line: number, column: number, value: sudokuValue) => {
             chooseDigitAction({ x: line, y: column, value });
@@ -87,7 +84,8 @@ const PlayBoard: FC<Props> = memo(
          *
          * @returns JSX.ELEMENT array
          */
-        const mapPlayBoardBlockLine = (nums: sudokuValue[], line: number) => (
+        const mapPlayBoardBlockLine = useCallback((nums: sudokuValue[], line: number) => {
+            return (
             <Grid key={`PlayBoard${line}`} container item spacing={0}>
                 {nums.map((num: sudokuValue, column: number) => (
                     <NumberBlock
@@ -116,12 +114,28 @@ const PlayBoard: FC<Props> = memo(
                     />
                 ))}
             </Grid>
-        );
+        )},[
+            values,
+            playRound,
+            placeValue,
+            initValues,
+            conflictValues,
+            showConflict,
+            showOptionNumber,
+            showUnchangeable,
+            blockHighlight,
+            handleBlockClick,
+            clearBlockHighlightAction,
+            blockHighlightAction,
+            handleOptionClick,
+            clearBlockHighlightAction,
+            chooseDigitStartAction,
+        ]);
+
         return (
             <>
                 {useMemo(() => {
                     return (
-                        <>
                         <HotKeys keyMap={digitsKeyMap} handlers={handlers} allowChanges>
                             <div className={classes.playBoardContainer} onMouseLeave={clearBlockHighlightAction}>
                                 <Grid container spacing={0}>
@@ -129,24 +143,12 @@ const PlayBoard: FC<Props> = memo(
                                 </Grid>
                             </div>
                         </HotKeys>
-                        </>
                     );
                 }, [
-                    playRound,
-                    values,
-                    showOptionNumber,
-                    initValues,
-                    showUnchangeable,
-                    showConflict,
-                    conflictValues,
-                    blockHighlight,
-                    darkMode,
-                    point,
-                    handlers,
                     placeValue,
+                    handlers,
+                    classes.playBoardContainer,
                     clearBlockHighlightAction,
-                    classes.optionNumberBlock,
-                    classes.playBoardBlockContainer,
                     mapPlayBoardBlockLine,
                 ])}
             </>
