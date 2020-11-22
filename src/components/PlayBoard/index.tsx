@@ -36,6 +36,8 @@ const PlayBoard: FC<Props> = memo(
         const { darkMode } = useContext(ThemeContext);
 
         const handleChooseDigitHotKeys=useCallback((value:sudokuValue) => {
+            if(initValues[point.x][point.y] !== null)
+                return;
             chooseDigitAction({ x: point.x, y: point.y, value});
             playRoundForwardAction({
                 x: point.x,
@@ -43,7 +45,7 @@ const PlayBoard: FC<Props> = memo(
                 from: point.value,
                 to: value,
             });
-        },[point,chooseDigitAction,playRoundForwardAction]);
+        },[point,initValues,chooseDigitAction,playRoundForwardAction]);
 
         let handlers=createDigitsHandlers(handleChooseDigitHotKeys);
 

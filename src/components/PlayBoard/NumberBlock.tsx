@@ -120,6 +120,7 @@ const NumberBlock: FC<localProps> = memo(
                         num,
                         initValue,
                         showUnchangeable,
+                        showOptionNumber,
                         classes.numberIconNormal,
                         blockhighlight,
                         showConflict,
