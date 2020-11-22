@@ -137,7 +137,7 @@ const NumberBlock: FC<localProps> = memo(
                                     })}>
                                     {optNumber.map((num, c) => (
                                         <NumberOption
-                                            key={`num${num}`}
+                                            key={`line${line}column${column}index${c}optnum${num}`}
                                             num={num}
                                             onMouseEnter={() => {
                                                optionOnMouseEnter(num);
