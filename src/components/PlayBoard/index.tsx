@@ -94,6 +94,7 @@ const PlayBoard: FC<Props> = memo(
                         column={column}
                         values={values}
                         num={num}
+                        playRound={playRound}
                         placeValue={placeValue}
                         initValue={initValues[line][column]}
                         conflictValue={conflictValues[line][column]}

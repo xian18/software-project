@@ -12,6 +12,7 @@ export interface localProps {
     line: number;
     column: number;
     num: sudokuValue;
+    playRound:number;
     placeValue:PlaceValue;
     initValue: sudokuValue;
     conflictValue: conflictValue;
@@ -43,7 +44,7 @@ function compareNumberBlock(prevProps: any, nextProps: any) {
         prevProps.showConflict === nextProps.showConflict &&
         prevProps.showUnchangeable === nextProps.showUnchangeable &&
         prevProps.conflictValue === nextProps.conflictValue &&
-        prevProps.placeValue === nextProps.placeValue
+        prevProps.playRound === nextProps.playRound
     );
 }
 
@@ -52,8 +53,8 @@ const NumberBlock: FC<localProps> = memo(
         line,
         column,
         num,
-        placeValue,
         initValue,
+        playRound,
         showOptionNumber,
         showConflict,
         showUnchangeable,
@@ -68,6 +69,7 @@ const NumberBlock: FC<localProps> = memo(
         optionOnMouseLeave,
     }) => {
         const classes = useStyles();
+        const optNumber: sudokuValue[] = optionNumber(values, line, column);
         return (
             <div className={classes.PlayBoardLine} key={`PlayBoardLine${line}Block${column}`}>
                 <Grid
@@ -80,6 +82,7 @@ const NumberBlock: FC<localProps> = memo(
                         [classes.leftPadding]: !(column % 3),
                         [classes.splitBorder]:true,
                     })}>
+                    {useMemo(()=>(
                     <IconButton
                         className={classNames(classes.playBoardBlockContainer, {
                             [classes.hidenullIcon]: showOptionNumber === true && num === null,
@@ -113,9 +116,18 @@ const NumberBlock: FC<localProps> = memo(
                             })}
                         />
                     </IconButton>
+                    ),[
+                        num,
+                        initValue,
+                        showUnchangeable,
+                        classes.numberIconNormal,
+                        blockhighlight,
+                        showConflict,
+                        conflictValue,
+                        ])}
+
                     {useMemo(() => {
                         if (num === null && showOptionNumber === true && initValue === null) {
-                            const optNumber: sudokuValue[] = optionNumber(values, line, column);
                             return (
                                 <Grid
                                     container
@@ -146,6 +158,7 @@ const NumberBlock: FC<localProps> = memo(
                         num,
                         showOptionNumber,
                         initValue,
+                        playRound,
                         classes.optionNumberBlock,
                         classes.optionalNumberTopPadding,
                         column,
