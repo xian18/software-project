@@ -23,7 +23,7 @@ let conflictValues: conflictValue[][] = [
     [a, a, a, a, a, a, a, a, a],
 ];
 let conflict: boolean = false;
-let complete: boolean = false;
+let complete: boolean = true;
 export function conflictDetect(values: conflictValue[][]) {
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
@@ -31,7 +31,7 @@ export function conflictDetect(values: conflictValue[][]) {
         }
     }
     conflict = false;
-    complete = false;
+    complete = true;
     isConflict(values);
     isSuccess(values);
     return {
@@ -88,6 +88,7 @@ function COLUMN(x: number): number {
     return x % 3;
 }
 function isSuccess(values: conflictValue[][]): boolean {
+    // console.log("in IsSuccess");
     let row: number, column: number;
     if (conflict)
         complete = false;
@@ -99,6 +100,7 @@ function isSuccess(values: conflictValue[][]): boolean {
             }
         }
     }
+    // console.log(complete);
     return complete;
 }
 
