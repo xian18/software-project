@@ -1,6 +1,12 @@
 {
-  "name": "reacttutorial",
+  "name": "software-project",
   "version": "0.1.0",
+  "description": "software project homework",
+  "keywords": ["software","project","homework","HUST"],
+  "homepage": "https://github.com/xian18/software-project",
+  "bugs": "https://github.com/xian18/software-project/issues",
+  "repository": { "type": "git", "url": "https://github.com/xian18/software-project" },
+  "author": "TEAM",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
