@@ -78,6 +78,12 @@ export default (state = init, action: ActionType): GameStore => {
             return { ...init,
                 values: generate,
                 initValues: generate.map((x) => Object.assign({}, x)),
+                blockHighlight:zero9x9.map((x) => Object.assign({}, x)) as number[][],
+                conflictValues:null9x9.map((x) =>[...x] as conflictValue[]),
+                level,
+                showUnchangeable,
+                showConflict,
+                showOptionNumber,
             };
         }
         case actions.BLOCK_HIGHLIGHT: // calculate highlight matrix
