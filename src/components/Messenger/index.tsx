@@ -166,7 +166,6 @@ const Messenger: FC<Props> = memo(({
             </div>
         </div>
     );
-    console.log(svgCode);
     const AvatarBox = ({ avatar: messageAvatar, name }: Message) => (
         <Avatar alt={name} src={messageAvatar} className={classes.avatar} children={<div dangerouslySetInnerHTML={{__html: svgCode}}/>} /> //default set children={FaceIcon}
     );
