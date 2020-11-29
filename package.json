@@ -2,15 +2,24 @@
   "name": "software-project",
   "version": "0.1.0",
   "description": "software project homework",
-  "keywords": ["software","project","homework","HUST"],
+  "keywords": [
+    "software",
+    "project",
+    "homework",
+    "HUST"
+  ],
   "homepage": "https://github.com/xian18/software-project",
   "bugs": "https://github.com/xian18/software-project/issues",
-  "repository": { "type": "git", "url": "https://github.com/xian18/software-project" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xian18/software-project"
+  },
   "author": "TEAM",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@multiavatar/multiavatar": "^1.0.1",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

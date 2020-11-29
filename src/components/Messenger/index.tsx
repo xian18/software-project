@@ -22,6 +22,7 @@ import PlusOneIcon from '@material-ui/icons/ExposurePlus1';
 import FaceIcon from '@material-ui/icons/Face';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import SendIcon from '@material-ui/icons/Send';
+import multiavatar from '@multiavatar/multiavatar';
 import EnlargeableImage from '../EnlargeableImg';
 import {useSnackbar} from 'notistack';
 
@@ -40,8 +41,13 @@ const Messenger: FC<Props> = memo(({
     const classes = useStyles();
     const [content, setContent] = useState('');
     const [container, setContainer] = useState<Element | null>(null);
+    const [svgCode, setSvgCode] = useState<string>("");
     const {enqueueSnackbar,closeSnackbar}=useSnackbar();    // eslint-disable-line
 
+    useEffect(() => { 
+        setSvgCode(multiavatar('bind avatar'));
+    },[])
+    
     useEffect(()=>{
         startSocketAction();
     },[startSocketAction])
@@ -160,13 +166,14 @@ const Messenger: FC<Props> = memo(({
             </div>
         </div>
     );
-
+    console.log(svgCode);
     const AvatarBox = ({ avatar: messageAvatar, name }: Message) => (
-        <Avatar alt={name} src={messageAvatar} className={classes.avatar} children={<FaceIcon />} />
+        <Avatar alt={name} src={messageAvatar} className={classes.avatar} children={<div dangerouslySetInnerHTML={{__html: svgCode}}/>} /> //default set children={FaceIcon}
     );
 
     return (
         <Paper className={classes.messenger}>
+            <div dangerouslySetInnerHTML={{__html: svgCode}} />
             <div className={classes.messages} ref={setContainer}>
                 {messages.map((message, index) => (
                     <div key={index} className={classNames(classes.messageContainer, { [classes.my]: message.isSelf })}>
