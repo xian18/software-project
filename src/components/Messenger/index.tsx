@@ -22,35 +22,24 @@ import PlusOneIcon from '@material-ui/icons/ExposurePlus1';
 import FaceIcon from '@material-ui/icons/Face';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import SendIcon from '@material-ui/icons/Send';
-import multiavatar from '@multiavatar/multiavatar';
 import EnlargeableImage from '../EnlargeableImg';
-import {useSnackbar} from 'notistack';
+import { useSnackbar } from 'notistack';
 
 import { Message } from '../../types';
 import useStyles from '../../styles/messenger';
 
-import {Props} from '../../containers/Messenger';
+import { Props } from '../../containers/Messenger';
+import { AvatarSvg } from '../SmallComponents/AvatarSvg';
 
-const Messenger: FC<Props> = memo(({
-    messages,
-    username,
-    avatar,
-    sendMessageAction,
-    startSocketAction,
-}) => {
+const Messenger: FC<Props> = memo(({ messages, username, avatar, sendMessageAction, startSocketAction }) => {
     const classes = useStyles();
     const [content, setContent] = useState('');
     const [container, setContainer] = useState<Element | null>(null);
-    const [svgCode, setSvgCode] = useState<string>("");
-    const {enqueueSnackbar,closeSnackbar}=useSnackbar();    // eslint-disable-line
-
-    useEffect(() => { 
-        setSvgCode(multiavatar('bind avatar'));
-    },[])
-    
-    useEffect(()=>{
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar(); // eslint-disable-line
+    const [avatarId, setAvatarId] = useState(`${Date.now()}`);
+    useEffect(() => {
         startSocketAction();
-    },[startSocketAction])
+    }, [startSocketAction]);
 
     useEffect(() => {
         if (container && container.scrollHeight - container.scrollTop < 1000) {
@@ -64,7 +53,7 @@ const Messenger: FC<Props> = memo(({
         time: Date.now(),
         isImage,
         name: username,
-        avatar
+        avatar,
     });
 
     const handleKey: KeyboardEventHandler = (event) => {
@@ -80,9 +69,9 @@ const Messenger: FC<Props> = memo(({
         }
     };
 
-    const handlePaste: ClipboardEventHandler = (event:ClipboardEvent<HTMLInputElement>) => {
-        const items:DataTransferItemList = (event.clipboardData || event['originalEvent'].clipboardData).items;
-        let blob:File | null = null;
+    const handlePaste: ClipboardEventHandler = (event: ClipboardEvent<HTMLInputElement>) => {
+        const items: DataTransferItemList = (event.clipboardData || event['originalEvent'].clipboardData).items;
+        let blob: File | null = null;
         for (const i of Object.values(items)) {
             if (i.type.indexOf('image') === 0) {
                 blob = i.getAsFile();
@@ -167,12 +156,16 @@ const Messenger: FC<Props> = memo(({
         </div>
     );
     const AvatarBox = ({ avatar: messageAvatar, name }: Message) => (
-        <Avatar alt={name} src={messageAvatar} className={classes.avatar} children={<div dangerouslySetInnerHTML={{__html: svgCode}}/>} /> //default set children={FaceIcon}
+        <Avatar
+            alt={name}
+            src={messageAvatar}
+            className={classes.avatar}
+            children={<AvatarSvg SvgProp={{ style: { height: '36px', width: '36px' } }} AvatarId={avatarId} />}
+        /> //default set children={FaceIcon}
     );
 
     return (
         <Paper className={classes.messenger}>
-            <div dangerouslySetInnerHTML={{__html: svgCode}} />
             <div className={classes.messages} ref={setContainer}>
                 {messages.map((message, index) => (
                     <div key={index} className={classNames(classes.messageContainer, { [classes.my]: message.isSelf })}>
