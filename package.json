@@ -34,6 +34,7 @@
     "@types/socket.io-client": "^1.4.34",
     "classnames": "^2.2.6",
     "exjs": "^1.2.1",
+    "express": "^4.17.1",
     "notistack": "^1.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

@@ -1,10 +1,15 @@
-process.env.DEBUG='socket.io*';
+process.env.DEBUG = 'socket.io*';
 
-const io = require('socket.io')();
-io.on('connection', client => {
-  client.on("connect",(data)=>{
-    console.log(data);
-  })
-  console.log(client);
+const server = require('http').createServer();
+const io = require('socket.io')(server);
+io.on('connection', (client) => {
+    console.log('connect 1243t54y6uyi');
+    client.on('event', (data) => {
+        console.log(1234);
+    });
+    client.on('disconnect', () => {
+        console.log('213245tytj');
+        /* … */
+    });
 });
-io.listen(3001);
+server.listen(3000);
