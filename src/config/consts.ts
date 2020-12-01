@@ -1,1 +1,1 @@
-export const API = 'https://hustunique.com:5000';
+export const API = 'http://hustunique.com:5000';
