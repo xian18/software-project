@@ -29,8 +29,7 @@ const NumberIcon: FC<{
                     className: classNames(className, {
                         [classes.unchangeableBlock]: showUnchangeable,
                     }),
-                }}
-                ></NumberSvg>
+                }}></NumberSvg>
         );
     else {
         if (num === null) {

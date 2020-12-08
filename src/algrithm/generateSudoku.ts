@@ -6,8 +6,8 @@ import { sudokuValue, Level } from '../types';
  * @param level 表示难度,取值0,1,2,3; 0-随机, 1-3难度递增
  *
  * @returns tuple [generate,answer] generate:元组的第一个元素,9x9 matrix   answer:元组的第二个元素, 9x9 matrix
- * 
- * 
+ *
+ *
  */
 
 const a = null;
@@ -57,34 +57,28 @@ export const generateSudoku = (level: Level): sudokuValue[][][] => {
         }
     }
     while (!fillForm(0, 1));
-    digHole((level+1)*10);
+    digHole((level + 1) * 10);
     getHole();
-    return [
-        Hole, Sudoku
-    ];
+    return [Hole, Sudoku];
 };
 
 export default generateSudoku;
 
 function set(x: number, y: number, val: sudokuValue): boolean {
-    if (Sudoku[y][x] !== a)
-        return false;
+    if (Sudoku[y][x] !== a) return false;
     let x0: number, y0: number;
     //列冲突
     for (x0 = 0; x0 < 9; x0++) {
-        if (Sudoku[y][x0] === val)
-            return false;
+        if (Sudoku[y][x0] === val) return false;
     }
     //行冲突
     for (y0 = 0; y0 < 9; y0++) {
-        if (Sudoku[y0][x] === val)
-            return false;
+        if (Sudoku[y0][x] === val) return false;
     }
     //九宫格内部冲突
     for (y0 = Math.floor(y / 3) * 3; y0 < Math.floor(y / 3) * 3 + 3; y0++) {
         for (x0 = Math.floor(x / 3) * 3; x0 < Math.floor(x / 3) * 3 + 3; x0++) {
-            if (Sudoku[y0][x0] === val)
-                return false;
+            if (Sudoku[y0][x0] === val) return false;
         }
     }
     //没有错误则修改值
@@ -109,7 +103,6 @@ function initXOrd(Xord: Array<number>) {
     }
 }
 function fillForm(y: number, val: sudokuValue): boolean {
-
     let Xord: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let i: number, x: number;
     //随机生成一个序列0-9
@@ -118,12 +111,9 @@ function fillForm(y: number, val: sudokuValue): boolean {
         x = Xord[i];
         if (set(x, y, val)) {
             if (y === 8) {
-                if (val === 9 || fillForm(0, (val as number + 1) as sudokuValue))
-                    return true;
-            }
-            else {
-                if (fillForm(y + 1, val))
-                    return true;
+                if (val === 9 || fillForm(0, ((val as number) + 1) as sudokuValue)) return true;
+            } else {
+                if (fillForm(y + 1, val)) return true;
             }
             reset(x, y);
         }
@@ -155,8 +145,7 @@ function getHole() {
         for (x = 0; x < 9; x++) {
             if (HolePosition[y][x] === 1) {
                 Hole[y][x] = a;
-            }
-            else {
+            } else {
                 Hole[y][x] = Sudoku[y][x];
             }
         }

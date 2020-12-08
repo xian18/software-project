@@ -1,4 +1,3 @@
-  
 import purple from '@material-ui/core/colors/purple';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { createStyles, makeStyles } from '@material-ui/styles';

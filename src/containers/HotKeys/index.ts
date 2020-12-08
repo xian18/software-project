@@ -1,17 +1,19 @@
-import { connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import {saveGameAction,loadGameAction} from '../../actions';
+import { saveGameAction, loadGameAction } from '../../actions';
 import { StoreState } from '../../reducers';
 
 import HotKeys from '../../components/HotKeys';
 import { PlayHistory, sudokuValue } from '../../types';
 
-const mapStateToProps = ({ Game: {values,initValues,playHistorys,playRound} }: StoreState): {
-    values:sudokuValue[][],
-    initValues:sudokuValue[][],
-    playHistorys:PlayHistory[],
-    playRound:number,
+const mapStateToProps = ({
+    Game: { values, initValues, playHistorys, playRound },
+}: StoreState): {
+    values: sudokuValue[][];
+    initValues: sudokuValue[][];
+    playHistorys: PlayHistory[];
+    playRound: number;
 } => ({
     values,
     initValues,

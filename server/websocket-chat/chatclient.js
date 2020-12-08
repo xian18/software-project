@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 var connection = null;
 var clientID = 0;
 var onlineUser = {};
 var publicHistory = [];
-var currentRenderTarget = "public";
-var myUserName = "";
+var currentRenderTarget = 'public';
+var myUserName = '';
 var myHostname = window.location.hostname;
 
 if (!myHostname) {
-    myHostname = "localhost";
+    myHostname = 'localhost';
 }
 
 /**
@@ -19,33 +19,33 @@ if (!myHostname) {
  * datachannel
  */
 function setUserName() {
-    console.log("set username");
-    myUserName = document.getElementById("name").value;
+    console.log('set username');
+    myUserName = document.getElementById('name').value;
     var msg = {
-        name: document.getElementById("name").value,
+        name: document.getElementById('name').value,
         date: Date.now(),
         id: clientID,
-        type: "username",
+        type: 'username',
     };
     connection.send(JSON.stringify(msg));
 }
 function parseMessageEvent(msg) {
-    console.log("parse message event", msg);
+    console.log('parse message event', msg);
     var connection;
     var desc;
     switch (msg.type) {
-        case "id":
+        case 'id':
             clientID = msg.id;
             setUserName();
             break;
-        case "rejectusername":
+        case 'rejectusername':
             myUserName = msg.name;
-            document.getElementById("name").value = myUserName;
+            document.getElementById('name').value = myUserName;
             break;
-        case "userlist":
+        case 'userlist':
             handleUserlistMsg(msg);
             break;
-        case "chat-offer":
+        case 'chat-offer':
             if (!onlineUser[msg.name].rtcpeerconnection) {
                 createPeerConnection(msg.name);
             }
@@ -68,7 +68,7 @@ function parseMessageEvent(msg) {
                     sendToServer({
                         name: myUserName,
                         target: msg.name,
-                        type: "chat-answer",
+                        type: 'chat-answer',
                         sdp: connection.localDescription,
                     });
                 })
@@ -78,7 +78,7 @@ function parseMessageEvent(msg) {
                     onlineUser[msg.name].rtcpeerconnection = null;
                 });
             break;
-        case "chat-answer":
+        case 'chat-answer':
             connection = onlineUser[msg.name].rtcpeerconnection;
             desc = new RTCSessionDescription(msg.sdp);
             connection.setRemoteDescription(desc).catch((e) => {
@@ -87,7 +87,7 @@ function parseMessageEvent(msg) {
                 onlineUser[msg.name].rtcpeerconnection = null;
             });
             break;
-        case "new-ice-candidate":
+        case 'new-ice-candidate':
             connection = onlineUser[msg.name].rtcpeerconnection;
             var candidate = new RTCIceCandidate(msg.candidate);
             connection.addIceCandidate(candidate).catch((e) => {
@@ -100,59 +100,47 @@ function parseMessageEvent(msg) {
 }
 
 function parseMessageText(msg) {
-    console.log("parse message text", msg);
-    var text = "";
+    console.log('parse message text', msg);
+    var text = '';
     var time = new Date(msg.date);
     var timeStr = time.toLocaleTimeString();
 
     switch (msg.type) {
-        case "username":
-            text =
-                "<b>User <em>" +
-                msg.name +
-                "</em> signed in at " +
-                timeStr +
-                "</b><br>";
+        case 'username':
+            text = '<b>User <em>' + msg.name + '</em> signed in at ' + timeStr + '</b><br>';
             break;
-        case "message":
-            text =
-                "(" +
-                timeStr +
-                ") <b>" +
-                msg.name +
-                "</b>: " +
-                msg.text +
-                "<br>";
+        case 'message':
+            text = '(' + timeStr + ') <b>' + msg.name + '</b>: ' + msg.text + '<br>';
             break;
-        case "rejectusername":
+        case 'rejectusername':
             text =
-                "<b>Your username has been set to <em>" +
+                '<b>Your username has been set to <em>' +
                 msg.name +
-                "</em> because the name you chose is in use.</b><br>";
+                '</em> because the name you chose is in use.</b><br>';
             break;
     }
     return text;
 }
 
 function sendToServer(msg) {
-    console.log("send to server", msg);
+    console.log('send to server', msg);
     connection.send(JSON.stringify(msg));
 }
 
 function sendToUser(msg, target) {
-    console.log("send to user", msg);
+    console.log('send to user', msg);
     onlineUser[target].datachannel.send(JSON.stringify(msg));
 }
 
 function createPeerConnection(target) {
-    console.log("create peer connection", target);
+    console.log('create peer connection', target);
     var connection = new RTCPeerConnection({
         iceServers: [
             // Information about ICE servers - Use your own!
             {
-                urls: "turn:" + myHostname, // A TURN server
-                username: "webrtc",
-                credential: "turnserver",
+                urls: 'turn:' + myHostname, // A TURN server
+                username: 'webrtc',
+                credential: 'turnserver',
             },
         ],
     });
@@ -160,7 +148,7 @@ function createPeerConnection(target) {
     connection.onicecandidate = (evt) => {
         if (evt.candidate) {
             sendToServer({
-                type: "new-ice-candidate",
+                type: 'new-ice-candidate',
                 target: target,
                 name: myUserName,
                 candidate: evt.candidate,
@@ -175,7 +163,7 @@ function createPeerConnection(target) {
                 sendToServer({
                     name: myUserName,
                     target: target,
-                    type: "chat-offer",
+                    type: 'chat-offer',
                     sdp: connection.localDescription,
                 });
             })
@@ -193,16 +181,16 @@ function createPeerConnection(target) {
 }
 
 function createDataChannel_self(target, datachannel) {
-    console.log("create data channel", target, datachannel);
-    datachannel.addEventListener("open", (evt) => {
-        console.log("datachannel create");
+    console.log('create data channel', target, datachannel);
+    datachannel.addEventListener('open', (evt) => {
+        console.log('datachannel create');
     });
-    datachannel.addEventListener("close", (evt) => {
-        console.log("datachannel close");
+    datachannel.addEventListener('close', (evt) => {
+        console.log('datachannel close');
     });
     datachannel.onmessage = (evt) => {
         var msg = JSON.parse(evt.data);
-        var chatBox = document.getElementById("chatbox");
+        var chatBox = document.getElementById('chatbox');
         parseMessageEvent(msg);
         var text = parseMessageText(msg);
         if (text.length) {
@@ -217,12 +205,12 @@ function createDataChannel_self(target, datachannel) {
 }
 
 function renderChatDiv(history, target) {
-    console.log("render chat div", history, target);
+    console.log('render chat div', history, target);
     if (target === currentRenderTarget) {
         return;
     }
-    var chatBox = document.getElementById("chatbox");
-    var text = "";
+    var chatBox = document.getElementById('chatbox');
+    var text = '';
     history.forEach((msg) => {
         text += parseMessageText(msg);
     });
@@ -233,9 +221,9 @@ function renderChatDiv(history, target) {
 
 function handleNameClick(evt) {
     var target = evt.target.textContent;
-    console.log("handleNameClick", target);
-    if (target === "public") {
-        renderChatDiv(publicHistory, "public");
+    console.log('handleNameClick', target);
+    if (target === 'public') {
+        renderChatDiv(publicHistory, 'public');
         return;
     }
     if (target === currentRenderTarget || target === myUserName) {
@@ -243,19 +231,14 @@ function handleNameClick(evt) {
     }
     if (!onlineUser[target].datachannel) {
         createPeerConnection(target);
-        createDataChannel_self(
-            target,
-            onlineUser[target].rtcpeerconnection.createDataChannel(
-                "chat-channel"
-            )
-        );
+        createDataChannel_self(target, onlineUser[target].rtcpeerconnection.createDataChannel('chat-channel'));
     }
     renderChatDiv(onlineUser[target].history, target);
 }
 
 function handleUserlistMsg(msg) {
-    var listElem = document.getElementById("userlistbox");
-    console.log("handle user list message", msg);
+    var listElem = document.getElementById('userlistbox');
+    console.log('handle user list message', msg);
     msg.users.forEach((username) => {
         if (username in onlineUser) {
             return;
@@ -263,9 +246,9 @@ function handleUserlistMsg(msg) {
             onlineUser[username] = {
                 userName: username,
                 itemElemnt: (() => {
-                    var item = document.createElement("li");
+                    var item = document.createElement('li');
                     item.appendChild(document.createTextNode(username));
-                    item.addEventListener("click", handleNameClick, false);
+                    item.addEventListener('click', handleNameClick, false);
                     listElem.appendChild(item);
                     return item;
                 })(),
@@ -295,34 +278,34 @@ function handleUserlistMsg(msg) {
 }
 
 function connect() {
-    console.log("connect to server");
+    console.log('connect to server');
     var serverUrl;
-    var scheme = "ws";
+    var scheme = 'ws';
 
     // If this is an HTTPS connection, we have to use a secure WebSocket
     // connection too, so add another "s" to the scheme.
 
-    if (document.location.protocol === "https:") {
-        scheme += "s";
+    if (document.location.protocol === 'https:') {
+        scheme += 's';
     }
 
-    serverUrl = scheme + "://" + document.location.hostname + ":6503";
+    serverUrl = scheme + '://' + document.location.hostname + ':6503';
 
-    connection = new WebSocket(serverUrl, "json");
+    connection = new WebSocket(serverUrl, 'json');
 
     connection.onopen = function (evt) {
-        document.getElementById("text").disabled = false;
-        document.getElementById("send").disabled = false;
+        document.getElementById('text').disabled = false;
+        document.getElementById('send').disabled = false;
     };
 
     connection.onmessage = function (evt) {
-        var chatBox = document.getElementById("chatbox");
+        var chatBox = document.getElementById('chatbox');
         var msg = JSON.parse(evt.data);
         parseMessageEvent(msg);
         var text = parseMessageText(msg);
         if (text.length) {
             publicHistory.push(msg);
-            if (currentRenderTarget === "public") {
+            if (currentRenderTarget === 'public') {
                 chatBox.innerHTML += text;
                 chatBox.scrollTop = chatBox.scrollHeight - chatBox.clientHeight;
             }
@@ -331,24 +314,24 @@ function connect() {
 }
 
 function handleSendButton() {
-    console.log("send chat message", currentRenderTarget);
-    if (currentRenderTarget === "public") {
+    console.log('send chat message', currentRenderTarget);
+    if (currentRenderTarget === 'public') {
         sendToServer({
-            text: document.getElementById("text").value,
-            type: "message",
+            text: document.getElementById('text').value,
+            type: 'message',
             id: clientID,
             date: Date.now(),
         });
     } else {
         var msg = {
-            text: document.getElementById("text").value,
-            type: "message",
+            text: document.getElementById('text').value,
+            type: 'message',
             id: clientID,
             name: myUserName,
             date: Date.now(),
         };
         sendToUser(msg, currentRenderTarget);
-        var chatBox = document.getElementById("chatbox");
+        var chatBox = document.getElementById('chatbox');
         var text = parseMessageText(msg);
         if (text.length) {
             onlineUser[currentRenderTarget].history.push(msg);
@@ -360,18 +343,18 @@ function handleSendButton() {
 
 function handleKey(evt) {
     if (evt.keyCode === 13 || evt.keyCode === 14) {
-        if (!document.getElementById("send").disabled) {
+        if (!document.getElementById('send').disabled) {
             handleSendButton();
             evt.preventDefault();
         }
     }
 }
 
-window.addEventListener("load", () => {
-    var listElem = document.getElementById("userlistbox");
-    var item = document.createElement("li");
-    item.appendChild(document.createTextNode("public"));
-    item.addEventListener("click", handleNameClick, false);
+window.addEventListener('load', () => {
+    var listElem = document.getElementById('userlistbox');
+    var item = document.createElement('li');
+    item.appendChild(document.createTextNode('public'));
+    item.addEventListener('click', handleNameClick, false);
     listElem.appendChild(item);
 });
 window.onlineUser = onlineUser;

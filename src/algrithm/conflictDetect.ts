@@ -69,9 +69,14 @@ function isConflict(values: conflictValue[][]) {
     for (num = 0; num < 9; num++) {
         for (x = 0; x < 9; x++) {
             for (y = x + 1; y < 9; y++) {
-                if (values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] === values[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)]) {
-                    conflictValues[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] = values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
-                    conflictValues[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)] = values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
+                if (
+                    values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] ===
+                    values[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)]
+                ) {
+                    conflictValues[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)] =
+                        values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
+                    conflictValues[ROW(num) * 3 + ROW(y)][COLUMN(num) * 3 + COLUMN(y)] =
+                        values[ROW(num) * 3 + ROW(x)][COLUMN(num) * 3 + COLUMN(x)];
                     conflict = true;
                 }
             }
@@ -90,13 +95,11 @@ function COLUMN(x: number): number {
 function isSuccess(values: conflictValue[][]): boolean {
     // console.log("in IsSuccess");
     let row: number, column: number;
-    if (conflict)
-        complete = false;
+    if (conflict) complete = false;
     else {
         for (row = 0; row < 9; row++) {
             for (column = 0; column < 9; column++) {
-                if (values[row][column] === a)
-                    complete = false;
+                if (values[row][column] === a) complete = false;
             }
         }
     }

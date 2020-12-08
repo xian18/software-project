@@ -5,7 +5,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
     createStyles({
         modalContainer: {
             display: 'flex',
-            alignItems:'center',
+            alignItems: 'center',
             justifyContent: 'center',
         },
         modal: {
@@ -17,30 +17,30 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             position: 'fixed',
             top: '50%',
             left: '50%',
-            
+
             //boxShadow: shadows[5],
             //padding: spacing(1),
         },
-        digitsContainerLine:{
-            display:'flex',
-            width:'40vmin', 
+        digitsContainerLine: {
+            display: 'flex',
+            width: '40vmin',
             //maxWidth:'35%',
             //margin:'auto',
-            backgroundColor:palette.primary.main,
+            backgroundColor: palette.primary.main,
         },
-        digitButtonContainer:{
-            width:'12vmin',
-            padding:'0.3vmin',
-            margin:'0.3vmin',
+        digitButtonContainer: {
+            width: '12vmin',
+            padding: '0.3vmin',
+            margin: '0.3vmin',
         },
-        digitButton:{
+        digitButton: {
             //color:palette.secondary.light,
-            fill:palette.secondary.contrastText,
-            borderRadius:15,
-            width:'12vmin',
-            height:'12vmin',
+            fill: palette.secondary.contrastText,
+            borderRadius: 15,
+            width: '12vmin',
+            height: '12vmin',
             //margin:spacing(2),
-            padding:0,
+            padding: 0,
         },
         backdrop: {
             background: palette.primary.main,

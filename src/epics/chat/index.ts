@@ -1,5 +1,5 @@
 import sendMessageEpic from './sendMessage';
 
-const epics=[sendMessageEpic];
+const epics = [sendMessageEpic];
 
 export default epics;

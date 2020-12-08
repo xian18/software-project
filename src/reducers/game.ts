@@ -22,7 +22,7 @@ type ActionType =
     | actions.ToggleShowOptionNumber
     | actions.SaveGame
     | actions.LoadGame
-    | actions.SetLevel
+    | actions.SetLevel;
 
 export interface GameStore {
     values: sudokuValue[][] /** 数独数字 9x9 matrix*/;
@@ -45,7 +45,7 @@ export interface GameStore {
 const generate = generateSudoku(1)[0];
 const init: GameStore = {
     values: generate,
-    initValues: generate.map((x) =>[...x] as sudokuValue[]),
+    initValues: generate.map((x) => [...x] as sudokuValue[]),
     blockHighlight: zero9x9.map((x) => Object.assign({}, x)) as number[][],
     level: 1,
     point: { x: 0, y: 0, value: null },
@@ -55,7 +55,7 @@ const init: GameStore = {
     playHistorys: [],
     placeValue: null,
     showUnchangeable: true,
-    conflictValues: null9x9.map((x) =>[...x] as conflictValue[]),
+    conflictValues: null9x9.map((x) => [...x] as conflictValue[]),
     showConflict: true,
     complete: false,
     showOptionNumber: true,
@@ -73,13 +73,15 @@ export default (state = init, action: ActionType): GameStore => {
         showOptionNumber,
     } = state;
     switch (action.type) {
-        case actions.UPDATE_SUDOKU:{ // when click fresh button, generate sudoku and update 9x9 matrix in store
-            const [generate, result] = generateSudoku(level);   // eslint-disable-line
-            return { ...init,
+        case actions.UPDATE_SUDOKU: {
+            // when click fresh button, generate sudoku and update 9x9 matrix in store
+            const [generate, result] = generateSudoku(level); // eslint-disable-line
+            return {
+                ...init,
                 values: generate,
                 initValues: generate.map((x) => Object.assign({}, x)),
-                blockHighlight:zero9x9.map((x) => Object.assign({}, x)) as number[][],
-                conflictValues:null9x9.map((x) =>[...x] as conflictValue[]),
+                blockHighlight: zero9x9.map((x) => Object.assign({}, x)) as number[][],
+                conflictValues: null9x9.map((x) => [...x] as conflictValue[]),
                 level,
                 showUnchangeable,
                 showConflict,
@@ -97,13 +99,13 @@ export default (state = init, action: ActionType): GameStore => {
             return { ...state, point: action.point };
         case actions.CHOOSE_DIGIT:
             values[action.point.x][action.point.y] = action.point.value;
-            const {complete, conflictValues } = conflictDetect(values);
-            return { ...state, values: values, point:action.point, conflictValues, complete };
+            const { complete, conflictValues } = conflictDetect(values);
+            return { ...state, values: values, point: action.point, conflictValues, complete };
         case actions.PLAY_ROUND_BACKWARD: {
-            if (playRound === 0) return {...state};
+            if (playRound === 0) return { ...state };
             if (playRound > 0)
                 values[playHistorys[playRound - 1].x][playHistorys[playRound - 1].y] = playHistorys[playRound - 1].from;
-            const {conflictValues} = conflictDetect(values);
+            const { conflictValues } = conflictDetect(values);
             return {
                 ...state,
                 values: values,
@@ -131,17 +133,18 @@ export default (state = init, action: ActionType): GameStore => {
         case actions.TOGGLE_SHOW_OPTIONNUMBER:
             return { ...state, showOptionNumber: !showOptionNumber };
         case actions.LOAD_GAME: {
-            const {conflictValues} = conflictDetect(action.values);
-            return {...state,
+            const { conflictValues } = conflictDetect(action.values);
+            return {
+                ...state,
                 values: action.values,
                 initValues: action.initValues,
                 playHistorys: action.playHistorys,
-                playRound:action.playRound,
+                playRound: action.playRound,
                 conflictValues,
             };
         }
         case actions.SET_LEVEL:
-            return {...state,level:action.level};
+            return { ...state, level: action.level };
         default:
             return { ...state };
     }

@@ -1,9 +1,9 @@
-import { Point, sudokuValue, PlayHistory, PlaceValue, Message,Level } from '../types';
+import { Point, sudokuValue, PlayHistory, PlaceValue, Message, Level } from '../types';
 import createActionFunc from './utils';
 
 /** 让counter数字加一*/
 export const INCREMENT = 'INCREMENT';
-export type INCREMENT = typeof INCREMENT;   // eslint-disable-line
+export type INCREMENT = typeof INCREMENT; // eslint-disable-line
 export interface Increment {
     type: INCREMENT;
 }
@@ -11,7 +11,7 @@ export const incrementAction = createActionFunc(INCREMENT);
 
 /** 让counter数字减一*/
 export const DECREMENT = 'DECREMENT';
-export type DECREMENT = typeof DECREMENT;   // eslint-disable-line
+export type DECREMENT = typeof DECREMENT; // eslint-disable-line
 export interface Decrement {
     type: DECREMENT;
 }
@@ -19,7 +19,7 @@ export const decrementAction = createActionFunc(DECREMENT);
 
 /** get serverValue action start, gonna be handled by epic*/
 export const GET_SERVERVALUE = 'GET_SERVERVALUE';
-export type GET_SERVERVALUE = typeof GET_SERVERVALUE;   // eslint-disable-line
+export type GET_SERVERVALUE = typeof GET_SERVERVALUE; // eslint-disable-line
 export interface GetserverValue {
     type: GET_SERVERVALUE;
     payload: string;
@@ -28,7 +28,7 @@ export const getserverValueAction = createActionFunc(GET_SERVERVALUE, 'payload')
 
 /** get serverValue action fullfilled, gonna be handled by counters's reducer*/
 export const SERVERVALUE_FULFILLED = 'SERVERVALUE_FULFILLED';
-export type SERVERVALUE_FULFILLED = typeof SERVERVALUE_FULFILLED;   // eslint-disable-line
+export type SERVERVALUE_FULFILLED = typeof SERVERVALUE_FULFILLED; // eslint-disable-line
 export interface ServerValueFulfilled {
     type: SERVERVALUE_FULFILLED;
     key: string;
@@ -56,7 +56,7 @@ export const chooseDigitAction = createActionFunc(CHOOSE_DIGIT, 'point');
 
 /** 调用generateSudoku函数，生成新的数独9x9 matrix,放入store中*/
 export const UPDATE_SUDOKU = 'UPDATE_SUDOKU';
-export type UPDATE_SUDOKU = typeof UPDATE_SUDOKU;   // eslint-disable-line
+export type UPDATE_SUDOKU = typeof UPDATE_SUDOKU; // eslint-disable-line
 export interface UpdateSudokuAction {
     type: UPDATE_SUDOKU;
 }
@@ -64,7 +64,7 @@ export const updateSudokuAction = createActionFunc(UPDATE_SUDOKU);
 
 /** 根据value计算新的blockHighlight矩阵*/
 export const BLOCK_HIGHLIGHT = 'BLOCK_HIGHLIGHT';
-export type BLOCK_HIGHLIGHT = typeof BLOCK_HIGHLIGHT;   // eslint-disable-line
+export type BLOCK_HIGHLIGHT = typeof BLOCK_HIGHLIGHT; // eslint-disable-line
 export interface BlockHighlightAction {
     type: BLOCK_HIGHLIGHT;
     value: sudokuValue;
@@ -73,7 +73,7 @@ export const blockHighlightAction = createActionFunc(BLOCK_HIGHLIGHT, 'value');
 
 /** 将blockHighlight矩阵全部置0，没有任何一个块需要高亮*/
 export const CLEAR_BLOCK_HIGHLIGHT = 'CLEAR_BLOCK_HIGHLIGHT';
-export type CLEAR_BLOCK_HIGHLIGHT = typeof CLEAR_BLOCK_HIGHLIGHT;   // eslint-disable-line
+export type CLEAR_BLOCK_HIGHLIGHT = typeof CLEAR_BLOCK_HIGHLIGHT; // eslint-disable-line
 export interface ClearBlockHighlightAction {
     type: CLEAR_BLOCK_HIGHLIGHT;
 }
@@ -81,7 +81,7 @@ export const clearBlockHighlightAction = createActionFunc(CLEAR_BLOCK_HIGHLIGHT)
 
 /** toggle global digitBoard on and off*/
 export const TOGGLE_DIGITBOARD = 'TOGGLE_DIGITBOARD';
-export type TOGGLE_DIGITBOARD = typeof TOGGLE_DIGITBOARD;   // eslint-disable-line
+export type TOGGLE_DIGITBOARD = typeof TOGGLE_DIGITBOARD; // eslint-disable-line
 export interface ToggleDigitBoardAction {
     type: TOGGLE_DIGITBOARD;
 }
@@ -98,7 +98,7 @@ export const playRoundForwardAction = createActionFunc(PLAY_ROUND_FORWARD, 'payl
 
 /** play round go back*/
 export const PLAY_ROUND_BACKWARD = 'PLAY_ROUND_BACKWARD';
-export type PLAY_ROUND_BACKWARD = typeof PLAY_ROUND_BACKWARD;   // eslint-disable-line
+export type PLAY_ROUND_BACKWARD = typeof PLAY_ROUND_BACKWARD; // eslint-disable-line
 export interface PlayRoundBackwardAction {
     type: PLAY_ROUND_BACKWARD;
 }
@@ -106,7 +106,7 @@ export const playRoundBackwardAction = createActionFunc(PLAY_ROUND_BACKWARD);
 
 /** 设置placeValue值*/
 export const SET_PLACE_VALUE = 'SET_PLACE_VALUE';
-export type SET_PLACE_VALUE = typeof SET_PLACE_VALUE;   // eslint-disable-line
+export type SET_PLACE_VALUE = typeof SET_PLACE_VALUE; // eslint-disable-line
 export interface SetPlaceValueAction {
     type: SET_PLACE_VALUE;
     value: PlaceValue;
@@ -115,7 +115,7 @@ export const setPlaceValueAction = createActionFunc(SET_PLACE_VALUE, 'value');
 
 /** 清空placeValue值，设置为null*/
 export const CLEAR_PLACE_VALUE = 'CLEAR_PLACE_VALUE';
-export type CLEAR_PLACE_VALUE = typeof CLEAR_PLACE_VALUE;   // eslint-disable-line
+export type CLEAR_PLACE_VALUE = typeof CLEAR_PLACE_VALUE; // eslint-disable-line
 export interface ClearPlaceValueAction {
     type: CLEAR_PLACE_VALUE;
     value: PlaceValue;
@@ -148,7 +148,7 @@ export const toggleShowOptionNumberAction = createActionFunc(TOGGLE_SHOW_OPTIONN
 
 /** 记录多次游戏的所有数据*/
 export const SAVE_GAME = 'SAVE_GAME';
-export type SAVE_GAME = typeof SAVE_GAME;   // eslint-disable-line
+export type SAVE_GAME = typeof SAVE_GAME; // eslint-disable-line
 export interface SaveGame {
     type: SAVE_GAME;
 }
@@ -156,53 +156,53 @@ export const saveGameAction = createActionFunc(SAVE_GAME);
 
 /** 记录多次游戏的所有数据*/
 export const LOAD_GAME = 'LOAD_GAME';
-export type LOAD_GAME = typeof LOAD_GAME;   // eslint-disable-line
+export type LOAD_GAME = typeof LOAD_GAME; // eslint-disable-line
 export interface LoadGame {
     type: LOAD_GAME;
-    values:sudokuValue[][];
-    initValues:sudokuValue[][];
-    playHistorys:PlayHistory[];
-    playRound:number;
+    values: sudokuValue[][];
+    initValues: sudokuValue[][];
+    playHistorys: PlayHistory[];
+    playRound: number;
 }
-export const loadGameAction = createActionFunc(LOAD_GAME,'values','initValues','playHistorys','playRound');
+export const loadGameAction = createActionFunc(LOAD_GAME, 'values', 'initValues', 'playHistorys', 'playRound');
 
 /** 在聊天框发送消息*/
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export type SEND_MESSAGE = typeof SEND_MESSAGE; // eslint-disable-line
 export interface SendMessage {
     type: SEND_MESSAGE;
-    message:Message;
+    message: Message;
 }
-export const sendMessageAction = createActionFunc(SEND_MESSAGE,'message');
+export const sendMessageAction = createActionFunc(SEND_MESSAGE, 'message');
 
 /** 启动socket连接*/
-export const START_SOCKET='START_SOCKET';
-export type START_SOCKET=typeof START_SOCKET;   // eslint-disable-line
+export const START_SOCKET = 'START_SOCKET';
+export type START_SOCKET = typeof START_SOCKET; // eslint-disable-line
 export interface StartSocket {
-    type:START_SOCKET,
+    type: START_SOCKET;
 }
-export const startSocketAction=createActionFunc(START_SOCKET);
+export const startSocketAction = createActionFunc(START_SOCKET);
 
 /** 添加一条信息到面板*/
-export const ADD_MESSAGE='ADD_MESSAGE';
-export type ADD_MESSAGE=typeof ADD_MESSAGE; // eslint-disable-line
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export type ADD_MESSAGE = typeof ADD_MESSAGE; // eslint-disable-line
 export interface AddMessage {
-    type:ADD_MESSAGE,
-    message:Message;
+    type: ADD_MESSAGE;
+    message: Message;
 }
-export const addMessageAction=createActionFunc(ADD_MESSAGE,'message');
+export const addMessageAction = createActionFunc(ADD_MESSAGE, 'message');
 
-export const SET_LEVEL='SET_LEVEL';
-export type SET_LEVEL=typeof SET_LEVEL; // eslint-disable-line
-export interface  SetLevel {
-    type:SET_LEVEL;
-    level:Level;
+export const SET_LEVEL = 'SET_LEVEL';
+export type SET_LEVEL = typeof SET_LEVEL; // eslint-disable-line
+export interface SetLevel {
+    type: SET_LEVEL;
+    level: Level;
 }
-export const setLevelAction=createActionFunc(SET_LEVEL,'level');
+export const setLevelAction = createActionFunc(SET_LEVEL, 'level');
 
-export const TOGGLE_PROGRESS='TOGGLE_PROGRESS';
-export type TOGGLE_PROGRESS=typeof TOGGLE_PROGRESS; // eslint-disable-line
-export interface  ToggleProgress {
-    type:TOGGLE_PROGRESS;
+export const TOGGLE_PROGRESS = 'TOGGLE_PROGRESS';
+export type TOGGLE_PROGRESS = typeof TOGGLE_PROGRESS; // eslint-disable-line
+export interface ToggleProgress {
+    type: TOGGLE_PROGRESS;
 }
-export const toggleProgress=createActionFunc(TOGGLE_PROGRESS);
+export const toggleProgress = createActionFunc(TOGGLE_PROGRESS);

@@ -26,3 +26,5 @@ yarn-error.log*
 /.vs
 /httpServer
 /schoolmap
+/.vscode
+/.idea

@@ -22,11 +22,11 @@ import PlayHelper from '../../components/PlayHelper';
 import { PlaceValue } from '../../types';
 
 const mapStateToProps = ({
-    Game: { placeValue, complete,playRound },
+    Game: { placeValue, complete, playRound },
 }: StoreState): {
     placeValue: PlaceValue;
     complete: boolean;
-    playRound:number;
+    playRound: number;
 } => ({
     placeValue,
     complete,
