@@ -12,7 +12,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
 
             top: '50%',
             transform: 'translate(-50%,-50%)',
-            [breakpoints.down('sm')]:{
+            [breakpoints.down('sm')]: {
                 transform: 'translate(-50%,0%)',
                 top: '10%',
             },
@@ -23,14 +23,14 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             padding: spacing(0),
             height: '9vmin',
         },
-        splitBorder:{
-            padding:'0.3vmin',
-            margin:0,
+        splitBorder: {
+            padding: '0.3vmin',
+            margin: 0,
             //borderTop:`dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
-            borderBottom:`dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
-            borderRight:`dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
-            width:'9.3vmin',
-            height:'9vmin',
+            borderBottom: `dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
+            borderRight: `dashed 0.3vmin ${palette.numberBackgroundColor?.contrastText}`,
+            width: '9.3vmin',
+            height: '9vmin',
         },
         playBoardBlockContainer: {
             position: 'relative',
@@ -53,7 +53,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
         numberIconNormal: {
             margin: 0,
             padding: 0,
-            width:'8.25vmin',
+            width: '8.25vmin',
             //height:'8.7vmin',
             borderRadius: '20%',
         },
@@ -91,7 +91,7 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             fill: `${palette.optionNumberBackgroudColor?.contrastText}`,
         },
         optionNumberBlock: {
-            paddingTop:"0.3vmin",
+            paddingTop: '0.3vmin',
             //margin:"0vmin",
             position: 'relative',
             fontSize: '0rem',

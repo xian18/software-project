@@ -7,7 +7,7 @@ import {
     StateObservable,
 } from 'redux-observable';
 
-import { BehaviorSubject, Observable,EMPTY} from 'rxjs';
+import { BehaviorSubject, Observable, EMPTY } from 'rxjs';
 import io from 'socket.io-client';
 import { VariantType } from 'notistack';
 import { StoreState } from '../reducers';
@@ -29,9 +29,9 @@ export const customError = (error: object) => {
     return err as CustomError;
 };
 
-export const errHandler = ({ message, type }: CustomError, customAction?: AnyAction) =>{
+export const errHandler = ({ message, type }: CustomError, customAction?: AnyAction) => {
     return EMPTY;
-}
+};
 
 const dependencies = { io, socket$: new BehaviorSubject((null as unknown) as Socket), sessionStorage };
 
@@ -47,8 +47,4 @@ export const epicMiddleware: EpicMiddleware<Action, Action, StoreState> = create
     dependencies,
 });
 
-export const epics = combineEpics(
-    ...counters,
-    ...webSocket,
-    ...chat,
-);
+export const epics = combineEpics(...counters, ...webSocket, ...chat);

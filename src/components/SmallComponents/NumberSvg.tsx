@@ -1,5 +1,5 @@
 import React, { FC, memo, SVGProps } from 'react';
-import {numberIcons} from '../../consts/elements';
+import { numberIcons } from '../../consts/elements';
 import Clear from '@material-ui/icons/Clear';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
 export const NumberSvg: FC<{

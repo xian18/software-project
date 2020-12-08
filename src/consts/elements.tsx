@@ -40,5 +40,15 @@ export const numberIcons = new Map<number, JSX.Element>([
     [-1, <></>],
 ]);
 
-export const loadIcon=(<><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2z"></path><path d="m-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z" transform={"rotate(180,12,9.5)"}></path></>);
-export const saveIcon=(<><path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2z"></path><path d="m-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"></path></>);
+export const loadIcon = (
+    <>
+        <path d='M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2z'></path>
+        <path d='m-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z' transform={'rotate(180,12,9.5)'}></path>
+    </>
+);
+export const saveIcon = (
+    <>
+        <path d='M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2z'></path>
+        <path d='m-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z'></path>
+    </>
+);

@@ -1,4 +1,4 @@
-import React, { FC, memo} from 'react';
+import React, { FC, memo } from 'react';
 
 import Progress from '../Progress';
 
@@ -7,24 +7,16 @@ import { Props } from '../../containers/Frame';
 
 import useStyles from '../../styles/frame';
 
-const Frame: FC<Props> = memo(
-    ({
-        children,
-        userInfo,
-        loading,
-    }) => {
-        const classes = useStyles();
+const Frame: FC<Props> = memo(({ children, userInfo, loading }) => {
+    const classes = useStyles();
 
-        return (
-            <div className={classes.root}>
-                <AppBar />
-                <main className={classes.content}>
-                    {userInfo && children}
-                </main>
-                {loading && <Progress />}
-            </div>
-        )
-    },
-);
+    return (
+        <div className={classes.root}>
+            <AppBar />
+            <main className={classes.content}>{userInfo && children}</main>
+            {loading && <Progress />}
+        </div>
+    );
+});
 
 export default Frame;

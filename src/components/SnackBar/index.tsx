@@ -1,4 +1,4 @@
-import React, { FC, memo} from 'react';
+import React, { FC, memo } from 'react';
 import { SnackbarProvider } from 'notistack';
 import useStyles from '../../styles/snackBar';
 

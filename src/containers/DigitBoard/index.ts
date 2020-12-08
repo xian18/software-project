@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { chooseDigitAction, blockHighlightAction, playRoundForwardAction,toggleDigitBoardAction } from '../../actions';
-import { Point} from '../../types';
+import { chooseDigitAction, blockHighlightAction, playRoundForwardAction, toggleDigitBoardAction } from '../../actions';
+import { Point } from '../../types';
 import { StoreState } from '../../reducers';
 
 import DigitBoard from '../../components/DigitBoard';
 
-const mapStateToProps = ({ Game: { point,digitBoard } }: StoreState): { point: Point,digitBoard:boolean } => ({
+const mapStateToProps = ({ Game: { point, digitBoard } }: StoreState): { point: Point; digitBoard: boolean } => ({
     point,
     digitBoard,
 });

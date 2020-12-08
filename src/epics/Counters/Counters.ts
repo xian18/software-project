@@ -1,16 +1,16 @@
 import { Action, AnyAction } from 'redux';
-import {ofType,} from 'redux-observable';
-import {of} from 'rxjs';
+import { ofType } from 'redux-observable';
+import { of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import {mergeMap,} from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 import { GetserverValue, GET_SERVERVALUE, serverValueFulfilled } from '../../actions';
-import {Epic} from '../';
+import { Epic } from '../';
 import { API } from '../../config/consts';
 
-export const getserverValueEpic:Epic<GetserverValue> = (action$,state$,{}) =>
+export const getserverValueEpic: Epic<GetserverValue> = (action$, state$, {}) =>
     action$.pipe(
-        ofType<Action,GetserverValue>(GET_SERVERVALUE),
+        ofType<Action, GetserverValue>(GET_SERVERVALUE),
         mergeMap(() =>
             ajax.getJSON<{ type: string; message: string }>(`${API}/user/qrCode`).pipe(
                 mergeMap((res) => {

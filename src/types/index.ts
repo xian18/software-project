@@ -3,7 +3,7 @@ export type sudokuValue = null | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9; /** null-格
 export type conflictValue = null | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export type PlaceValue = -1 | null | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export type Level = 0 | 1 | 2 | 3;
-export type Gender=0 | 1 | 2;
+export type Gender = 0 | 1 | 2;
 
 export interface Point {
     x: number;
@@ -24,7 +24,7 @@ export interface Message {
     name: string;
     time: number;
     isImage: boolean;
-    avatar:string;
+    avatar: string;
 }
 
 export interface Userinfo {

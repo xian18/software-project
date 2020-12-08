@@ -27,7 +27,7 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
     const [helper, setHelper] = useState(false);
     const [drawer, setDrawer] = useState(false);
-    const [messenger,setMessenger]=useState(false);
+    const [messenger, setMessenger] = useState(false);
     const { darkMode, setDarkMode } = useContext(ThemeContext); // eslint-disable-line
 
     const handleClickPerson: MouseEventHandler = ({ currentTarget }) => {
@@ -48,9 +48,9 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
     const toggleDrawer = () => {
         setDrawer((drawer) => !drawer);
     };
-    const toggleMessenger=()=>{
-        setMessenger((messenger)=>!messenger);
-    }
+    const toggleMessenger = () => {
+        setMessenger((messenger) => !messenger);
+    };
 
     const HelpMessage = useMemo(() => <Typography>这里是我们要做的东西</Typography>, []);
 
@@ -88,18 +88,18 @@ const Bar: FC<Props> = memo(({ updateSudokuAction, playRoundBackwardAction }) =>
                                 <div className={classNames(classes.rightButtons)}>
                                     <TipButton
                                         TooltipProp={{ title: 'Messenger', children: <></> }}
-                                        IconButtonProp={{ onClick:toggleMessenger, color: 'inherit' }}>
+                                        IconButtonProp={{ onClick: toggleMessenger, color: 'inherit' }}>
                                         <ChatIcon />
                                     </TipButton>
                                     <TipButton
                                         TooltipProp={{ title: 'Help', children: <></> }}
-                                        IconButtonProp={{ onClick:toggleHelper, color: 'inherit' }}>
+                                        IconButtonProp={{ onClick: toggleHelper, color: 'inherit' }}>
                                         <HelpIcon />
                                     </TipButton>
                                     <TipButton
                                         TooltipProp={{ title: 'Dark', children: <></> }}
                                         IconButtonProp={{
-                                            onClick:setDarkMode,
+                                            onClick: setDarkMode,
                                             color: 'inherit',
                                         }}>
                                         <Brightness4 />

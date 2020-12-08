@@ -1,16 +1,21 @@
-import { connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import {sendMessageAction,startSocketAction} from '../../actions';
+import { sendMessageAction, startSocketAction } from '../../actions';
 import { StoreState } from '../../reducers';
 
 import Messenger from '../../components/Messenger';
-import { Message} from '../../types';
+import { Message } from '../../types';
 
-const mapStateToProps = ({ User: {messages,info:{username,avatar}} }: StoreState): {
-    messages:Message[];
-    username:string;
-    avatar:string;
+const mapStateToProps = ({
+    User: {
+        messages,
+        info: { username, avatar },
+    },
+}: StoreState): {
+    messages: Message[];
+    username: string;
+    avatar: string;
 } => ({
     messages,
     username,
