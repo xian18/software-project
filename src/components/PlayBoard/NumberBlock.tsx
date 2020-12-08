@@ -79,9 +79,9 @@ const NumberBlock: FC<localProps> = memo(
                     container
                     className={classNames({
                         [classes.bottomPaddingBorder]: line === 2 || line === 5,
-                        [classes.topPadding]: !(line % 3),
+                        //[classes.topPadding]: !(line % 3),
                         [classes.rightPaddingBorder]: column === 2 || column === 5,
-                        [classes.leftPadding]: !(column % 3),
+                        //[classes.leftPadding]: !(column % 3),
                         [classes.splitBorder]:true,
                     })}>
                     {useMemo(()=>(
