@@ -12,7 +12,7 @@ export const socketReceiveEpic: Epic = (action$, state$, { socket$ }) =>
                 ? EMPTY
                 : new Observable<Action>((o) => {
                       /** 接收到消息*/
-                      socket.on('message', ({ message }: { message: Message }) => {
+                      socket.on('receiveMessage', ({ message }: { message: Message }) => {
                           o.next(addMessageAction({ ...message, isSelf: false }));
                       });
 
