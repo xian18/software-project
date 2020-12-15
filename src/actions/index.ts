@@ -36,7 +36,7 @@ export interface ServerValueFulfilled {
 }
 export const serverValueFulfilled = createActionFunc(SERVERVALUE_FULFILLED, 'key', 'value');
 
-/** 展示DigitBoard*/
+/** 当鼠标hover上一个numberBlock，将此block的Point更新到Store中*/
 export const CHOOSE_DIGIT_START = 'CHOOSE_ACTION_START';
 export type CHOOSE_DIGIT_START = typeof CHOOSE_DIGIT_START; // eslint-disable-line
 export interface ChooseDigitStartAction {
@@ -45,7 +45,7 @@ export interface ChooseDigitStartAction {
 }
 export const chooseDigitStartAction = createActionFunc(CHOOSE_DIGIT_START, 'point');
 
-/** DigitBoard click a number, the clicked number will update number in block*/
+/** DigitBoard click a number, the clicked number will update the number in the block*/
 export const CHOOSE_DIGIT = 'CHOOSE_DIGIT';
 export type CHOOSE_DIGIT = typeof CHOOSE_DIGIT; // eslint-disable-line
 export interface ChooseDigitAction {
@@ -54,7 +54,7 @@ export interface ChooseDigitAction {
 }
 export const chooseDigitAction = createActionFunc(CHOOSE_DIGIT, 'point');
 
-/** 调用generateSudoku函数，生成新的数独9x9 matrix,放入store中*/
+/** 调用generateSudoku函数，生成新的数独9x9 matrix,并放入store中*/
 export const UPDATE_SUDOKU = 'UPDATE_SUDOKU';
 export type UPDATE_SUDOKU = typeof UPDATE_SUDOKU; // eslint-disable-line
 export interface UpdateSudokuAction {
@@ -87,7 +87,7 @@ export interface ToggleDigitBoardAction {
 }
 export const toggleDigitBoardAction = createActionFunc(TOGGLE_DIGITBOARD);
 
-/** play round go ahrad*/
+/** playround go ahead*/
 export const PLAY_ROUND_FORWARD = 'PLAY_ROUND_FORWARD';
 export type PLAY_ROUND_FORWARD = typeof PLAY_ROUND_FORWARD; // eslint-disable-line
 export interface PlayRoundForwardAction {
@@ -96,7 +96,7 @@ export interface PlayRoundForwardAction {
 }
 export const playRoundForwardAction = createActionFunc(PLAY_ROUND_FORWARD, 'payload');
 
-/** play round go back*/
+/** playround go back*/
 export const PLAY_ROUND_BACKWARD = 'PLAY_ROUND_BACKWARD';
 export type PLAY_ROUND_BACKWARD = typeof PLAY_ROUND_BACKWARD; // eslint-disable-line
 export interface PlayRoundBackwardAction {
@@ -192,6 +192,7 @@ export interface AddMessage {
 }
 export const addMessageAction = createActionFunc(ADD_MESSAGE, 'message');
 
+/**设置游戏难度，在Store中更新level值 */
 export const SET_LEVEL = 'SET_LEVEL';
 export type SET_LEVEL = typeof SET_LEVEL; // eslint-disable-line
 export interface SetLevel {
@@ -200,6 +201,7 @@ export interface SetLevel {
 }
 export const setLevelAction = createActionFunc(SET_LEVEL, 'level');
 
+/**拉起进度条 */
 export const TOGGLE_PROGRESS = 'TOGGLE_PROGRESS';
 export type TOGGLE_PROGRESS = typeof TOGGLE_PROGRESS; // eslint-disable-line
 export interface ToggleProgress {
