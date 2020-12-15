@@ -1,4 +1,4 @@
-import React, {FC, memo, useState, useMemo, useEffect, useCallback} from 'react';
+import React, { FC, memo, useState, useMemo, useEffect, useCallback } from 'react';
 import { useSnackbar } from 'notistack';
 
 import Grid from '@material-ui/core/Grid';
@@ -35,7 +35,7 @@ const PlayHelper: FC<Props> = memo(
         setLevelAction,
     }) => {
         const classes = useStyles();
-        const { enqueueSnackbar, closeSnackbar } = useSnackbar();   // eslint-disable-line
+        const { enqueueSnackbar, closeSnackbar } = useSnackbar(); // eslint-disable-line
 
         const [completeMessageShowed, setCompleteMessageshowed] = useState(
             false,
@@ -46,7 +46,7 @@ const PlayHelper: FC<Props> = memo(
                 enqueueSnackbar('Sudoku Complete!', { variant: 'info' });
                 setCompleteMessageshowed(true);
             }
-        }, [complete,completeMessageShowed,enqueueSnackbar]);
+        }, [complete, completeMessageShowed, enqueueSnackbar]);
 
         const [highlightLoc, setHighlightLoc] = useState(
             0,
@@ -55,7 +55,7 @@ const PlayHelper: FC<Props> = memo(
         /** 按钮文本，可更改*/
         const showConflictTexts = ['取消显示冲突', '显示冲突'];
 
-        const [showOptionNumberIcon,setShowOptionNumberIcon] = useState(false); //true 为可见 false 为不可见
+        const [showOptionNumberIcon, setShowOptionNumberIcon] = useState(false); //true 为可见 false 为不可见
         const [showUnchangeableSwitch, setShowUnchangeableSwitch] = useState(true);
         const [showUnchangeableText, setShowUnchangeableText] = useState('取消不可变显示');
         const [showConflictSwitch, setShowConflictSwitch] = useState(true);
@@ -68,7 +68,7 @@ const PlayHelper: FC<Props> = memo(
                 ? setShowUnchangeableText(showUnchangeableTexts[1])
                 : setShowUnchangeableText(showUnchangeableTexts[0]);
             setShowUnchangeableSwitch((prev) => !prev);
-        },[showUnchangeableText]);
+        }, [showUnchangeableText]);
 
         /** toggle button text*/
         const toggleShowConflict = () => {
@@ -79,8 +79,8 @@ const PlayHelper: FC<Props> = memo(
         };
 
         /** toggle button text*/
-        const toggleShowOptionNumberIcon=()=>{
-            setShowOptionNumberIcon((prev)=>!prev);
+        const toggleShowOptionNumberIcon = () => {
+            setShowOptionNumberIcon((prev) => !prev);
         };
 
         /**
@@ -93,41 +93,45 @@ const PlayHelper: FC<Props> = memo(
          *
          * @returns JSX.Element
          */
-        const mapNumberIcon = useCallback((value: number, index: number) => (
-            <Grid key={`value${value}`} item className={classes.numberIconNormal}>
-                <IconButton
-                    onMouseEnter={() => {
-                        blockHighlightAction(value);
-                    }}
-                    onClick={() => {
-                        if (highlightLoc === value) {
-                            clearPlaceValueAction();
-                            setHighlightLoc(0);
-                        } else {
-                            setPlaceValueAction(value);
-                            setHighlightLoc(value);
-                        }
-                    }}
-                    onMouseLeave={clearBlockHighlightAction}
-                    className={classNames(classes.numberIconNormal)}>
-                    <NumberSvg
-                        num={value}
-                        SvgProp={{
-                            className: classNames(classes.numberIconNormal, {
-                                [classes.hightLight]: highlightLoc === value,
-                            }),
-                        }}></NumberSvg>
-                </IconButton>
-            </Grid>
-        ),[
-            blockHighlightAction,
-            classes.hightLight,
-            classes.numberIconNormal,
-            clearBlockHighlightAction,
-            clearPlaceValueAction,
-            highlightLoc,
-            setPlaceValueAction,
-        ]);
+        const mapNumberIcon = useCallback(
+            (value: number, index: number) => (
+                <Grid key={`value${value}`} item className={classes.numberIconNormaContainer}>
+                    <IconButton
+                        onMouseEnter={() => {
+                            blockHighlightAction(value);
+                        }}
+                        onClick={() => {
+                            if (highlightLoc === value) {
+                                clearPlaceValueAction();
+                                setHighlightLoc(0);
+                            } else {
+                                setPlaceValueAction(value);
+                                setHighlightLoc(value);
+                            }
+                        }}
+                        onMouseLeave={clearBlockHighlightAction}
+                        //className={classNames(classes.numberIconNormal)}
+                    >
+                        <NumberSvg
+                            num={value}
+                            SvgProp={{
+                                className: classNames(classes.numberIconNormal, {
+                                    [classes.hightLight]: highlightLoc === value,
+                                }),
+                            }}></NumberSvg>
+                    </IconButton>
+                </Grid>
+            ),
+            [
+                blockHighlightAction,
+                classes.hightLight,
+                classes.numberIconNormal,
+                clearBlockHighlightAction,
+                clearPlaceValueAction,
+                highlightLoc,
+                setPlaceValueAction,
+            ],
+        );
 
         return (
             <React.Fragment>
@@ -136,69 +140,80 @@ const PlayHelper: FC<Props> = memo(
                 </Grid>
                 <Grid container className={classes.buttonContainers}>
                     {/** 撤销填写数独操作*/}
-                    {useMemo(()=>(
-                        <TipButton
-                            TooltipProp={{ title: '撤回上一步', children: <></>, arrow: true }}
-                            IconButtonProp={{
-                                onClick: playRoundBackwardAction,
-                                className: classNames(classes.iconButtonContainer, {}),
-                            }}>
-                            <Undo className={classNames(classes.iconButtonIcon, {})} />
-                        </TipButton>
-                    ),[classes.iconButtonContainer,classes.iconButtonIcon,playRoundBackwardAction])}
-                        {/** 开始新一局数独，调用updateSudoku*/}
-                    {useMemo(()=>(
-                        <TipButton
-                            TooltipProp={{ title: '开始新一局', children: <></>, arrow: true }}
-                            IconButtonProp={{
-                                onClick: ()=> {
-                                    setCompleteMessageshowed(false);    /** 开始了新一局游戏，该局游戏还没有显示过success*/
-                                    updateSudokuAction();
-                                },
-                                className: classNames(classes.iconButtonContainer, {}),
-                            }}>
-                            <Refresh className={classNames(classes.iconButtonIcon, {})} />
-                        </TipButton>
-                    ),[classes.iconButtonContainer,classes.iconButtonIcon,updateSudokuAction])}
+                    {useMemo(
+                        () => (
+                            <TipButton
+                                TooltipProp={{ title: '撤回上一步', children: <></>, arrow: true }}
+                                IconButtonProp={{
+                                    onClick: playRoundBackwardAction,
+                                    className: classNames(classes.iconButtonContainer, {}),
+                                }}>
+                                <Undo className={classNames(classes.iconButtonIcon, {})} />
+                            </TipButton>
+                        ),
+                        [classes.iconButtonContainer, classes.iconButtonIcon, playRoundBackwardAction],
+                    )}
+                    {/** 开始新一局数独，调用updateSudoku*/}
+                    {useMemo(
+                        () => (
+                            <TipButton
+                                TooltipProp={{ title: '开始新一局', children: <></>, arrow: true }}
+                                IconButtonProp={{
+                                    onClick: () => {
+                                        setCompleteMessageshowed(
+                                            false,
+                                        ); /** 开始了新一局游戏，该局游戏还没有显示过success*/
+                                        updateSudokuAction();
+                                    },
+                                    className: classNames(classes.iconButtonContainer, {}),
+                                }}>
+                                <Refresh className={classNames(classes.iconButtonIcon, {})} />
+                            </TipButton>
+                        ),
+                        [classes.iconButtonContainer, classes.iconButtonIcon, updateSudokuAction],
+                    )}
                     {/** 显示或者隐藏可选数字(optionNumber)*/}
-                    {useMemo(()=>(
-                        <TipButton
-                            TooltipProp={{
-                                title: showOptionNumberIcon ? '显示可选数字' : '隐藏可选数字',
-                                children: <></>,
-                                arrow: true,
-                            }}
-                            IconButtonProp={{
-                                onClick: () => {
-                                    toggleShowOptionNumberIcon();
-                                    toggleShowOptionNumberAction();
-                                },
-                                className: classNames(classes.iconButtonContainer, {}),
-                            }}>
-                            <VisibilityOutlined
-                                className={classNames(classes.iconButtonIcon, {
-                                    [classes.hideElement]: showOptionNumberIcon,
-                                })}
-                            />
-                            <VisibilityOffOutlined
-                                className={classNames(classes.iconButtonIcon, {
-                                    [classes.hideElement]: !showOptionNumberIcon,
-                                })}
-                            />
-                        </TipButton>
-                    ),[
-                        showOptionNumberIcon,
-                        classes.hideElement,
-                        classes.iconButtonContainer,
-                        classes.iconButtonIcon,
-                        toggleShowOptionNumberAction,
-                    ])}
+                    {useMemo(
+                        () => (
+                            <TipButton
+                                TooltipProp={{
+                                    title: showOptionNumberIcon ? '显示可选数字' : '隐藏可选数字',
+                                    children: <></>,
+                                    arrow: true,
+                                }}
+                                IconButtonProp={{
+                                    onClick: () => {
+                                        toggleShowOptionNumberIcon();
+                                        toggleShowOptionNumberAction();
+                                    },
+                                    className: classNames(classes.iconButtonContainer, {}),
+                                }}>
+                                <VisibilityOutlined
+                                    className={classNames(classes.iconButtonIcon, {
+                                        [classes.hideElement]: showOptionNumberIcon,
+                                    })}
+                                />
+                                <VisibilityOffOutlined
+                                    className={classNames(classes.iconButtonIcon, {
+                                        [classes.hideElement]: !showOptionNumberIcon,
+                                    })}
+                                />
+                            </TipButton>
+                        ),
+                        [
+                            showOptionNumberIcon,
+                            classes.hideElement,
+                            classes.iconButtonContainer,
+                            classes.iconButtonIcon,
+                            toggleShowOptionNumberAction,
+                        ],
+                    )}
 
                     <TextField
                         select
                         label='难度'
                         defaultValue={0}
-                        onChange={(event)=>{
+                        onChange={(event) => {
                             setLevelAction(event.target.value);
                         }}>
                         <MenuItem value={0}>0超级简单</MenuItem>
@@ -259,7 +274,6 @@ const PlayHelper: FC<Props> = memo(
                                 showConflictSwitch,
                                 toggleShowConflict,
                                 toggleShowConflictAction,
-
                             ],
                         )}
                     </FormGroup>

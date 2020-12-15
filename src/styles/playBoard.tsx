@@ -42,7 +42,6 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             cursor: 'pointer',
             textAlign: 'center',
             verticalAlign: '',
-            borderRadius: '0',
             backgroundColor: `${palette.numberBackgroundColor?.main}`,
             fill: `${palette.numberBackgroundColor?.contrastText}`,
         },
@@ -66,12 +65,12 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
 
         rightPaddingBorder: {
             //paddingRight: '0.3vmin',
-            borderRight: '0.3vmin solid black',
+            borderRight: `0.3vmin solid ${palette.numberBackgroundColor?.contrastText}`,
         },
 
         bottomPaddingBorder: {
             //paddingBottom: '0.3vmin',
-            borderBottom: '0.3vmin solid black',
+            borderBottom: `0.3vmin solid ${palette.numberBackgroundColor?.contrastText}`,
         },
 
         unchangeableBlock: {
@@ -97,32 +96,9 @@ const useStyles = makeStyles(({ palette, shadows, spacing, breakpoints }: Theme)
             //paddingTop: '0.4vmin',
             //background:"blue",
         },
-        conflictOne: {
-            backgroundColor: 'blue',
-        },
-        conflictTwo: {
-            backgroundColor: 'red',
-        },
-        conflictThree: {
-            backgroundColor: 'black',
-        },
-        conflictFour: {
-            backgroundColor: 'yellow',
-        },
-        conflictFive: {
-            backgroundColor: 'green',
-        },
-        conflictSix: {
-            backgroundColor: 'purple',
-        },
-        conflictSeven: {
-            backgroundColor: 'gray',
-        },
-        conflictEight: {
-            backgroundColor: '#eeeeee',
-        },
-        conflictNine: {
-            backgroundColor: 'red',
+        conflictNumber: {
+            color: `${palette.conflictNumberBackgroundColor?.contrastText}`,
+            background: `${palette.conflictNumberBackgroundColor?.main}`,
         },
     });
 });

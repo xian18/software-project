@@ -8,6 +8,13 @@ const useStyles = makeStyles((theme: Theme) => {
             backgroundColor: `${theme.palette.hightLightNumberBackgroundColor?.main}`,
             color: `${theme.palette.hightLightNumberBackgroundColor?.contrastText}`,
         },
+        numberIconNormaContainer: {
+            margin: 0,
+            padding: 0,
+            height: '16vmin',
+            width: '16vmin',
+            display: 'flex',
+        },
         numberIconNormal: {
             margin: 0,
             padding: 0,
@@ -15,6 +22,8 @@ const useStyles = makeStyles((theme: Theme) => {
             width: '16vmin',
             display: 'flex',
             borderRadius: '20%',
+            color: `${theme.palette.boardBackgroundColor?.contrastText}`,
+            backgroundColor: `${theme.palette.boardBackgroundColor?.main}`,
             '&:hover': {
                 backgroundColor: `${theme.palette.hightLightNumberBackgroundColor?.main}`,
                 color: `${theme.palette.hightLightNumberBackgroundColor?.contrastText}`,
