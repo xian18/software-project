@@ -24,7 +24,6 @@ func GinMiddleware(allowOrigin string) gin.HandlerFunc {
 func main() {
 	router := gin.New()
 	server,_ := socketio.NewServer(nil)
-
 	server.OnConnect("/", func(s socketio.Conn) error {
 		s.SetContext("")
 		fmt.Println("connected:", s.ID())
@@ -34,7 +33,11 @@ func main() {
 
 	server.OnEvent("/", "sendMessage", func(s socketio.Conn, msg string) {
 		fmt.Println("sendBroadcast:", msg)
-		server.BroadcastToRoom("", "bcast", "receiveMessage", msg)
+		server.ForEach("","bcast",func (conn socketio.Conn)  {
+			if conn.ID()!= s.ID(){
+				conn.Emit("receiveMessage", msg)
+			}
+		})
 	})
 
 	server.OnError("/", func(s socketio.Conn, e error) {
