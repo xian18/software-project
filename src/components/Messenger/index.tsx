@@ -19,7 +19,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import PlusOneIcon from '@material-ui/icons/ExposurePlus1';
-import FaceIcon from '@material-ui/icons/Face';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import SendIcon from '@material-ui/icons/Send';
 import EnlargeableImage from '../EnlargeableImg';
